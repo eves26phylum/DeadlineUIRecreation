@@ -1,0 +1,96 @@
+import React, { StrictMode, useEffect, useRef, useState, useCallback } from "@rbxts/react";
+import useTags from './hooks/useTags';
+import motion from '@rbxts/react-motion';
+
+export interface DOMDefinition {
+    tags?: string[],
+    children?: React.ReactNode,
+    flexProps?: Partial<React.InstanceProps<UIListLayout>>,
+    textProps?: Partial<React.InstanceProps<TextLabel>>
+}
+export function Basic({flexProps, textProps, children, dog, tags = [], ...restProps}: DOMDefinition & {dog?: (arg0: Frame | undefined) => void} & Partial<React.InstanceProps<Frame>>) {
+    const ref = useRef<Frame>();
+    useTags(ref, tags);
+    const combinedRef = useCallback((instance: Frame | undefined) => {
+        ref.current = instance;
+        dog?.(instance);
+    }, [dog]);
+
+	return (
+		<frame
+            ref = {combinedRef}
+			AutomaticSize={Enum.AutomaticSize.XY}
+			Size={new UDim2(0, 0, 0, 0)}
+			BackgroundTransparency={1}
+			BorderSizePixel={0}
+			{...restProps}
+		>
+            <uilistlayout
+                FillDirection={Enum.FillDirection.Vertical}
+                Padding={new UDim(0, 0)}
+                HorizontalAlignment={Enum.HorizontalAlignment.Left}
+                VerticalAlignment={Enum.VerticalAlignment.Top}
+                SortOrder={Enum.SortOrder.Name}
+                {...flexProps}
+            />
+            {typeIs(children, "string") ? (
+                <textlabel
+                    AutomaticSize={Enum.AutomaticSize.XY}
+                    Size={new UDim2(0, 0, 0, 0)}
+                    BackgroundTransparency={1}
+                    BorderSizePixel={0}
+                    Text={children}
+                    {...textProps}
+                />
+            ) : children}
+		</frame>
+	);
+}
+
+export function BasicScroll({children, tags = [], scrollProps = {}, ...restProps}: DOMDefinition & Partial<React.InstanceProps<Frame>> & {scrollProps: Partial<React.InstanceProps<ScrollingFrame>>}) {
+    const ref = useRef<ScrollingFrame>();
+    useTags(ref, tags);
+	return (
+		<scrollingframe
+            ref = {ref}
+			AutomaticSize={Enum.AutomaticSize.XY}
+			Size={new UDim2(0, 0, 0, 0)}
+			BackgroundTransparency={1}
+			BorderSizePixel={0}
+			ScrollBarThickness={5}
+			CanvasSize={new UDim2(0, 0, 0, 0)}
+			AutomaticCanvasSize={Enum.AutomaticSize.XY}
+			{...scrollProps}
+		>
+            <Basic {...restProps}>
+                {children}
+            </Basic>
+		</scrollingframe>
+	);
+}
+
+export function Button({children, tags = [], flexProps, frameProps, textProps, ...restProps}: DOMDefinition & {frameProps?: Partial<React.InstanceProps<Frame>>} & Partial<React.InstanceProps<TextButton>>) {
+    const ref = useRef<TextButton>();
+    useTags(ref, tags);
+    return <textbutton ref={ref} 
+        AutoButtonColor={false} 
+        AutomaticSize={Enum.AutomaticSize.XY}
+        Size={new UDim2(0, 0, 0, 0)} 
+        BackgroundTransparency={0} 
+        BorderSizePixel={0}
+        {...restProps}
+        Text={""}
+        TextSize={1}>
+        <Basic
+            flexProps={{HorizontalAlignment: Enum.HorizontalAlignment.Center, ...flexProps}}
+            textProps={
+                {
+                    ...textProps
+                }
+            }
+            {...frameProps}
+        >
+            {children}
+        </Basic>
+    </textbutton>
+}
