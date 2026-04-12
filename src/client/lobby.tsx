@@ -13,8 +13,8 @@ import motion from "@rbxts/react-motion";
 import { UiContextProvider, AppContextProvider } from "./hooks/useAppContext";
 import { moneyFormat } from "shared/types/deadlineClientTypes";
 import QuestsManager from "./questsManager";
-import { Styles } from "./styles";
-const [lobbySheet, createRule] = Styles();
+import { Styles, createRule } from "./styles";
+const lobbySheet = Styles();
 export default function() {
     const uiPageLayoutRef = useRef<UIPageLayout>();
     const [money, setMoney] = useState<moneyFormat>({

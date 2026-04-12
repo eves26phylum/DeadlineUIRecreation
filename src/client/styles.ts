@@ -1,4 +1,11 @@
 import { ReplicatedStorage } from "@rbxts/services";
+export function createRule(selector: string, props: InstanceProperties<any>, styleSheet: StyleSheet) {
+    const rule: StyleRule = new Instance("StyleRule");
+    rule.Parent = styleSheet;
+    rule.Selector = selector;
+    rule.SetProperties(props);
+    return rule
+}
 export function Styles() {
     const lobbySheet = new Instance("StyleSheet");
     lobbySheet.SetAttribute("PaddingXL", new UDim(0, 24));
@@ -29,13 +36,6 @@ export function Styles() {
     lobbySheet.SetAttribute("LargerSubheadingTextSize", 32);
     lobbySheet.SetAttribute("SubheadingTextSize", 24);
     lobbySheet.Parent = ReplicatedStorage;
-    function createRule(selector: string, props: InstanceProperties<any>, styleSheet: StyleSheet) {
-        const rule: StyleRule = new Instance("StyleRule");
-        rule.Parent = styleSheet;
-        rule.Selector = selector;
-        rule.SetProperties(props);
-        return rule
-    }
     createRule(".textOnDark", { TextColor3: "$AccentColour" }, lobbySheet);
     createRule(".textOnDemotivationCycle", { TextColor3: "$SecondaryAccentColour" }, lobbySheet);
     createRule(".textBody", { TextSize: "$TextSize", FontFace: "$FontMainRegular" }, lobbySheet);
@@ -172,5 +172,5 @@ export function Styles() {
         PaddingBottom: "$PaddingL",
         PaddingTop: "$PaddingL",
     }, lobbySheet); // 1/2 padding rule
-    return [lobbySheet, createRule] as const;
+    return lobbySheet;
 }
