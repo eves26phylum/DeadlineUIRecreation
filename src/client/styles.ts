@@ -78,16 +78,16 @@ export function Styles() {
     createRule(".currencyBubbleCardObject.XP > .stroke", {
         Color: "$SavouryColour"
     }, lobbySheet)
-    createRule(".currencyBubbleCardObject.$", {
+    createRule(".currencyBubbleCardObject.NewTaiwanDollars", {
         BackgroundColor3: "$PositiveColour"
     }, lobbySheet)
-    createRule(".currencyBubbleCardObject.$ > .stroke", {
+    createRule(".currencyBubbleCardObject.NewTaiwanDollars > .stroke", {
         Color: "$PositiveColour"
     }, lobbySheet)
     createRule(".currencyBubbleCardObject::UICorner", {
         CornerRadius: new UDim(0, 4)
     }, lobbySheet)
-    createRule(".currencyBubbleMiniText.$, .currencyBubbleLargeText.$", {
+    createRule(".currencyBubbleMiniText.NewTaiwanDollars, .currencyBubbleLargeText.NewTaiwanDollars", {
         TextColor3: "$PositiveColour"
     }, lobbySheet)
     createRule(".currencyBubbleMiniText.XP, .currencyBubbleLargeText.XP", {

@@ -15,12 +15,12 @@ export interface TableOfQuestsType {
     experienceAmount: number,
     newTaiwanDollarsAmount: number
 }
-export function CurrencyBubbleCardObject({currency, amount, completed}: {currency: string, amount: number, completed?: boolean}) {
-    return <frame Tag={`currencyBubbleCardObject ${currency}`} AutomaticSize={Enum.AutomaticSize.XY} BackgroundTransparency={0}>
+export function CurrencyBubbleCardObject({currency, amount, styleIndicator, completed}: {currency: string, amount: number, styleIndicator: string, completed?: boolean}) {
+    return <frame Tag={`currencyBubbleCardObject ${styleIndicator}`} Size={new UDim2(0, 48, 0, 48)} AutomaticSize={Enum.AutomaticSize.XY} BackgroundTransparency={0}>
         <uigradient Rotation={90} Color={new ColorSequence([new ColorSequenceKeypoint(0, Color3.fromRGB(30, 30, 30)),new ColorSequenceKeypoint(1, Color3.fromRGB(15, 15, 15))])}/>
-        <uistroke Tag={`stroke ${currency}`}><uigradient Rotation={90} Color={new ColorSequence([new ColorSequenceKeypoint(0, Color3.fromRGB(128, 128, 128)),new ColorSequenceKeypoint(1, Color3.fromRGB(64, 64, 64))])}/></uistroke>
-        <frame Tag={`paddingStandard ${currency}`} BackgroundTransparency={1} AutomaticSize={Enum.AutomaticSize.XY}><textlabel Tag={`textStandard ${currency} currencyBubbleLargeText`} AutomaticSize={Enum.AutomaticSize.XY} BackgroundTransparency={1} Position={new UDim2(0.5, 0, 0.5, 0)} AnchorPoint={new Vector2(0.5, 0.5)} Text={tostring(currency)}/></frame>
-        <textlabel Tag={`textMini ${currency} currencyBubbleMiniText paddingTiny`} BackgroundTransparency={1} AutomaticSize={Enum.AutomaticSize.XY} Position={new UDim2(0.5, 0, 1, 0)} AnchorPoint={new Vector2(0.5, 1)} Text={tostring(amount)}/>
+        <uistroke Tag={`stroke ${styleIndicator}`}><uigradient Rotation={90} Color={new ColorSequence([new ColorSequenceKeypoint(0, Color3.fromRGB(128, 128, 128)),new ColorSequenceKeypoint(1, Color3.fromRGB(64, 64, 64))])}/></uistroke>
+        <frame Size={new UDim2(1, 0, 1, 0)} Tag={`paddingStandard ${styleIndicator}`} BackgroundTransparency={1} AutomaticSize={Enum.AutomaticSize.XY}><textlabel Tag={`textStandard ${styleIndicator} currencyBubbleLargeText`} AutomaticSize={Enum.AutomaticSize.XY} BackgroundTransparency={1} Position={new UDim2(0.5, 0, 0.5, 0)} AnchorPoint={new Vector2(0.5, 0.5)} Text={tostring(currency)}/></frame>
+        <textlabel Tag={`textMini ${styleIndicator} currencyBubbleMiniText paddingTiny`} BackgroundTransparency={1} AutomaticSize={Enum.AutomaticSize.XY} Position={new UDim2(0.5, 0, 1, 0)} AnchorPoint={new Vector2(0.5, 1)} Text={tostring(amount)}/>
     </frame>;
 }
 export function QuestProgressBar({progress, completedTag, ...props}: {progress: ProgressObject, completedTag: string} & Partial<React.InstanceProps<Frame>>) {
@@ -55,8 +55,8 @@ export function Quest({tableQuest, index, callback = () => {}}: {tableQuest: Tab
             <QuestProgressBar completedTag={completedTag} Size={new UDim2(0, axis_content, 0, 0)} AutomaticSize={Enum.AutomaticSize.Y} progress={tableQuest.progress}/>
         </Basic>
         <Basic tags={["actionContainer"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
-            <CurrencyBubbleCardObject currency="XP" amount={tableQuest.experienceAmount}/>
-            <CurrencyBubbleCardObject currency="$" amount={tableQuest.newTaiwanDollarsAmount}/>
+            <CurrencyBubbleCardObject styleIndicator="XP" currency="XP" amount={tableQuest.experienceAmount}/>
+            <CurrencyBubbleCardObject styleIndicator="NewTaiwanDollars" currency="$" amount={tableQuest.newTaiwanDollarsAmount}/>
             <Button tags={["rerollButton"]} textProps={{Tag: "textStandard textOnDemotivationCycle"}} Event={{MouseButton1Click: () => {callback(index)}}}>3 MORE</Button>
         </Basic>
         </Basic>;
