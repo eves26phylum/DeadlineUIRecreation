@@ -19,7 +19,9 @@ export function Styles() {
     lobbySheet.SetAttribute("RerollMainButtonComplementaryHoverColourBackgroundColor3", Color3.fromRGB(80, 80, 80));
     lobbySheet.SetAttribute("RerollButtonComplementaryColourBackgroundColor3", Color3.fromRGB(40, 40, 40));
     lobbySheet.SetAttribute("RerollButtonComplementaryColourHoverBackgroundColor3", Color3.fromRGB(60, 60, 60));
+    lobbySheet.SetAttribute("backgroundCompletedQuestColour", Color3.fromRGB(20, 70, 20))
     lobbySheet.SetAttribute("DailyQuestsTitleComplementaryColourBackgroundColour3Darker", Color3.fromRGB(30, 30, 30));
+    lobbySheet.SetAttribute("progressBarBackgroundCompletedQuestColour", Color3.fromRGB(30, 30, 30));
     lobbySheet.SetAttribute("BorderColour", Color3.fromHex("#2A2A2A"));
     lobbySheet.SetAttribute("BackgroundColour", Color3.fromRGB(0, 0, 0));
     lobbySheet.SetAttribute("PositiveColour", Color3.fromRGB(0, 255, 0));
@@ -74,6 +76,12 @@ export function Styles() {
     createRule(".QuestProgressBar", {
         BackgroundTransparency: 0,
         BackgroundColor3: "$progressQuestBarHighlight"
+    }, lobbySheet)
+    createRule(".QuestProgressBar.completed", {
+        BackgroundColor3: "$progressBarBackgroundCompletedQuestColour"
+    }, lobbySheet)
+    createRule(".QuestProgressBar.completed > .QuestProgressBarContent", {
+        BackgroundColor3: "$SecondaryAccentColour"
     }, lobbySheet)
     createRule(".QuestProgressBar::UICorner", {
         CornerRadius: new UDim(1, 0)
@@ -136,6 +144,12 @@ export function Styles() {
     }, lobbySheet)
     createRule(".tableOfQuest", {
         BackgroundColor3: "$backgroundQuestColour"
+    }, lobbySheet)
+    createRule(".tableOfQuest.completed", {
+        BackgroundColor3: "$backgroundCompletedQuestColour"
+    }, lobbySheet)
+    createRule(".textOnDark.completed", {
+        TextColor3: "$SecondaryAccentColour"
     }, lobbySheet)
     createRule(".rerollButton", {
         BackgroundColor3: "$RerollButtonComplementaryColourBackgroundColor3"

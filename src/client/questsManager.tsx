@@ -38,7 +38,8 @@ export default function() {
                         finish: 5
                     },
                     newTaiwanDollarsAmount: 500,
-                    experienceAmount: 500
+                    experienceAmount: 500,
+                    completed: true
                 },
                 {
                     name: "Consume 5 MRE packs",
