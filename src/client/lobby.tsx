@@ -65,8 +65,8 @@ createRule(".tableOfQuest::UIPadding", {
 createRule(".tableOfQuest > UIListLayout", {
     Padding: "$PaddingS"
 }, lobbySheet)
-createRule(".bodyContainer > .textGroup", {
-    Padding: "$PaddingS"
+createRule(".bodyContainer > .textGroup > UIListLayout", {
+    Padding: "$PaddingL"
 }, lobbySheet)
 createRule(".QuestProgressBar > .QuestProgressBarContent", {
     BackgroundColor3: "$AccentColour"

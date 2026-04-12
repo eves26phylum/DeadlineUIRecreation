@@ -31,7 +31,10 @@ export function Quest({tableQuest}: {tableQuest: TableOfQuestsType}) {
         <Basic tags={["bodyContainer", "actionContainer"]} dog={refFunction}>
             <uiflexitem FlexMode={"Fill"}/>
             <Basic tags={["textGroup"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
-                <textlabel TextWrapped={true} Tag={"textBody textOnDark"} BackgroundTransparency={1} AutomaticSize={Enum.AutomaticSize.XY} Text={tableQuest.name}/>
+                <textlabel TextWrapped={true} Tag={"textBody textOnDark"} BackgroundTransparency={1} AutomaticSize={Enum.AutomaticSize.XY} Text={tableQuest.name}>
+                    <uiflexitem FlexMode={"Fill"}/>
+                </textlabel>
+                <textlabel TextWrapped={true} Tag={"textBody textOnDark"} BackgroundTransparency={1} AutomaticSize={Enum.AutomaticSize.XY} Text={`${tableQuest.progress.now}/${tableQuest.progress.finish}`}/>
             </Basic>
             {/* <textlabel AutomaticSize={Enum.AutomaticSize.XY} Text="I AM A FUCKING PROGRESS BAR"/> */}
             <QuestProgressBar Size={new UDim2(0, axis_content, 0, 0)} AutomaticSize={Enum.AutomaticSize.Y} progress={tableQuest.progress}/>
