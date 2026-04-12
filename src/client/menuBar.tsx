@@ -49,7 +49,7 @@ export function MenuBar({buttonsJSON = [], children = {}, slideTransition = {
                         })
                     }
             </Basic>
-            <motion.frame 
+            <motion.frame
                 animate={{Position: new UDim2(0, getButtonPosXFromIndex(selectedButton), 0, 0)}} 
                 AutomaticSize={Enum.AutomaticSize.None} 
                 Size={new UDim2(0, buttonSize.X, 0, buttonSize.Y)} 

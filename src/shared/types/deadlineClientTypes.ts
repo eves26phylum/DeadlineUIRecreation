@@ -9,6 +9,8 @@ export interface AppContextType {
     states: {
         money: moneyFormat,
         setMoney: React.Dispatch<React.SetStateAction<moneyFormat>>,
+        questsFinishTimeSeconds: number,
+        setQuestsFinishTimeSeconds: React.Dispatch<React.SetStateAction<number>>
     }
 }
 
