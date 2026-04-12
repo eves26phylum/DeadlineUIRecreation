@@ -96,15 +96,18 @@ export default function() {
     //         setMoney({newTaiwanDollars: money.newTaiwanDollars + 10000, biitcoin: money.biitcoin + 10});
     //     });
     // }, [money.newTaiwanDollars])
-    const uiPageLayoutConnRef = useRef<RBXScriptConnection | undefined>(undefined);
-    useEffect(()=>{
-        if (uiPageLayoutConnRef.current) uiPageLayoutConnRef.current.Disconnect();
-        uiPageLayoutConnRef.current = uiPageLayoutRef.current?.GetPropertyChangedSignal("CurrentPage").Connect(() => {
-            const currentPage: number | undefined = uiPageLayoutRef.current?.CurrentPage?.LayoutOrder;
-            if (!currentPage) return warn("Current page was not found");
-            setSelectedPage(currentPage);
-        })
-    }, [uiPageLayoutRef])
+    // const uiPageLayoutConnRef = useRef<RBXScriptConnection | undefined>(undefined);
+    // useEffect(()=>{
+    //     if (uiPageLayoutConnRef.current) uiPageLayoutConnRef.current.Disconnect();
+    //     uiPageLayoutConnRef.current = uiPageLayoutRef.current?.GetPropertyChangedSignal("CurrentPage").Connect(() => {
+    //         const currentPage: number | undefined = uiPageLayoutRef.current?.CurrentPage?.LayoutOrder;
+    //         if (!currentPage) return warn("Current page was not found");
+    //         print(currentPage);
+    //         setSelectedPage(currentPage);
+    //     })
+    // }, [uiPageLayoutRef]) infinite loop
+    // don't want to bother with trackpad support
+    
     useEffect(()=>{
         uiPageLayoutRef.current?.JumpToIndex(selectedPage + 1);
     }, [selectedPage])
