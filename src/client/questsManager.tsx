@@ -17,7 +17,7 @@ export default function() {
     const appContext = useAppContext();
     return <Basic>
         <Basic BackgroundTransparency={0} Size={new UDim2(1, 0, 0, 0)} dog={refFunction} tags={["questsTitle"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum. ItemLineAlignment.Center}}>
-            <uisizeconstraint MinSize={new Vector2(500, 0)}/>
+            <uisizeconstraint MinSize={new Vector2(600, 0)}/>
             <Basic textProps={{Tag: "textTitleLargerSubheading textOnDark"}}>DAILY QUESTS</Basic>
             <Basic flexProps={{Tag: "paddingStandard", FillDirection: Enum.FillDirection.Horizontal, HorizontalAlignment: Enum.HorizontalAlignment.Right, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>
                 <uiflexitem FlexMode={"Fill"}/>
@@ -39,7 +39,43 @@ export default function() {
                     },
                     newTaiwanDollarsAmount: 500,
                     experienceAmount: 500
-                }
+                },
+                {
+                    name: "Consume 5 MRE packs",
+                    progress: {
+                        now: 2,
+                        finish: 5
+                    },
+                    newTaiwanDollarsAmount: 500,
+                    experienceAmount: 500
+                },
+                {
+                    name: "Help 2 SYNO allies",
+                    progress: {
+                        now: -1,
+                        finish: 2
+                    },
+                    newTaiwanDollarsAmount: 500,
+                    experienceAmount: 500
+                },
+                {
+                    name: "Headshot 3000 people",
+                    progress: {
+                        now: 500,
+                        finish: 3000
+                    },
+                    newTaiwanDollarsAmount: 500,
+                    experienceAmount: 500
+                },
+                {
+                    name: "Capture 20 points",
+                    progress: {
+                        now: 17,
+                        finish: 20
+                    },
+                    newTaiwanDollarsAmount: 500,
+                    experienceAmount: 500
+                },
             ]}/>
         </Basic>
     </Basic>; // you can hook quest table to an external system like the server

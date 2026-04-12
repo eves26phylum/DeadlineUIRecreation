@@ -147,6 +147,9 @@ createRule(".questsTitle::UIPadding", {
 createRule(".questsTitle", {
     BackgroundColor3: "$DailyQuestsTitleComplementaryColourBackgroundColour3Darker"
 }, lobbySheet)
+createRule(".tableOfQuest", {
+    BackgroundColor3: "$backgroundQuestColour"
+}, lobbySheet)
 createRule(".rerollButton", {
     BackgroundColor3: "$RerollButtonComplementaryColourBackgroundColor3"
 }, lobbySheet)
@@ -188,7 +191,7 @@ export default function() {
         newTaiwanDollars: 0,
         biitcoin: 0
     });
-    const [questsFinishTimeSeconds, setQuestsFinishTimeSeconds] = useState<number>(86400);
+    const [questsFinishTimeSeconds, setQuestsFinishTimeSeconds] = useState<number>(12000);
     const APPCONTEXT = {
         states: {
             money: money,
