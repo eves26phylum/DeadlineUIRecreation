@@ -3,7 +3,7 @@ import { Basic, Button } from "./easyobjects";
 import { MenuButton, IconMenuButton, MenuButtonProps } from "./menuButton";
 import motion, { Transition } from "@rbxts/react-motion";
 import { useUiContext } from './hooks/useAppContext';
-import { UiContextType } from 'shared/types/deadlineClientTypes';
+import { UiContextType } from 'client/types/deadlineClientTypes';
 interface extraProps {
     text: string
 }

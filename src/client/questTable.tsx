@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "@rbxts/react";
 import { BasicScroll, Basic, Button } from "./easyobjects";
-import { UiContextType } from "shared/types/deadlineClientTypes";
+import { UiContextType } from "client/types/deadlineClientTypes";
 import { useUiContext } from "./hooks/useAppContext";
 import { useAbsoluteAxis } from "./hooks/useAbsoluteAxis";
 
@@ -25,7 +25,7 @@ export function QuestProgressBar({progress, completedTag, ...props}: {progress: 
         <frame BorderSizePixel={0} Tag={`QuestProgressBarContent`} Size={new UDim2(calculatedProgress, 0, 0, progressBarHeight)}/>
     </Basic>
 }
-export function Quest({tableQuest}: {tableQuest: TableOfQuestsType}) {
+export function Quest({tableQuest, index, callback = () => {}}: {tableQuest: TableOfQuestsType, callback: (index: number) => void, index: number}) {
     const [axis_content, refFunction] = useAbsoluteAxis("X");
     const completedTag = tableQuest.completed ? "completed" : "";
     const notCompletedTag = tableQuest.completed ? "" : "completed";
@@ -49,14 +49,14 @@ export function Quest({tableQuest}: {tableQuest: TableOfQuestsType}) {
         <Basic tags={["actionContainer"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
             <Basic tags={["currencyBubbleCardObject"]} Size={new UDim2(0, 24, 0, 24)}>{tostring(tableQuest.newTaiwanDollarsAmount)}</Basic>
             <Basic tags={["currencyBubbleCardObject"]} Size={new UDim2(0, 24, 0, 24)}>{tostring(tableQuest.experienceAmount)}</Basic>
-            <Button tags={["rerollButton"]} textProps={{Tag: "textStandard textOnDemotivationCycle"}}>3 MORE</Button>
+            <Button tags={["rerollButton"]} textProps={{Tag: "textStandard textOnDemotivationCycle"}} Event={{MouseButton1Click: () => {callback(index)}}}>3 MORE</Button>
         </Basic>
         </Basic>;
 }
-export function QuestTable({tableOfQuests}: {tableOfQuests?: TableOfQuestsType[]}) {
+export function QuestTable({tableOfQuests, callback}: {tableOfQuests?: TableOfQuestsType[], callback: (index: number) => void}) {
     return <Basic Size={new UDim2(1, 0, 0, 0)} AutomaticSize={Enum.AutomaticSize.Y}>
         {tableOfQuests ? tableOfQuests.map((value: TableOfQuestsType, index: number, array: readonly TableOfQuestsType[]) => {
-            return <Quest tableQuest={value}/>;
+            return <Quest tableQuest={value} callback={callback} index={index}/>;
         }) : "Table is quite empty. Nothing exists here."}
     </Basic>
 }

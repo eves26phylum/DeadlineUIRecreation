@@ -11,8 +11,9 @@ import { MenuBarHome } from "./menuBar";
 import { ReplicatedStorage, Workspace } from '@rbxts/services';
 import motion from "@rbxts/react-motion";
 import { UiContextProvider, AppContextProvider } from "./hooks/useAppContext";
-import { moneyFormat } from "shared/types/deadlineClientTypes";
+import { moneyFormat } from "client/types/deadlineClientTypes";
 import QuestsManager from "./questsManager";
+import { TableOfQuestsType } from "./questTable";
 import { Styles, createRule } from "./styles";
 const lobbySheet = Styles();
 export default function() {
@@ -22,12 +23,62 @@ export default function() {
         biitcoin: 0
     });
     const [questsFinishTimeSeconds, setQuestsFinishTimeSeconds] = useState<number>(12000);
+    const [questTableState, setQuestTableState] = useState<TableOfQuestsType[]>([
+                {
+                    name: "Capture 5 points",
+                    progress: {
+                        now: 5,
+                        finish: 5
+                    },
+                    newTaiwanDollarsAmount: 500,
+                    experienceAmount: 500,
+                    completed: true
+                },
+                {
+                    name: "Consume 5 MRE packs",
+                    progress: {
+                        now: 2,
+                        finish: 5
+                    },
+                    newTaiwanDollarsAmount: 500,
+                    experienceAmount: 500
+                },
+                {
+                    name: "Help 2 SYNO allies",
+                    progress: {
+                        now: -1,
+                        finish: 2
+                    },
+                    newTaiwanDollarsAmount: 500,
+                    experienceAmount: 500
+                },
+                {
+                    name: "Headshot 3000 people",
+                    progress: {
+                        now: 538,
+                        finish: 3000
+                    },
+                    newTaiwanDollarsAmount: 500,
+                    experienceAmount: 500
+                },
+                {
+                    name: "Capture 20 points",
+                    progress: {
+                        now: 17,
+                        finish: 20
+                    },
+                    newTaiwanDollarsAmount: 500,
+                    experienceAmount: 500
+                },
+            ]);
     const APPCONTEXT = {
         states: {
             money: money,
             setMoney: setMoney,
             questsFinishTimeSeconds: questsFinishTimeSeconds,
-            setQuestsFinishTimeSeconds: setQuestsFinishTimeSeconds
+            setQuestsFinishTimeSeconds: setQuestsFinishTimeSeconds,
+            questTableState: questTableState,
+            setQuestTableState: setQuestTableState
         }
     };
     const [selectedPage, setSelectedPage] = useState<number>(0);
@@ -40,11 +91,11 @@ export default function() {
             "quests.progressBarWidth": 10
         }
     }
-    useEffect(()=>{
-        task.delay(1, () => {
-            setMoney({newTaiwanDollars: money.newTaiwanDollars + 10000, biitcoin: money.biitcoin + 10});
-        });
-    }, [money.newTaiwanDollars])
+    // useEffect(()=>{
+    //     task.delay(1, () => {
+    //         setMoney({newTaiwanDollars: money.newTaiwanDollars + 10000, biitcoin: money.biitcoin + 10});
+    //     });
+    // }, [money.newTaiwanDollars])
     useEffect(()=>{
         uiPageLayoutRef.current?.JumpToIndex(selectedPage + 1);
     }, [selectedPage])

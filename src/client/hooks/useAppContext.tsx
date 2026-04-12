@@ -1,5 +1,5 @@
 import React, { useContext, createContext, useState } from "@rbxts/react";
-import { moneyFormat, UiContextType, AppContextType } from "shared/types/deadlineClientTypes";
+import { moneyFormat, UiContextType, AppContextType } from "client/types/deadlineClientTypes";
 const AppContext = createContext<AppContextType | undefined>(undefined);
 const UiContext = createContext<UiContextType | undefined>(undefined);
 

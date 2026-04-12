@@ -178,7 +178,8 @@ export function Styles() {
     createRule(".menuButton > Frame > UIListLayout", {
         FillDirection: Enum.FillDirection.Horizontal, 
         Padding: "$PaddingS",
-        ItemLineAlignment: Enum.ItemLineAlignment.Center
+        ItemLineAlignment: Enum.ItemLineAlignment.Center,
+        VerticalAlignment: Enum.VerticalAlignment.Center
     }, lobbySheet)
     createRule(".menuButton > Frame::UIPadding", {
         PaddingLeft: "$PaddingXXL",
