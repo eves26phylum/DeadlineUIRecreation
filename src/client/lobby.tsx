@@ -33,6 +33,7 @@ lobbySheet.SetAttribute("FontMainSemiBold", new Font("rbxassetid://12187365977",
 lobbySheet.SetAttribute("FontMainRegular", new Font("rbxassetid://12187365977", Enum.FontWeight.Regular));
 lobbySheet.SetAttribute("TextSize", 16);
 lobbySheet.SetAttribute("TitleTextSize", 48);
+lobbySheet.SetAttribute("LargerSubheadingTextSize", 32);
 lobbySheet.SetAttribute("SubheadingTextSize", 24);
 lobbySheet.Parent = ReplicatedStorage;
 function createRule(selector: string, props: InstanceProperties<any>, styleSheet: StyleSheet) {
@@ -47,6 +48,7 @@ createRule(".textOnDemotivationCycle", { TextColor3: "$SecondaryAccentColour" },
 createRule(".textBody", { TextSize: "$TextSize", FontFace: "$FontMainRegular" }, lobbySheet);
 createRule(".textStandard", { TextSize: "$TextSize", FontFace: "$FontMainSemiBold" }, lobbySheet);
 createRule(".textTitleMain", { TextSize: "$TitleTextSize", FontFace: "$FontMainBold" }, lobbySheet);
+createRule(".textTitleLargerSubheading", { TextSize: "$LargerSubheadingTextSize", FontFace: "$FontMainBold" }, lobbySheet);
 createRule(".textTitleSubheading", { TextSize: "$SubheadingTextSize", FontFace: "$FontMainBold" }, lobbySheet);
 createRule(".shopMenuButton > Frame > TextLabel", { TextColor3: "$PositiveColour" }, lobbySheet);
 createRule(".shopMenuButton > Frame > ImageLabel", { ImageColor3: "$PositiveColour" }, lobbySheet);
