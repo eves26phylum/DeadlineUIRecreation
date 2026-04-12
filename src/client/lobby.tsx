@@ -96,6 +96,15 @@ export default function() {
     //         setMoney({newTaiwanDollars: money.newTaiwanDollars + 10000, biitcoin: money.biitcoin + 10});
     //     });
     // }, [money.newTaiwanDollars])
+    const uiPageLayoutConnRef = useRef<RBXScriptConnection | undefined>(undefined);
+    useEffect(()=>{
+        if (uiPageLayoutConnRef.current) uiPageLayoutConnRef.current.Disconnect();
+        uiPageLayoutConnRef.current = uiPageLayoutRef.current?.GetPropertyChangedSignal("CurrentPage").Connect(() => {
+            const currentPage: number | undefined = uiPageLayoutRef.current?.CurrentPage?.LayoutOrder;
+            if (!currentPage) return warn("Current page was not found");
+            setSelectedPage(currentPage);
+        })
+    }, [uiPageLayoutRef])
     useEffect(()=>{
         uiPageLayoutRef.current?.JumpToIndex(selectedPage + 1);
     }, [selectedPage])
@@ -111,8 +120,8 @@ export default function() {
         <motion.frame Size={new UDim2(1, 0, 1, 0)} BackgroundTransparency={1} Tag={"MenuContent"}>
             {/* <uiflexitem FlexMode={"Fill"}/> */}
             <uipagelayout ref={uiPageLayoutRef} EasingDirection={Enum.EasingDirection.Out} EasingStyle={Enum.EasingStyle.Quart} TweenTime={0.25}/>
-            <Basic BackgroundTransparency={1}>Hello I am the shop</Basic> {/* Negative one single page */}
-            <Basic Size={new UDim2(0, 0, 1, 0)} BackgroundTransparency={1} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
+            <Basic LayoutOrder={0} BackgroundTransparency={1}>Hello I am the shop</Basic> {/* Negative one single page */}
+            <Basic LayoutOrder={1} Size={new UDim2(0, 0, 1, 0)} BackgroundTransparency={1} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
                 <Basic Size={new UDim2(0.5, 0, 1, 0)}>
                     I am play column
                 </Basic>
@@ -120,10 +129,10 @@ export default function() {
                     <QuestsManager/>
                 </Basic>
             </Basic>
-            <Basic BackgroundTransparency={1}>Hello I am the servers</Basic>
-            <Basic BackgroundTransparency={1}>Hello I am the loadout</Basic>
-            <Basic BackgroundTransparency={1}>Hello I am the profile</Basic>
-            <Basic BackgroundTransparency={1}>Hello I am the settings</Basic>
+            <Basic LayoutOrder={2} BackgroundTransparency={1}>Hello I am the servers</Basic>
+            <Basic LayoutOrder={3} BackgroundTransparency={1}>Hello I am the loadout</Basic>
+            <Basic LayoutOrder={4} BackgroundTransparency={1}>Hello I am the profile</Basic>
+            <Basic LayoutOrder={5} BackgroundTransparency={1}>Hello I am the settings</Basic>
         </motion.frame>
         <stylelink StyleSheet={lobbySheet}/>
     </screengui></UiContextProvider></AppContextProvider>

@@ -5,10 +5,11 @@ import { presentationCameraHandler } from "./cameraHandler/presentationCameraHan
 export function changeCameraStateVariables(thisCameraState: cameraState) {
     const currentCamera: Camera | undefined = Workspace.CurrentCamera;
     if (!currentCamera) return warn(`Current camera does not exist at timestamp: {"os_time": ${os.time()}, "os_clock": ${os.clock()}}`);
-    PlayerFighterState.CameraState = thisCameraState
+    PlayerFighterState.CameraState = thisCameraState;
     switch (thisCameraState.cameraType) {
         case "presentationCamera":
             presentationCameraHandler(currentCamera, PlayerFighterState);
+            break
         default:
             notImplemented("playerBound");
     }
