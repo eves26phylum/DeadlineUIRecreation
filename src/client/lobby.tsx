@@ -25,7 +25,7 @@ export default function() {
     const [questsFinishTimeSeconds, setQuestsFinishTimeSeconds] = useState<number>(12000);
     const [questTableState, setQuestTableState] = useState<TableOfQuestsType[]>([
                 {
-                    name: "Feed 673382381 people for 20 years",
+                    name: "Feed 673382381 people for 20 years (solve world hunger)",
                     progress: {
                         now: 4,
                         finish: 673382381
@@ -40,8 +40,8 @@ export default function() {
                         now: 15,
                         finish: 5
                     },
-                    newTaiwanDollarsAmount: 500,
-                    experienceAmount: 500
+                    newTaiwanDollarsAmount: 2500,
+                    experienceAmount: 1000
                 },
                 {
                     name: "Help 2 SYNO allies",
@@ -49,8 +49,8 @@ export default function() {
                         now: 0,
                         finish: 2
                     },
-                    newTaiwanDollarsAmount: 500,
-                    experienceAmount: 500
+                    newTaiwanDollarsAmount: 10000,
+                    experienceAmount: 7000
                 },
                 {
                     name: "Headshot 3000 players with the Arid Eagle Mk RIZZ .50AE Conversion for Arid Eagle Mk RIZZ Eagle",
@@ -58,8 +58,8 @@ export default function() {
                         now: 538,
                         finish: 3000
                     },
-                    newTaiwanDollarsAmount: 500,
-                    experienceAmount: 500
+                    newTaiwanDollarsAmount: 676767,
+                    experienceAmount: 30000
                 },
                 {
                     name: "Capture 20 points",
@@ -67,8 +67,8 @@ export default function() {
                         now: 17,
                         finish: 20
                     },
-                    newTaiwanDollarsAmount: 500,
-                    experienceAmount: 500
+                    newTaiwanDollarsAmount: 10000,
+                    experienceAmount: 4000
                 },
             ]);
     const APPCONTEXT = {
