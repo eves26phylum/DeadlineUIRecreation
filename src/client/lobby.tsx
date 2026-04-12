@@ -21,7 +21,9 @@ lobbySheet.SetAttribute("PaddingTL", new UDim(0, 12));
 lobbySheet.SetAttribute("IconSize", new UDim2(0, 20, 0, 20));
 lobbySheet.SetAttribute("AccentColour", Color3.fromRGB(255, 255, 255));
 lobbySheet.SetAttribute("SecondaryAccentColour", Color3.fromHex("#808080"));
-lobbySheet.SetAttribute("RerollButtonComplementaryColourBackgroundColour3", Color3.fromRGB(40, 40, 40))
+lobbySheet.SetAttribute("RerollMainButtonComplementaryColourBackgroundColor3", Color3.fromRGB(60, 60, 60));
+lobbySheet.SetAttribute("RerollButtonComplementaryColourBackgroundColor3", Color3.fromRGB(40, 40, 40));
+lobbySheet.SetAttribute("DailyQuestsTitleComplementaryColourBackgroundColour3Darker", Color3.fromRGB(30, 30, 30));
 lobbySheet.SetAttribute("BorderColour", Color3.fromHex("#2A2A2A"));
 lobbySheet.SetAttribute("BackgroundColour", Color3.fromRGB(0, 0, 0));
 lobbySheet.SetAttribute("PositiveColour", Color3.fromRGB(0, 255, 0));
@@ -132,10 +134,27 @@ createRule(".rerollButton::UIPadding", {
     PaddingBottom: "$PaddingTL",
     PaddingTop: "$PaddingTL"
 }, lobbySheet)
+createRule(".questsTitle::UIPadding", {
+    PaddingLeft: "$PaddingL",
+    PaddingRight: "$PaddingL",
+    PaddingBottom: "$PaddingXXL",
+    PaddingTop: "$PaddingXXL"
+}, lobbySheet)
+createRule(".questsTitle", {
+    BackgroundColor3: "$DailyQuestsTitleComplementaryColourBackgroundColour3Darker"
+}, lobbySheet)
 createRule(".rerollButton", {
-    BackgroundColor3: "$RerollButtonComplementaryColourBackgroundColour3"
+    BackgroundColor3: "$RerollButtonComplementaryColourBackgroundColor3"
+}, lobbySheet)
+createRule(".rerollButton > Frame > UIListLayout", {
+    Padding: "$PaddingS"
+}, lobbySheet)
+createRule(".rerollButtonMain", {
+    BackgroundColor3: "$RerollMainButtonComplementaryColourBackgroundColor3"
 }, lobbySheet)
 createRule(".menuButton", { BackgroundColor3: "$BackgroundColour" }, lobbySheet);
+createRule(".menuButton:Hover", { BackgroundColor3: "$DailyQuestsTitleComplementaryColourBackgroundColour3Darker" }, lobbySheet);
+createRule(".menuButton:Press", { BackgroundColor3: "$DailyQuestsTitleComplementaryColourBackgroundColour3Darker" }, lobbySheet);
 createRule(".menuButton.defaultMenuButton.selected", { BackgroundColor3: "$AccentColour" }, lobbySheet);
 createRule(".menuButton.shopMenuButton.selected", { BackgroundColor3: "$PositiveColour" }, lobbySheet);
 createRule(".icon", { 

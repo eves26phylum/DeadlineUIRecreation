@@ -30,11 +30,11 @@ export function Quest({tableQuest}: {tableQuest: TableOfQuestsType}) {
     return <Basic tags={["tableOfQuest"]} Size={new UDim2(1, 0, 0, 0)} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>
         <Basic tags={["bodyContainer", "actionContainer"]} dog={refFunction}>
             <uiflexitem FlexMode={"Fill"}/>
-            <Basic tags={["textGroup"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
-                <textlabel TextWrapped={true} Tag={"textBody textOnDark"} BackgroundTransparency={1} AutomaticSize={Enum.AutomaticSize.XY} Text={tableQuest.name}>
+            <Basic tags={["textGroup"]} Size={new UDim2(1, 0, 0, 0)} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
+                <textlabel TextWrapped={true} TextXAlignment={Enum.TextXAlignment.Left} TextYAlignment={Enum.TextYAlignment.Top} Tag={"textBody textOnDark"} BackgroundTransparency={1} AutomaticSize={Enum.AutomaticSize.XY} Text={tableQuest.name}>
                     <uiflexitem FlexMode={"Fill"}/>
                 </textlabel>
-                <textlabel TextWrapped={true} Tag={"textBody textOnDark"} BackgroundTransparency={1} AutomaticSize={Enum.AutomaticSize.XY} Text={`${tableQuest.progress.now}/${tableQuest.progress.finish}`}/>
+                <textlabel TextWrapped={true} TextXAlignment={Enum.TextXAlignment.Right} TextYAlignment={Enum.TextYAlignment.Top} Tag={"textBody textOnDark"} BackgroundTransparency={1} AutomaticSize={Enum.AutomaticSize.XY} Text={`${tableQuest.progress.now}/${tableQuest.progress.finish}`}/>
             </Basic>
             {/* <textlabel AutomaticSize={Enum.AutomaticSize.XY} Text="I AM A FUCKING PROGRESS BAR"/> */}
             <QuestProgressBar Size={new UDim2(0, axis_content, 0, 0)} AutomaticSize={Enum.AutomaticSize.Y} progress={tableQuest.progress}/>
