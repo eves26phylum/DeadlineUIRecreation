@@ -42,7 +42,7 @@ export function Quest({tableQuest}: {tableQuest: TableOfQuestsType}) {
         <Basic tags={["actionContainer"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
             <Basic tags={["currencyBubbleCardObject"]} Size={new UDim2(0, 24, 0, 24)}>{tostring(tableQuest.newTaiwanDollarsAmount)}</Basic>
             <Basic tags={["currencyBubbleCardObject"]} Size={new UDim2(0, 24, 0, 24)}>{tostring(tableQuest.experienceAmount)}</Basic>
-            <Button>I do clicking</Button>
+            <Button tags={["rerollButton"]} textProps={{Tag: "textStandard textOnDemotivationCycle"}}>3 MORE</Button>
         </Basic>
         </Basic>;
 }

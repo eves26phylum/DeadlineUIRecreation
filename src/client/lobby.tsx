@@ -20,6 +20,7 @@ lobbySheet.SetAttribute("PaddingL", new UDim(0, 16));
 lobbySheet.SetAttribute("IconSize", new UDim2(0, 20, 0, 20));
 lobbySheet.SetAttribute("AccentColour", Color3.fromRGB(255, 255, 255));
 lobbySheet.SetAttribute("SecondaryAccentColour", Color3.fromHex("#808080"));
+lobbySheet.SetAttribute("RerollButtonComplementaryColourBackgroundColour3", Color3.fromRGB(40, 40, 40))
 lobbySheet.SetAttribute("BorderColour", Color3.fromHex("#2A2A2A"));
 lobbySheet.SetAttribute("BackgroundColour", Color3.fromRGB(0, 0, 0));
 lobbySheet.SetAttribute("PositiveColour", Color3.fromRGB(0, 255, 0));
@@ -123,6 +124,15 @@ createRule(".paddingMini::UIPadding", {
 }, lobbySheet)
 createRule(".menuBarButtonsContainer::UIStroke", {
     Color: "$BorderColour"
+}, lobbySheet)
+createRule(".rerollButton::UIPadding", {
+    PaddingLeft: "$PaddingL",
+    PaddingRight: "$PaddingL",
+    PaddingBottom: "$PaddingS",
+    PaddingTop: "$PaddingS"
+}, lobbySheet)
+createRule(".rerollButton", {
+    BackgroundColor3: "$RerollButtonComplementaryColourBackgroundColour3"
 }, lobbySheet)
 createRule(".menuButton", { BackgroundColor3: "$BackgroundColour" }, lobbySheet);
 createRule(".menuButton.defaultMenuButton.selected", { BackgroundColor3: "$AccentColour" }, lobbySheet);
