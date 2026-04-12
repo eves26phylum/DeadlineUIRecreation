@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "@rbxts/react";
-import { BasicScroll, Basic } from "./easyobjects";
+import { BasicScroll, Basic, Button } from "./easyobjects";
 import { UiContextType } from "shared/types/deadlineClientTypes";
 import { useUiContext } from "./hooks/useAppContext";
 import { useAbsoluteAxis } from "./hooks/useAbsoluteAxis";
@@ -41,6 +41,8 @@ export function Quest({tableQuest}: {tableQuest: TableOfQuestsType}) {
         </Basic>
         <Basic tags={["actionContainer"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
             <Basic tags={["currencyBubbleCardObject"]} Size={new UDim2(0, 24, 0, 24)}>{tostring(tableQuest.newTaiwanDollarsAmount)}</Basic>
+            <Basic tags={["currencyBubbleCardObject"]} Size={new UDim2(0, 24, 0, 24)}>{tostring(tableQuest.experienceAmount)}</Basic>
+            <Button>I do clicking</Button>
         </Basic>
         </Basic>;
 }

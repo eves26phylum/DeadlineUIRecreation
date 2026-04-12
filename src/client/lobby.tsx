@@ -65,7 +65,7 @@ createRule(".tableOfQuest::UIPadding", {
     PaddingTop: "$PaddingL",
 }, lobbySheet)
 createRule(".tableOfQuest > UIListLayout", {
-    Padding: "$PaddingS"
+    Padding: "$PaddingL"
 }, lobbySheet)
 createRule(".bodyContainer > .textGroup > UIListLayout", {
     Padding: "$PaddingL"
@@ -147,10 +147,13 @@ export default function() {
         newTaiwanDollars: 0,
         biitcoin: 0
     });
+    const [questsFinishTimeSeconds, setQuestsFinishTimeSeconds] = useState<number>(86400);
     const APPCONTEXT = {
         states: {
             money: money,
-            setMoney: setMoney
+            setMoney: setMoney,
+            questsFinishTimeSeconds: questsFinishTimeSeconds,
+            setQuestsFinishTimeSeconds: setQuestsFinishTimeSeconds
         }
     };
     const [selectedPage, setSelectedPage] = useState<number>(0);
@@ -163,6 +166,11 @@ export default function() {
             "quests.progressBarWidth": 10
         }
     }
+    useEffect(()=>{
+        task.delay(1, () => {
+            setMoney({newTaiwanDollars: money.newTaiwanDollars + 10000, biitcoin: money.biitcoin + 10});
+        });
+    }, [money.newTaiwanDollars])
     useEffect(()=>{
         uiPageLayoutRef.current?.JumpToIndex(selectedPage + 1);
     }, [selectedPage])
