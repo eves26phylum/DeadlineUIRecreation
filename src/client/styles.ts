@@ -84,7 +84,13 @@ export function Styles() {
     createRule(".currencyBubbleCardObject.NewTaiwanDollars > .stroke", {
         Color: "$PositiveColour"
     }, lobbySheet)
-    createRule(".currencyBubbleCardObject::UICorner", {
+    createRule(".currencyBubbleCardObject.completed", {
+        BackgroundColor3: "$BackgroundColour"
+    }, lobbySheet)
+    createRule(".currencyBubbleCardObject.completed > .stroke", {
+        Color: "$BorderColour"
+    }, lobbySheet)
+    createRule(".miniUICorner::UICorner", {
         CornerRadius: new UDim(0, 4)
     }, lobbySheet)
     createRule(".currencyBubbleMiniText.NewTaiwanDollars, .currencyBubbleLargeText.NewTaiwanDollars", {
@@ -95,6 +101,9 @@ export function Styles() {
     }, lobbySheet)
     createRule(".currencyBubbleMiniText", {
         TextTransparency: 0.5
+    }, lobbySheet)
+    createRule(".currencyBubbleMiniText.completed, .currencyBubbleLargeText.completed", {
+        TextColor3: "$SecondaryAccentColour"
     }, lobbySheet)
     createRule(".bodyContainer > .textGroup > UIListLayout", {
         Padding: "$PaddingL"

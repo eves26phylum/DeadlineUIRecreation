@@ -25,7 +25,7 @@ export default function() {
             <Basic flexProps={{Tag: "paddingStandard", FillDirection: Enum.FillDirection.Horizontal, HorizontalAlignment: Enum.HorizontalAlignment.Right, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>
                 <uiflexitem FlexMode={"Fill"}/>
                 <TimeStamp endDate={appContext.states.questsFinishTimeSeconds}/>
-                <Button tags={["rerollButton", "rerollButtonMain"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>
+                <Button tags={["rerollButton", "rerollButtonMain", "miniUICorner"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>
                     <imagelabel Tag={"icon"} BackgroundTransparency={1} Image={"rbxassetid://7072721134"}/>
                     <textlabel AutomaticSize={Enum.AutomaticSize.XY} Tag={"textStandard textOnDark"} BackgroundTransparency={1} BorderSizePixel={0} Text={"REROLL"}/>
                 </Button>
