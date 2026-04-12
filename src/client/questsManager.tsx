@@ -12,6 +12,7 @@ export default function() {
         {(()=>{print(axis_content); return <></>})()}
         <Basic Size={new UDim2(0, axis_content, 0, 0)} BackgroundColor3={Color3.fromRGB(255, 0, 0)} BackgroundTransparency={0}>
             {/* <QuestTable/> */}
+            Hiiii
         </Basic>
     </Basic>;
 }

@@ -9,6 +9,8 @@ import { Basic, Button } from "./easyobjects";
 import { MenuBarHome } from "./menuBar";
 import { ReplicatedStorage, Workspace } from '@rbxts/services';
 import motion from "@rbxts/react-motion";
+import { UiContextProvider, AppContextProvider } from "./hooks/useAppContext";
+import { moneyFormat } from "shared/types/deadlineClientTypes";
 import QuestsManager from "./questsManager";
 const lobbySheet = new Instance("StyleSheet");
 lobbySheet.SetAttribute("PaddingXL", new UDim(0, 24));
@@ -99,9 +101,28 @@ createRule(".menuButton > Frame::UIPadding", {
     PaddingTop: "$PaddingL",
 }, lobbySheet);
 export default function() {
-    const [money, setMoney] = useState<{newTaiwanDollars: number, biitcoin: number}>({newTaiwanDollars: 60000, biitcoin: 67});
     const uiPageLayoutRef = useRef<UIPageLayout>();
-    return <screengui ResetOnSpawn={false} ScreenInsets={Enum.ScreenInsets.DeviceSafeInsets}>
+    const [money, setMoney] = useState<moneyFormat>({
+        newTaiwanDollars: 0,
+        biitcoin: 0
+    });
+    const APPCONTEXT = {
+        states: {
+            money: money,
+            setMoney: setMoney
+        }
+    };
+    const [selectedPage, setSelectedPage] = useState<number>(0);
+    const UICONTEXT = {
+        states: {
+            selectedPage: selectedPage,
+            setSelectedPage: setSelectedPage
+        }
+    }
+    useEffect(()=>{
+        uiPageLayoutRef.current?.JumpToIndex(selectedPage + 1);
+    }, [selectedPage])
+    return <AppContextProvider APPCONTEXT={APPCONTEXT}><UiContextProvider UICONTEXT={UICONTEXT}><screengui ResetOnSpawn={false} ScreenInsets={Enum.ScreenInsets.DeviceSafeInsets}>
         <uilistlayout
             FillDirection={Enum.FillDirection.Vertical}
             Padding={new UDim(0, 0)}
@@ -109,7 +130,7 @@ export default function() {
             VerticalAlignment={Enum.VerticalAlignment.Top}
             SortOrder={Enum.SortOrder.Name}
         />
-        <MenuBarHome getMoney={()=>{return money;}} pageCallback={(name: string, index: number) => {print(name, index); if (uiPageLayoutRef) uiPageLayoutRef.current?.JumpToIndex(index + 1); /* Account for the -1 bias (+1)*/}}/>
+        <MenuBarHome getMoney={()=>{return money;}} pageCallback={(name: string, index: number) => {}}/>
         <motion.frame Size={new UDim2(1, 0, 1, 0)} BackgroundTransparency={1} Tag={"MenuContent"}>
             {/* <uiflexitem FlexMode={"Fill"}/> */}
             <uipagelayout ref={uiPageLayoutRef} EasingDirection={Enum.EasingDirection.Out} EasingStyle={Enum.EasingStyle.Quart} TweenTime={0.25}/>
@@ -128,5 +149,5 @@ export default function() {
             <Basic BackgroundTransparency={1}>Hello I am the settings</Basic>
         </motion.frame>
         <stylelink StyleSheet={lobbySheet}/>
-    </screengui>
+    </screengui></UiContextProvider></AppContextProvider>
 };

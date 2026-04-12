@@ -2,6 +2,8 @@ import React, { StrictMode, useEffect, useState, useRef } from '@rbxts/react';
 import { Basic, Button } from "./easyobjects";
 import { MenuButton, IconMenuButton, MenuButtonProps } from "./menuButton";
 import motion, { Transition } from "@rbxts/react-motion";
+import { useUiContext } from './hooks/useAppContext';
+import { UiContextType } from 'shared/types/deadlineClientTypes';
 interface extraProps {
     text: string
 }
@@ -18,8 +20,10 @@ export function MenuBar({buttonsJSON = [], children = {}, slideTransition = {
     children?: React.ReactNode,
     slideTransition?: Transition
 }) {
-    const [selectedButton, setSelectedButton] = useState(0); // too lazy to bring it outside because it's almost useless for a demo.
     const [buttonSize, setButtonSize] = useState(new Vector2(0, 0));
+    const UiContext: UiContextType = useUiContext();
+    const selectedButton = UiContext.states.selectedPage;
+    const setSelectedButton = UiContext.states.setSelectedPage;
     function getButtonPosXFromIndex(index: number) {
         return index * buttonSize.X;
     }
@@ -75,6 +79,9 @@ export function MenuBar({buttonsJSON = [], children = {}, slideTransition = {
 }
 export function MenuBarHome({pageCallback = () => {}, getMoney = () => {return {newTaiwanDollars: 1, biitcoin: 67}}, ...props}: {getMoney?: () => {newTaiwanDollars: number, biitcoin: number}, pageCallback: (name: string, index: number) => void}) {
     const money = getMoney();
+    const UiContext: UiContextType = useUiContext();
+    const selectedButton = UiContext.states.selectedPage;
+    const setSelectedButton = UiContext.states.setSelectedPage;
     return <Basic BackgroundTransparency={0} tags={["menuBarHome-full"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center, Wraps: true}}>
         <Basic flexProps={{HorizontalAlignment: Enum.HorizontalAlignment.Center}}>
             <uiflexitem FlexMode={Enum.UIFlexMode.Fill}/>
@@ -118,7 +125,7 @@ export function MenuBarHome({pageCallback = () => {}, getMoney = () => {return {
                         <textlabel Tag={"textOnDemotivationCycle textStandard"} BackgroundTransparency={1} Text={"B"} AutomaticSize={Enum.AutomaticSize.XY} TextXAlignment={Enum.TextXAlignment.Left} TextYAlignment={Enum.TextYAlignment.Top}/></Basic>
                 </Basic>
             <Basic tags={["menuBarButtonsContainer"]} flexProps={{HorizontalAlignment: Enum.HorizontalAlignment.Center, FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>
-                <IconMenuButton tags={["shopMenuButton"]} image="rbxassetid://7072721954" pageCallback={() => {pageCallback("SHOP", -1)}} frameProps={{Size:new UDim2(0, 150, 0, 0)}} AutomaticSize={Enum.AutomaticSize.Y} Size={new UDim2(0, 150, 0, 0)}>
+                <IconMenuButton tags={["shopMenuButton"]} image="rbxassetid://7072721954" pageCallback={() => {pageCallback("SHOP", -1); setSelectedButton(-1)}} frameProps={{Size:new UDim2(0, 150, 0, 0)}} AutomaticSize={Enum.AutomaticSize.Y} Size={new UDim2(0, 150, 0, 0)}>
                     <uiflexitem FlexMode={"Fill"}/>
                     <textlabel AutomaticSize={Enum.AutomaticSize.XY} Size={new UDim2(0, 0, 0, 0)} BackgroundTransparency={1} BorderSizePixel={0} Tag={"textStandard"} Text={"SHOP"}/>
                 </IconMenuButton>
