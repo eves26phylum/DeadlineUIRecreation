@@ -19,7 +19,7 @@ export function Styles() {
     lobbySheet.SetAttribute("RerollMainButtonComplementaryHoverColourBackgroundColor3", Color3.fromRGB(80, 80, 80));
     lobbySheet.SetAttribute("RerollButtonComplementaryColourBackgroundColor3", Color3.fromRGB(40, 40, 40));
     lobbySheet.SetAttribute("RerollButtonComplementaryColourHoverBackgroundColor3", Color3.fromRGB(60, 60, 60));
-    lobbySheet.SetAttribute("backgroundCompletedQuestColour", Color3.fromRGB(20, 70, 20))
+    // lobbySheet.SetAttribute("backgroundCompletedQuestColour", Color3.fromRGB(20, 70, 20))
     lobbySheet.SetAttribute("DailyQuestsTitleComplementaryColourBackgroundColour3Darker", Color3.fromRGB(30, 30, 30));
     lobbySheet.SetAttribute("progressBarBackgroundCompletedQuestColour", Color3.fromRGB(30, 30, 30));
     lobbySheet.SetAttribute("BorderColour", Color3.fromHex("#2A2A2A"));
@@ -146,7 +146,7 @@ export function Styles() {
         BackgroundColor3: "$backgroundQuestColour"
     }, lobbySheet)
     createRule(".tableOfQuest.completed", {
-        BackgroundColor3: "$backgroundCompletedQuestColour"
+        BackgroundColor3: "$PositiveColour"
     }, lobbySheet)
     createRule(".textOnDark.completed", {
         TextColor3: "$SecondaryAccentColour"

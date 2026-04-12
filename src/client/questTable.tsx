@@ -30,7 +30,7 @@ export function Quest({tableQuest, index, callback = () => {}}: {tableQuest: Tab
     const completedTag = tableQuest.completed ? "completed" : "";
     const notCompletedTag = tableQuest.completed ? "" : "completed";
     return <Basic BackgroundTransparency={0} tags={["tableOfQuest", completedTag]} Size={new UDim2(1, 0, 0, 0)} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>
-        <uigradient Color={new ColorSequence([new ColorSequenceKeypoint(0, Color3.fromRGB(255, 255, 255)),new ColorSequenceKeypoint(1, Color3.fromRGB(0, 0, 0))])}/>
+        <uigradient Color={new ColorSequence([new ColorSequenceKeypoint(0, tableQuest.completed ? Color3.fromRGB(20, 70, 20) : Color3.fromRGB(255, 255, 255)),new ColorSequenceKeypoint(1, Color3.fromRGB(0, 0, 0))])}/>
         <Basic tags={["bodyContainer", "actionContainer"]} dog={refFunction}>
             <uiflexitem FlexMode={"Fill"}/>
             <Basic tags={["textGroup"]} Size={new UDim2(1, 0, 0, 0)} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>

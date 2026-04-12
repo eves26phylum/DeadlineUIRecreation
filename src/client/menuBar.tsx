@@ -50,6 +50,7 @@ export function MenuBar({buttonsJSON = [], children = {}, slideTransition = {
                     }
             </Basic>
             <motion.frame
+                BorderSizePixel={0}
                 animate={{Position: new UDim2(0, getButtonPosXFromIndex(selectedButton), 0, 0)}} 
                 AutomaticSize={Enum.AutomaticSize.None} 
                 Size={new UDim2(0, buttonSize.X, 0, buttonSize.Y)} 
@@ -57,7 +58,7 @@ export function MenuBar({buttonsJSON = [], children = {}, slideTransition = {
                 transition={slideTransition}  
             >
                     {children}
-                    <motion.frame transition={slideTransition} animate={{Position: new UDim2(0, -getButtonPosXFromIndex(selectedButton), 0, 0)}}  Size={new UDim2(0, buttonSize.X * buttonRef.current.size(), 0, 0)} BackgroundTransparency={1}>
+                    <motion.frame BorderSizePixel={0} transition={slideTransition} animate={{Position: new UDim2(0, -getButtonPosXFromIndex(selectedButton), 0, 0)}}  Size={new UDim2(0, buttonSize.X * buttonRef.current.size(), 0, 0)} BackgroundTransparency={1}>
                         <uilistlayout
                             FillDirection={Enum.FillDirection.Horizontal}
                             Padding={new UDim(0, 0)}
