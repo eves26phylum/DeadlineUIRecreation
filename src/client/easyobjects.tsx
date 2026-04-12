@@ -8,6 +8,16 @@ export interface DOMDefinition {
     flexProps?: Partial<React.InstanceProps<UIListLayout>>,
     textProps?: Partial<React.InstanceProps<TextLabel>>
 }
+export function Text({text, ...textProps}: {text: string} & Partial<React.InstanceProps<TextLabel>>) {
+    return  <textlabel
+                AutomaticSize={Enum.AutomaticSize.XY}
+                Size={new UDim2(0, 0, 0, 0)}
+                BackgroundTransparency={1}
+                BorderSizePixel={0}
+                Text={text}
+                {...textProps}
+            />
+}
 export function Basic({flexProps, textProps, children, dog, tags = [], ...restProps}: DOMDefinition & {dog?: (arg0: Frame | undefined) => void} & Partial<React.InstanceProps<Frame>>) {
     const ref = useRef<Frame>();
     useTags(ref, tags);
@@ -34,14 +44,7 @@ export function Basic({flexProps, textProps, children, dog, tags = [], ...restPr
                 {...flexProps}
             />
             {typeIs(children, "string") ? (
-                <textlabel
-                    AutomaticSize={Enum.AutomaticSize.XY}
-                    Size={new UDim2(0, 0, 0, 0)}
-                    BackgroundTransparency={1}
-                    BorderSizePixel={0}
-                    Text={children}
-                    {...textProps}
-                />
+                <Text text={children} {...textProps}/>
             ) : children}
 		</frame>
 	);

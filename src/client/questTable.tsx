@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "@rbxts/react";
-import { BasicScroll, Basic, Button } from "./easyobjects";
+import { BasicScroll, Basic, Button, Text } from "./easyobjects";
 import { UiContextType } from "client/types/deadlineClientTypes";
 import { useUiContext } from "./hooks/useAppContext";
 import { useAbsoluteAxis } from "./hooks/useAbsoluteAxis";
@@ -38,9 +38,9 @@ export function QuestProgressBar({progress, completedTag, ...props}: {progress: 
 export function Quest({tableQuest, index, callback = () => {}}: {tableQuest: TableOfQuestsType, callback: (index: number) => void, index: number}) {
     const [axis_content, refFunction] = useAbsoluteAxis("X");
     const completedTag = tableQuest.completed ? "completed" : "";
-    const finishedTag = tableQuest.finished ? "finished" : "";
+    const finishedTag = tableQuest.finished ? (`finished ${tableQuest.completed ? "notcompleted-finish" : ""}`) : "";
     const notCompletedTag = tableQuest.completed ? "" : "completed";
-    return <Basic BackgroundTransparency={0} tags={["tableOfQuest", completedTag, finishedTag]} Size={new UDim2(1, 0, 0, 0)} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>
+    return <Basic BackgroundTransparency={0} tags={["tableOfQuest", completedTag]} Tag={`${finishedTag}`} Size={new UDim2(1, 0, 0, 0)} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>
         <uigradient Color={new ColorSequence([new ColorSequenceKeypoint(0, tableQuest.finished ? Color3.fromRGB(70, 70, 70) : Color3.fromRGB(255, 255, 255)),new ColorSequenceKeypoint(1, Color3.fromRGB(0, 0, 0))])}/>
         <Basic tags={["bodyContainer", "actionContainer"]} dog={refFunction}>
             <uiflexitem FlexMode={"Fill"}/>
@@ -61,14 +61,16 @@ export function Quest({tableQuest, index, callback = () => {}}: {tableQuest: Tab
             <CurrencyBubbleCardObject completed={completedTag} styleIndicator="XP" currency="XP" amount={tableQuest.experienceAmount}/>
             <CurrencyBubbleCardObject completed={completedTag} styleIndicator="NewTaiwanDollars" currency="$" amount={tableQuest.newTaiwanDollarsAmount}/>
         </Basic>
-        <Button tags={["rerollButton", "miniUICorner"]} textProps={{Tag: "textStandard textOnDemotivationCycle"}} Event={{MouseButton1Click: () => {if (!tableQuest.finished) return; callback(index)}}}>{
-            tableQuest.completed ?
-            "CLAIMED"
-            :
-            tableQuest.finished ?
-                "CLAIM"
-            : "3 MORE"
-        }</Button>
+        <Button tags={["rerollButton", "miniUICorner"]} Tag={`${finishedTag}`} Event={{MouseButton1Click: () => {if (!tableQuest.finished) return; callback(index)}}}>
+            <Text Tag="textStandard textOnDemotivationCycle" text={
+                tableQuest.completed ?
+                "CLAIMED"
+                :
+                tableQuest.finished ?
+                    "CLAIM"
+                : "3 MORE"
+            }/>
+        </Button>
         </Basic>;
 }
 export function QuestTable({tableOfQuests, callback}: {tableOfQuests?: TableOfQuestsType[], callback: (index: number) => void}) {

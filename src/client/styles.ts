@@ -14,6 +14,7 @@ export function Styles() {
     lobbySheet.SetAttribute("PaddingTL", new UDim(0, 12));
     lobbySheet.SetAttribute("IconSize", new UDim2(0, 20, 0, 20));
     lobbySheet.SetAttribute("AccentColour", Color3.fromRGB(255, 255, 255));
+    lobbySheet.SetAttribute("AccentColourHover", Color3.fromRGB(235, 235, 235));
     lobbySheet.SetAttribute("SecondaryAccentColour", Color3.fromHex("#808080"));
     lobbySheet.SetAttribute("RerollMainButtonComplementaryColourBackgroundColor3", Color3.fromRGB(60, 60, 60));
     lobbySheet.SetAttribute("RerollMainButtonComplementaryHoverColourBackgroundColor3", Color3.fromRGB(80, 80, 80));
@@ -133,6 +134,36 @@ export function Styles() {
         PaddingBottom: "$PaddingXS",
         PaddingTop: "$PaddingXS",
     }, lobbySheet)
+    createRule(".rerollButton", {
+        BackgroundColor3: "$RerollButtonComplementaryColourBackgroundColor3"
+    }, lobbySheet)
+    createRule(".rerollButton:Hover", {
+        BackgroundColor3: "$RerollButtonComplementaryColourHoverBackgroundColor3"
+    }, lobbySheet)
+    createRule(".rerollButton.notcompleted-finish", {
+        BackgroundColor3: "$AccentColour"
+    }, lobbySheet)
+    createRule(".rerollButton.notcompleted-finish:Hover", {
+        BackgroundColor3: "$AccentColourHover"
+    }, lobbySheet)
+    createRule(".rerollButton.notcompleted-finish > Frame > TextLabel", {
+        TextColor3: "$BackgroundColour"
+    }, lobbySheet)
+    createRule(".rerollButton > Frame > UIListLayout", {
+        Padding: "$PaddingS"
+    }, lobbySheet)
+    createRule(".rerollButtonMain", {
+        BackgroundColor3: "$RerollMainButtonComplementaryColourBackgroundColor3"
+    }, lobbySheet)
+    createRule(".rerollButtonMain:Hover", {
+        BackgroundColor3: "$RerollMainButtonComplementaryHoverColourBackgroundColor3"
+    }, lobbySheet)
+    createRule(".rerollButton::UIPadding", {
+        PaddingLeft: "$PaddingXL",
+        PaddingRight: "$PaddingXL",
+        PaddingBottom: "$PaddingTL",
+        PaddingTop: "$PaddingTL"
+    }, lobbySheet)
     createRule(".actionContainer > UIListLayout", {
         Padding: "$PaddingS"
     }, lobbySheet)
@@ -177,12 +208,6 @@ export function Styles() {
     createRule(".menuBarButtonsContainer::UIStroke", {
         Color: "$BorderColour"
     }, lobbySheet)
-    createRule(".rerollButton::UIPadding", {
-        PaddingLeft: "$PaddingXL",
-        PaddingRight: "$PaddingXL",
-        PaddingBottom: "$PaddingTL",
-        PaddingTop: "$PaddingTL"
-    }, lobbySheet)
     createRule(".questsTitle::UIPadding", {
         PaddingLeft: "$PaddingL",
         PaddingRight: "$PaddingL",
@@ -201,21 +226,7 @@ export function Styles() {
     createRule(".textOnDark.completed", {
         TextColor3: "$SecondaryAccentColour"
     }, lobbySheet)
-    createRule(".rerollButton", {
-        BackgroundColor3: "$RerollButtonComplementaryColourBackgroundColor3"
-    }, lobbySheet)
-    createRule(".rerollButton:Hover", {
-        BackgroundColor3: "$RerollButtonComplementaryColourHoverBackgroundColor3"
-    }, lobbySheet)
-    createRule(".rerollButton > Frame > UIListLayout", {
-        Padding: "$PaddingS"
-    }, lobbySheet)
-    createRule(".rerollButtonMain", {
-        BackgroundColor3: "$RerollMainButtonComplementaryColourBackgroundColor3"
-    }, lobbySheet)
-    createRule(".rerollButtonMain:Hover", {
-        BackgroundColor3: "$RerollMainButtonComplementaryHoverColourBackgroundColor3"
-    }, lobbySheet)
+
     createRule(".menuButton", { BackgroundColor3: "$BackgroundColour" }, lobbySheet);
     createRule(".menuButton.defaultMenuButton:Hover", { BackgroundColor3: "$DailyQuestsTitleComplementaryColourBackgroundColour3Darker" }, lobbySheet);
     createRule(".menuButton.defaultMenuButton:Press", { BackgroundColor3: "$DailyQuestsTitleComplementaryColourBackgroundColour3Darker" }, lobbySheet);
