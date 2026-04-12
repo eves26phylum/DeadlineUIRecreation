@@ -1,10 +1,16 @@
 import React, { StrictMode, useEffect, useState } from "@rbxts/react";
 import { Basic, Button, DOMDefinition } from "./easyobjects";
 
-export interface MenuButtonProps {
+export interface MenuButtonProps extends DOMDefinition, Partial<React.InstanceProps<TextButton>>{
     pageCallback: () => void, tags?: string[], children?: React.ReactNode,
+    frameProps?: Partial<React.InstanceProps<Frame>>
 }
-export function MenuButton({pageCallback, tags = [], frameProps, children, ...props}: MenuButtonProps & DOMDefinition & {frameProps?: Partial<React.InstanceProps<Frame>>} & Partial<React.InstanceProps<TextButton>>) {
+
+export interface IconMenuButtonProps extends MenuButtonProps {
+    image: string
+}
+
+export function MenuButton({pageCallback, tags = [], frameProps, children, ...props}: MenuButtonProps) {
     return <Button 
         tags={[...tags, "menuButton"]}
         Event={{
@@ -16,7 +22,7 @@ export function MenuButton({pageCallback, tags = [], frameProps, children, ...pr
         {children}
     </Button>
 }
-export function IconMenuButton({image, children, frameProps, ...props}: MenuButtonProps & {frameProps?: Partial<React.InstanceProps<Frame>>} & DOMDefinition & Partial<React.InstanceProps<TextButton>> & {image: string}) {
+export function IconMenuButton({image, children, frameProps, ...props}: IconMenuButtonProps) {
     return <MenuButton frameProps={frameProps} {...props}>
         <imagelabel Tag={"icon"} BackgroundTransparency={1} Image={image}/>
         {children}

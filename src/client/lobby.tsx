@@ -8,7 +8,7 @@ Structure:
 import React, { StrictMode, useEffect, useState, useRef } from "@rbxts/react";
 import { Basic, Button } from "./easyobjects";
 import { MenuBarHome } from "./menuBar";
-import { ReplicatedStorage, Workspace } from '@rbxts/services';
+import { PlayerFighterState } from "./vars/playerFighterState";
 import motion from "@rbxts/react-motion";
 import { UiContextProvider, AppContextProvider } from "./hooks/useAppContext";
 import { moneyFormat } from "client/types/deadlineClientTypes";

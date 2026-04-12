@@ -6,13 +6,7 @@ export function changeCameraStateVariables(thisCameraState: cameraState) {
     const currentCamera: Camera | undefined = Workspace.CurrentCamera;
     if (!currentCamera) return warn(`Current camera does not exist at timestamp: {"os_time": ${os.time()}, "os_clock": ${os.clock()}}`);
     PlayerFighterState.CameraState = thisCameraState;
-    switch (thisCameraState.cameraType) {
-        case "presentationCamera":
-            presentationCameraHandler(currentCamera, PlayerFighterState);
-            break
-        default:
-            notImplemented("playerBound");
-    }
+    presentationCameraHandler(currentCamera, PlayerFighterState);
 }
 task.defer(function() {
     let currentCamera: Camera | undefined = Workspace.CurrentCamera;
@@ -22,6 +16,5 @@ task.defer(function() {
             return warn("Current camera logic was not called because current camera does not exist")
         }
         presentationCameraHandler(currentCamera, PlayerFighterState);
-        currentCamera.CFrame = PlayerFighterState.CameraState.cameraCFrame;
     })
 })

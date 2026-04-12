@@ -1,5 +1,13 @@
-import { playerFighterState } from "client/vars/playerFighterState";
+import { playerFighterState, cameraType } from "client/vars/playerFighterState";
 export function presentationCameraHandler(currentCamera: Camera, PlayerFighterState: playerFighterState) {
-    currentCamera.CameraType = Enum.CameraType.Scriptable;
+    switch(PlayerFighterState.CameraState.cameraType) {
+        case "presentationCamera":
+            currentCamera.CameraType = Enum.CameraType.Scriptable;
+            currentCamera.CFrame = PlayerFighterState.CameraState.cameraCFrame;
+            break
+        case "playerBound":
+            currentCamera.CameraType = Enum.CameraType.Custom;
+            break
+    }
     return;
 }

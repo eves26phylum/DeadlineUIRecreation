@@ -1,13 +1,13 @@
 import React, { StrictMode, useEffect, useState, useRef } from '@rbxts/react';
 import { Basic, Button } from "./easyobjects";
-import { MenuButton, IconMenuButton, MenuButtonProps } from "./menuButton";
+import { MenuButton, IconMenuButton, MenuButtonProps, IconMenuButtonProps } from "./menuButton";
 import motion, { Transition } from "@rbxts/react-motion";
 import { useUiContext } from './hooks/useAppContext';
 import { UiContextType } from 'client/types/deadlineClientTypes';
 interface extraProps {
     text: string
 }
-type MenuBarButtonDef = Omit<MenuButtonProps, 'pageCallback'> & { image: string, pageCallback: (index: number) => void }
+type MenuBarButtonDef = Omit<IconMenuButtonProps, 'pageCallback'> & { pageCallback: (index: number) => void }
 export function MenuBar({buttonsJSON = [], children = {}, slideTransition = {
       duration: 0.25,
       easingStyle: Enum.EasingStyle.Quart,
