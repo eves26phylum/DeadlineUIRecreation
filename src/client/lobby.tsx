@@ -25,19 +25,19 @@ export default function() {
     const [questsFinishTimeSeconds, setQuestsFinishTimeSeconds] = useState<number>(12000);
     const [questTableState, setQuestTableState] = useState<TableOfQuestsType[]>([
                 {
-                    name: "Capture 5 points",
+                    name: "Feed 673382381 people for 20 years",
                     progress: {
-                        now: 5,
-                        finish: 5
+                        now: 4,
+                        finish: 673382381
                     },
-                    newTaiwanDollarsAmount: 500,
-                    experienceAmount: 500,
+                    newTaiwanDollarsAmount: math.huge,
+                    experienceAmount: math.huge,
                     completed: true
                 },
                 {
                     name: "Consume 5 MRE packs",
                     progress: {
-                        now: 2,
+                        now: 15,
                         finish: 5
                     },
                     newTaiwanDollarsAmount: 500,
@@ -46,14 +46,14 @@ export default function() {
                 {
                     name: "Help 2 SYNO allies",
                     progress: {
-                        now: -1,
+                        now: 0,
                         finish: 2
                     },
                     newTaiwanDollarsAmount: 500,
                     experienceAmount: 500
                 },
                 {
-                    name: "Headshot 3000 people",
+                    name: "Headshot 3000 players with the Arid Eagle Mk RIZZ .50AE Conversion for Arid Eagle Mk RIZZ Eagle",
                     progress: {
                         now: 538,
                         finish: 3000

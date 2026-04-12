@@ -18,9 +18,9 @@ export default function() {
     const appContext = useAppContext();
     const questTableState = appContext.states.questTableState;
     const setQuestTableState = appContext.states.setQuestTableState;
-    return <Basic>
+    return <Basic AutomaticSize={Enum.AutomaticSize.Y} Size={new UDim2(0, 700, 0, 0)}>
         <Basic BackgroundTransparency={0} Size={new UDim2(1, 0, 0, 0)} dog={refFunction} tags={["questsTitle"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum. ItemLineAlignment.Center}}>
-            <uisizeconstraint MinSize={new Vector2(600, 0)}/>
+            <uisizeconstraint MinSize={new Vector2(700, 0)}/>
             <Basic textProps={{Tag: "textTitleLargerSubheading textOnDark"}}>DAILY QUESTS</Basic>
             <Basic flexProps={{Tag: "paddingStandard", FillDirection: Enum.FillDirection.Horizontal, HorizontalAlignment: Enum.HorizontalAlignment.Right, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>
                 <uiflexitem FlexMode={"Fill"}/>
