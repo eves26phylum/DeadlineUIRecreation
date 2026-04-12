@@ -34,8 +34,8 @@ export default function() {
                 {
                     name: "Capture 5 points",
                     progress: {
-                        now: 500,
-                        finish: 500
+                        now: 5,
+                        finish: 5
                     },
                     newTaiwanDollarsAmount: 500,
                     experienceAmount: 500
@@ -61,7 +61,7 @@ export default function() {
                 {
                     name: "Headshot 3000 people",
                     progress: {
-                        now: 500,
+                        now: 538,
                         finish: 3000
                     },
                     newTaiwanDollarsAmount: 500,
