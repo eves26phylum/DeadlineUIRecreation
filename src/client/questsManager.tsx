@@ -18,6 +18,8 @@ export default function() {
     const appContext = useAppContext();
     const questTableState = appContext.states.questTableState;
     const setQuestTableState = appContext.states.setQuestTableState;
+    const money = appContext.states.money;
+    const setMoney = appContext.states.setMoney;
     return <Basic AutomaticSize={Enum.AutomaticSize.Y} Size={new UDim2(0, 700, 0, 0)}>
         <Basic BackgroundTransparency={0} Size={new UDim2(1, 0, 0, 0)} dog={refFunction} tags={["questsTitle"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum. ItemLineAlignment.Center}}>
             <uisizeconstraint MinSize={new Vector2(700, 0)}/>
@@ -36,6 +38,9 @@ export default function() {
             <QuestTable tableOfQuests={questTableState} callback={(index: number) => {
                 const cloneTableState = [...questTableState];
                 cloneTableState[index].completed = true;
+                const cloneMoney = {...money};
+                cloneMoney.newTaiwanDollars += cloneTableState[index].newTaiwanDollarsAmount
+                setMoney(cloneMoney);
                 setQuestTableState(cloneTableState);
             }}/>
         </Basic>

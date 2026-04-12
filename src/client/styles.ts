@@ -67,7 +67,7 @@ export function Styles() {
         PaddingTop: "$PaddingL",
     }, lobbySheet)
     createRule(".tableOfQuest > UIListLayout", {
-        Padding: "$PaddingL"
+        Padding: "$PaddingXL"
     }, lobbySheet)
     createRule(".currencyBubbleCardObject::UIAspectRatioConstraint", {
         AspectType: Enum.AspectType.ScaleWithParentSize
