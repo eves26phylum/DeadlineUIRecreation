@@ -26,15 +26,18 @@ export function Styles() {
     lobbySheet.SetAttribute("BorderColour", Color3.fromHex("#2A2A2A"));
     lobbySheet.SetAttribute("BackgroundColour", Color3.fromRGB(0, 0, 0));
     lobbySheet.SetAttribute("PositiveColour", Color3.fromRGB(0, 255, 0));
+    lobbySheet.SetAttribute("SavouryColour", Color3.fromRGB(255, 200, 0));
     lobbySheet.SetAttribute("backgroundQuestColour", Color3.fromRGB(15, 15, 15));
     lobbySheet.SetAttribute("progressQuestBarHighlight", Color3.fromRGB(37, 37, 37));
     lobbySheet.SetAttribute("PaddingS", new UDim(0, 8));
     lobbySheet.SetAttribute("PaddingXS", new UDim(0, 4));
     lobbySheet.SetAttribute("PaddingXXS", new UDim(0, 2));
+    lobbySheet.SetAttribute("PaddingOne", new UDim(0, 1));
     lobbySheet.SetAttribute("FontMainBold", new Font("rbxassetid://12187365977", Enum.FontWeight.Bold));
     lobbySheet.SetAttribute("FontMainSemiBold", new Font("rbxassetid://12187365977", Enum.FontWeight.SemiBold));
     lobbySheet.SetAttribute("FontMainRegular", new Font("rbxassetid://12187365977", Enum.FontWeight.Regular));
     lobbySheet.SetAttribute("TextSize", 16);
+    lobbySheet.SetAttribute("TextMiniSize", 10);
     lobbySheet.SetAttribute("TitleTextSize", 48);
     lobbySheet.SetAttribute("LargerSubheadingTextSize", 32);
     lobbySheet.SetAttribute("SubheadingTextSize", 24);
@@ -43,6 +46,7 @@ export function Styles() {
     createRule(".textOnDemotivationCycle", { TextColor3: "$SecondaryAccentColour" }, lobbySheet);
     createRule(".textBody", { TextSize: "$TextSize", FontFace: "$FontMainRegular" }, lobbySheet);
     createRule(".textStandard", { TextSize: "$TextSize", FontFace: "$FontMainSemiBold" }, lobbySheet);
+    createRule(".textMini", { TextSize: "$TextMiniSize", FontFace: "$FontMainSemiBold" }, lobbySheet);
     createRule(".textTitleMain", { TextSize: "$TitleTextSize", FontFace: "$FontMainBold" }, lobbySheet);
     createRule(".textTitleLargerSubheading", { TextSize: "$LargerSubheadingTextSize", FontFace: "$FontMainBold" }, lobbySheet);
     createRule(".textTitleSubheading", { TextSize: "$SubheadingTextSize", FontFace: "$FontMainBold" }, lobbySheet);
@@ -64,6 +68,33 @@ export function Styles() {
     }, lobbySheet)
     createRule(".tableOfQuest > UIListLayout", {
         Padding: "$PaddingL"
+    }, lobbySheet)
+    createRule(".currencyBubbleCardObject::UIAspectRatioConstraint", {
+        AspectType: Enum.AspectType.ScaleWithParentSize
+    }, lobbySheet)
+    createRule(".currencyBubbleCardObject.XP", {
+        BackgroundColor3: "$SavouryColour"
+    }, lobbySheet)
+    createRule(".currencyBubbleCardObject.XP > .stroke", {
+        Color: "$SavouryColour"
+    }, lobbySheet)
+    createRule(".currencyBubbleCardObject.$", {
+        BackgroundColor3: "$PositiveColour"
+    }, lobbySheet)
+    createRule(".currencyBubbleCardObject.$ > .stroke", {
+        Color: "$PositiveColour"
+    }, lobbySheet)
+    createRule(".currencyBubbleCardObject::UICorner", {
+        CornerRadius: new UDim(0, 4)
+    }, lobbySheet)
+    createRule(".currencyBubbleMiniText.$, .currencyBubbleLargeText.$", {
+        TextColor3: "$PositiveColour"
+    }, lobbySheet)
+    createRule(".currencyBubbleMiniText.XP, .currencyBubbleLargeText.XP", {
+        TextColor3: "$SavouryColour"
+    }, lobbySheet)
+    createRule(".currencyBubbleMiniText", {
+        TextTransparency: 0.5
     }, lobbySheet)
     createRule(".bodyContainer > .textGroup > UIListLayout", {
         Padding: "$PaddingL"
@@ -113,6 +144,9 @@ export function Styles() {
     createRule("UIListLayout.paddingMini", {
         Padding: "$PaddingXS"
     }, lobbySheet)
+     createRule("UIListLayout.paddingTiny", {
+        Padding: "$PaddingXXS"
+    }, lobbySheet)
     createRule(".paddingStandard::UIPadding", {
         PaddingLeft: "$PaddingL",
         PaddingRight: "$PaddingL",
@@ -124,6 +158,12 @@ export function Styles() {
         PaddingRight: "$PaddingS",
         PaddingBottom: "$PaddingXS",
         PaddingTop: "$PaddingXS"
+    }, lobbySheet)
+    createRule(".paddingTiny::UIPadding", {
+        PaddingLeft: "$PaddingXS",
+        PaddingRight: "$PaddingXS",
+        PaddingBottom: "$PaddingXXS",
+        PaddingTop: "$PaddingXXS"
     }, lobbySheet)
     createRule(".menuBarButtonsContainer::UIStroke", {
         Color: "$BorderColour"
