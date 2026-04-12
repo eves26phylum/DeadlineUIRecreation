@@ -51,6 +51,15 @@ createRule(".defaultMenuButton > Frame > TextLabel", { TextColor3: "$AccentColou
 createRule(".defaultMenuButton > Frame > ImageLabel", { ImageColor3: "$AccentColour" }, lobbySheet);
 createRule(".defaultMenuButton.selected > Frame > TextLabel", { TextColor3: "$BackgroundColour" }, lobbySheet);
 createRule(".defaultMenuButton.selected > Frame > ImageLabel", { ImageColor3: "$BackgroundColour" }, lobbySheet);
+createRule(".tableOfQuest::UIPadding", {
+    PaddingLeft: "$PaddingL",
+    PaddingRight: "$PaddingL",
+    PaddingBottom: "$PaddingL",
+    PaddingTop: "$PaddingL",
+}, lobbySheet)
+createRule(".actionContainer > UIListLayout", {
+    Padding: "$PaddingS"
+}, lobbySheet)
 createRule(".menuBarHome-full", {
     Size: new UDim2(1, 0, 0, 0),
     BackgroundColor3: "$BackgroundColour",
