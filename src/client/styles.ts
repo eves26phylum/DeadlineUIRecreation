@@ -202,6 +202,12 @@ export function Styles() {
         PaddingBottom: "$PaddingL",
         PaddingTop: "$PaddingL"
     }, lobbySheet)
+    createRule(".paddingGiant::UIPadding", {
+        PaddingLeft: "$PaddingXXL",
+        PaddingRight: "$PaddingXXL",
+        PaddingBottom: "$PaddingXXL",
+        PaddingTop: "$PaddingXXL"
+    }, lobbySheet)
     createRule(".paddingMini::UIPadding", {
         PaddingLeft: "$PaddingS",
         PaddingRight: "$PaddingS",

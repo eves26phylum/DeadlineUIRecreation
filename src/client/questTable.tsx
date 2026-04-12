@@ -4,6 +4,7 @@ import { UiContextType } from "client/types/deadlineClientTypes";
 import { useUiContext } from "./hooks/useAppContext";
 import { useAbsoluteAxis } from "./hooks/useAbsoluteAxis";
 
+export type styleIndicator = "NewTaiwanDollars" | "XP";
 export type ProgressObject = {
     now: number,
     finish: number
@@ -16,7 +17,7 @@ export interface TableOfQuestsType {
     newTaiwanDollarsAmount: number,
     finished?: boolean
 }
-export function CurrencyBubbleCardObject({currency, amount, styleIndicator, completed}: {currency: string, amount: number, styleIndicator: string, completed: string}) {
+export function CurrencyBubbleCardObject({currency, amount, styleIndicator, completed}: {currency: string, amount: number, styleIndicator: styleIndicator, completed: string}) {
     const combineString = `${styleIndicator} ${completed}`;
     return <frame Tag={`currencyBubbleCardObject miniUICorner ${combineString}`} Size={new UDim2(0, 48, 0, 48)} AutomaticSize={Enum.AutomaticSize.XY} BackgroundTransparency={0}>
         <uigradient Rotation={90} Color={new ColorSequence([new ColorSequenceKeypoint(0, Color3.fromRGB(30, 30, 30)),new ColorSequenceKeypoint(1, Color3.fromRGB(15, 15, 15))])}/>

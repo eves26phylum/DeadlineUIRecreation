@@ -15,6 +15,7 @@ import { moneyFormat } from "client/types/deadlineClientTypes";
 import QuestsManager from "./questsManager";
 import { TableOfQuestsType } from "./questTable";
 import { Styles, createRule } from "./styles";
+import { ProductionLobbySpawnConfig } from "./productionLobby";
 const lobbySheet = Styles();
 export default function() {
     const uiPageLayoutRef = useRef<UIPageLayout>();
@@ -127,7 +128,7 @@ export default function() {
             <Basic BackgroundTransparency={1}>Hello I am the shop</Basic> {/* Negative one single page */}
             <Basic Size={new UDim2(0, 0, 1, 0)} BackgroundTransparency={1} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
                 <Basic Size={new UDim2(0.5, 0, 1, 0)}>
-                    I am play column
+                    <ProductionLobbySpawnConfig/>
                 </Basic>
                 <Basic Size={new UDim2(0.5, 0, 1, 0)} flexProps={{HorizontalAlignment: Enum.HorizontalAlignment.Center, VerticalAlignment: Enum.VerticalAlignment.Center}}>
                     <QuestsManager/>
