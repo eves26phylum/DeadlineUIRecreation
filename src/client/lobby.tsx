@@ -64,11 +64,12 @@ export default function() {
                 {
                     name: "Capture 20 points",
                     progress: {
-                        now: 17,
+                        now: 20,
                         finish: 20
                     },
                     newTaiwanDollarsAmount: 10000,
-                    experienceAmount: 4000
+                    experienceAmount: 4000,
+                    finished: true
                 },
             ]);
     const APPCONTEXT = {

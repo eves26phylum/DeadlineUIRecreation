@@ -140,6 +140,12 @@ export function Styles() {
     createRule(".rerollButton:Hover", {
         BackgroundColor3: "$RerollButtonComplementaryColourHoverBackgroundColor3"
     }, lobbySheet)
+    createRule(".rerollButton > Frame > ImageLabel", {
+        ImageColor3: "$SecondaryAccentColour"
+    }, lobbySheet)
+    createRule(".rerollButtonMain > Frame > ImageLabel", {
+        ImageColor3: "$AccentColour"
+    }, lobbySheet)
     createRule(".rerollButton.notcompleted-finish", {
         BackgroundColor3: "$AccentColour"
     }, lobbySheet)
@@ -148,6 +154,9 @@ export function Styles() {
     }, lobbySheet)
     createRule(".rerollButton.notcompleted-finish > Frame > TextLabel", {
         TextColor3: "$BackgroundColour"
+    }, lobbySheet)
+    createRule(".rerollButton.notcompleted-finish > Frame > ImageLabel", {
+        ImageColor3: "$BackgroundColour"
     }, lobbySheet)
     createRule(".rerollButton > Frame > UIListLayout", {
         Padding: "$PaddingS"

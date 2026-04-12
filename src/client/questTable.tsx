@@ -38,7 +38,7 @@ export function QuestProgressBar({progress, completedTag, ...props}: {progress: 
 export function Quest({tableQuest, index, callback = () => {}}: {tableQuest: TableOfQuestsType, callback: (index: number) => void, index: number}) {
     const [axis_content, refFunction] = useAbsoluteAxis("X");
     const completedTag = tableQuest.completed ? "completed" : "";
-    const finishedTag = tableQuest.finished ? (`finished ${tableQuest.completed ? "notcompleted-finish" : ""}`) : "";
+    const finishedTag = tableQuest.finished ? (`finished ${tableQuest.completed ? "" : "notcompleted-finish"}`) : "";
     const notCompletedTag = tableQuest.completed ? "" : "completed";
     return <Basic BackgroundTransparency={0} tags={["tableOfQuest", completedTag]} Tag={`${finishedTag}`} Size={new UDim2(1, 0, 0, 0)} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>
         <uigradient Color={new ColorSequence([new ColorSequenceKeypoint(0, tableQuest.finished ? Color3.fromRGB(70, 70, 70) : Color3.fromRGB(255, 255, 255)),new ColorSequenceKeypoint(1, Color3.fromRGB(0, 0, 0))])}/>
@@ -61,7 +61,8 @@ export function Quest({tableQuest, index, callback = () => {}}: {tableQuest: Tab
             <CurrencyBubbleCardObject completed={completedTag} styleIndicator="XP" currency="XP" amount={tableQuest.experienceAmount}/>
             <CurrencyBubbleCardObject completed={completedTag} styleIndicator="NewTaiwanDollars" currency="$" amount={tableQuest.newTaiwanDollarsAmount}/>
         </Basic>
-        <Button tags={["rerollButton", "miniUICorner"]} Tag={`${finishedTag}`} Event={{MouseButton1Click: () => {if (!tableQuest.finished) return; callback(index)}}}>
+        <Button tags={["rerollButton", "miniUICorner"]} Tag={`${finishedTag}`} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}} Event={{MouseButton1Click: () => {if (!tableQuest.finished) return; callback(index)}}}>
+            {(tableQuest.finished && !tableQuest.completed) ? <imagelabel Tag={"icon"} BackgroundTransparency={1} Image={"rbxassetid://7072720870"}/> : <></>}
             <Text Tag="textStandard textOnDemotivationCycle" text={
                 tableQuest.completed ?
                 "CLAIMED"
