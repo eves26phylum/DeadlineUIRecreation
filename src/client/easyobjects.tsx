@@ -47,7 +47,7 @@ export function Basic({flexProps, textProps, children, dog, tags = [], ...restPr
 	);
 }
 
-export function BasicScroll({children, tags = [], scrollProps = {}, ...restProps}: DOMDefinition & Partial<React.InstanceProps<Frame>> & {scrollProps: Partial<React.InstanceProps<ScrollingFrame>>}) {
+export function BasicScroll({children, tags = [], scrollProps = {}, ...restProps}: DOMDefinition & Partial<React.InstanceProps<Frame>> & {scrollProps?: Partial<React.InstanceProps<ScrollingFrame>>}) {
     const ref = useRef<ScrollingFrame>();
     useTags(ref, tags);
 	return (

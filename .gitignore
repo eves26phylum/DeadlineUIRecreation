@@ -3,4 +3,5 @@
 /include
 *.tsbuildinfo
 .DS_Store
-/DeadlineUIRecreation.rbxl.lock
+*.rbxl.lock
+*.rbxlx.lock
