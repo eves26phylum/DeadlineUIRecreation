@@ -15,8 +15,9 @@ import { moneyFormat } from "shared/types/deadlineClientTypes";
 import QuestsManager from "./questsManager";
 const lobbySheet = new Instance("StyleSheet");
 lobbySheet.SetAttribute("PaddingXL", new UDim(0, 24));
-lobbySheet.SetAttribute("PaddingXXL", new UDim(0, 30));
+lobbySheet.SetAttribute("PaddingXXL", new UDim(0, 32));
 lobbySheet.SetAttribute("PaddingL", new UDim(0, 16));
+lobbySheet.SetAttribute("PaddingTL", new UDim(0, 12));
 lobbySheet.SetAttribute("IconSize", new UDim2(0, 20, 0, 20));
 lobbySheet.SetAttribute("AccentColour", Color3.fromRGB(255, 255, 255));
 lobbySheet.SetAttribute("SecondaryAccentColour", Color3.fromHex("#808080"));
@@ -126,10 +127,10 @@ createRule(".menuBarButtonsContainer::UIStroke", {
     Color: "$BorderColour"
 }, lobbySheet)
 createRule(".rerollButton::UIPadding", {
-    PaddingLeft: "$PaddingL",
-    PaddingRight: "$PaddingL",
-    PaddingBottom: "$PaddingS",
-    PaddingTop: "$PaddingS"
+    PaddingLeft: "$PaddingXL",
+    PaddingRight: "$PaddingXL",
+    PaddingBottom: "$PaddingTL",
+    PaddingTop: "$PaddingTL"
 }, lobbySheet)
 createRule(".rerollButton", {
     BackgroundColor3: "$RerollButtonComplementaryColourBackgroundColour3"
@@ -150,7 +151,7 @@ createRule(".menuButton > Frame::UIPadding", {
     PaddingRight: "$PaddingXXL",
     PaddingBottom: "$PaddingL",
     PaddingTop: "$PaddingL",
-}, lobbySheet);
+}, lobbySheet); // 1/2 padding rule
 export default function() {
     const uiPageLayoutRef = useRef<UIPageLayout>();
     const [money, setMoney] = useState<moneyFormat>({
