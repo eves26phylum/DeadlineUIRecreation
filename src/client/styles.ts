@@ -195,7 +195,7 @@ export function Styles() {
     createRule(".tableOfQuest", {
         BackgroundColor3: "$backgroundQuestColour"
     }, lobbySheet)
-    createRule(".tableOfQuest.completed", {
+    createRule(".tableOfQuest.finished", {
         BackgroundColor3: "$PositiveColour"
     }, lobbySheet)
     createRule(".textOnDark.completed", {

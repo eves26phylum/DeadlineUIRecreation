@@ -31,8 +31,7 @@ export default function() {
                         finish: 673382381
                     },
                     newTaiwanDollarsAmount: math.huge,
-                    experienceAmount: math.huge,
-                    completed: true
+                    experienceAmount: math.huge
                 },
                 {
                     name: "Consume 5 MRE packs",
@@ -41,7 +40,8 @@ export default function() {
                         finish: 5
                     },
                     newTaiwanDollarsAmount: 2500,
-                    experienceAmount: 1000
+                    experienceAmount: 1000,
+                    finished: true
                 },
                 {
                     name: "Help 2 SYNO allies",

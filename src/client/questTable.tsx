@@ -13,7 +13,8 @@ export interface TableOfQuestsType {
     name: string,
     progress: ProgressObject,
     experienceAmount: number,
-    newTaiwanDollarsAmount: number
+    newTaiwanDollarsAmount: number,
+    finished?: boolean
 }
 export function CurrencyBubbleCardObject({currency, amount, styleIndicator, completed}: {currency: string, amount: number, styleIndicator: string, completed: string}) {
     const combineString = `${styleIndicator} ${completed}`;
@@ -37,9 +38,10 @@ export function QuestProgressBar({progress, completedTag, ...props}: {progress: 
 export function Quest({tableQuest, index, callback = () => {}}: {tableQuest: TableOfQuestsType, callback: (index: number) => void, index: number}) {
     const [axis_content, refFunction] = useAbsoluteAxis("X");
     const completedTag = tableQuest.completed ? "completed" : "";
+    const finishedTag = tableQuest.finished ? "finished" : "";
     const notCompletedTag = tableQuest.completed ? "" : "completed";
-    return <Basic BackgroundTransparency={0} tags={["tableOfQuest", completedTag]} Size={new UDim2(1, 0, 0, 0)} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>
-        <uigradient Color={new ColorSequence([new ColorSequenceKeypoint(0, tableQuest.completed ? Color3.fromRGB(70, 70, 70) : Color3.fromRGB(255, 255, 255)),new ColorSequenceKeypoint(1, Color3.fromRGB(0, 0, 0))])}/>
+    return <Basic BackgroundTransparency={0} tags={["tableOfQuest", completedTag, finishedTag]} Size={new UDim2(1, 0, 0, 0)} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>
+        <uigradient Color={new ColorSequence([new ColorSequenceKeypoint(0, tableQuest.finished ? Color3.fromRGB(70, 70, 70) : Color3.fromRGB(255, 255, 255)),new ColorSequenceKeypoint(1, Color3.fromRGB(0, 0, 0))])}/>
         <Basic tags={["bodyContainer", "actionContainer"]} dog={refFunction}>
             <uiflexitem FlexMode={"Fill"}/>
             <Basic tags={["textGroup"]} Size={new UDim2(1, 0, 0, 0)} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
@@ -59,7 +61,14 @@ export function Quest({tableQuest, index, callback = () => {}}: {tableQuest: Tab
             <CurrencyBubbleCardObject completed={completedTag} styleIndicator="XP" currency="XP" amount={tableQuest.experienceAmount}/>
             <CurrencyBubbleCardObject completed={completedTag} styleIndicator="NewTaiwanDollars" currency="$" amount={tableQuest.newTaiwanDollarsAmount}/>
         </Basic>
-        <Button tags={["rerollButton", "miniUICorner"]} textProps={{Tag: "textStandard textOnDemotivationCycle"}} Event={{MouseButton1Click: () => {callback(index)}}}>3 MORE</Button>
+        <Button tags={["rerollButton", "miniUICorner"]} textProps={{Tag: "textStandard textOnDemotivationCycle"}} Event={{MouseButton1Click: () => {if (!tableQuest.finished) return; callback(index)}}}>{
+            tableQuest.completed ?
+            "CLAIMED"
+            :
+            tableQuest.finished ?
+                "CLAIM"
+            : "3 MORE"
+        }</Button>
         </Basic>;
 }
 export function QuestTable({tableOfQuests, callback}: {tableOfQuests?: TableOfQuestsType[], callback: (index: number) => void}) {
