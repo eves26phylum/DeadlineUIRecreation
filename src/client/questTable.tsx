@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from "@rbxts/react";
 import { BasicScroll, Basic } from "./easyobjects";
+import { UiContextType } from "shared/types/deadlineClientTypes";
+import { useUiContext } from "./hooks/useAppContext";
 export type ProgressObject = {
     now: number,
     finish: number
@@ -13,10 +15,12 @@ export interface TableOfQuestsType {
 export function QuestProgressBar({progress, ...props}: {progress: ProgressObject} & Partial<React.InstanceProps<Frame>>) {
     const calculatedProgress = useMemo(() => {
         return progress.now / progress.finish;
-    }, [progress.now, progress.finish])
-    return <Basic flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
-        <Basic>
-        </Basic>
+    }, [progress.now, progress.finish]);
+    const UiContext: UiContextType = useUiContext();
+    const progressBarHeight: number = UiContext.themes["quests.progressBarWidth"];
+
+    return <Basic tags={["QuestProgressBar"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal}} {...props}>
+        <frame Tag={"QuestProgressBarContent"} Size={new UDim2(calculatedProgress, 0, 0, progressBarHeight)}/>
     </Basic>
 }
 export function Quest({tableQuest}: {tableQuest: TableOfQuestsType}) {
@@ -24,7 +28,8 @@ export function Quest({tableQuest}: {tableQuest: TableOfQuestsType}) {
         <Basic tags={["actionContainer"]}>
             <uiflexitem FlexMode={"Fill"}/>
             <textlabel AutomaticSize={Enum.AutomaticSize.XY} Text={tableQuest.name}/>
-            <textlabel AutomaticSize={Enum.AutomaticSize.XY} Text="I AM A FUCKING PROGRESS BAR"/>
+            {/* <textlabel AutomaticSize={Enum.AutomaticSize.XY} Text="I AM A FUCKING PROGRESS BAR"/> */}
+            <QuestProgressBar Size={new UDim2(1, 0, 0, 0)} progress={tableQuest.progress}/>
         </Basic>
         <Basic tags={["actionContainer"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
             <Basic tags={["currencyBubbleCardObject"]} Size={new UDim2(0, 24, 0, 24)}>{tostring(tableQuest.newTaiwanDollarsAmount)}</Basic>

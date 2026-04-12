@@ -1,3 +1,4 @@
+// VERSION: Roblox Studio 0.716.0.7160873 (arm64)
 /* 
 Structure:
 - A menu bar script that has menu buttons
@@ -56,6 +57,9 @@ createRule(".tableOfQuest::UIPadding", {
     PaddingRight: "$PaddingL",
     PaddingBottom: "$PaddingL",
     PaddingTop: "$PaddingL",
+}, lobbySheet)
+createRule(".QuestProgressBar > .QuestProgressBarContent", {
+    
 }, lobbySheet)
 createRule(".actionContainer > UIListLayout", {
     Padding: "$PaddingS"
@@ -126,6 +130,9 @@ export default function() {
         states: {
             selectedPage: selectedPage,
             setSelectedPage: setSelectedPage
+        },
+        themes: {
+            "quests.progressBarWidth": 20
         }
     }
     useEffect(()=>{
