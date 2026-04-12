@@ -23,8 +23,11 @@ lobbySheet.SetAttribute("SecondaryAccentColour", Color3.fromHex("#808080"));
 lobbySheet.SetAttribute("BorderColour", Color3.fromHex("#2A2A2A"));
 lobbySheet.SetAttribute("BackgroundColour", Color3.fromRGB(0, 0, 0));
 lobbySheet.SetAttribute("PositiveColour", Color3.fromRGB(0, 255, 0));
+lobbySheet.SetAttribute("backgroundQuestColour", Color3.fromRGB(15, 15, 15));
+lobbySheet.SetAttribute("progressQuestBarHighlight", Color3.fromRGB(37, 37, 37));
 lobbySheet.SetAttribute("PaddingS", new UDim(0, 8));
 lobbySheet.SetAttribute("PaddingXS", new UDim(0, 4));
+lobbySheet.SetAttribute("PaddingXXS", new UDim(0, 2));
 lobbySheet.SetAttribute("FontMainBold", new Font("rbxassetid://12187365977", Enum.FontWeight.Bold));
 lobbySheet.SetAttribute("FontMainSemiBold", new Font("rbxassetid://12187365977", Enum.FontWeight.SemiBold));
 lobbySheet.SetAttribute("FontMainRegular", new Font("rbxassetid://12187365977", Enum.FontWeight.Regular));
@@ -33,7 +36,7 @@ lobbySheet.SetAttribute("TitleTextSize", 48);
 lobbySheet.SetAttribute("SubheadingTextSize", 24);
 lobbySheet.Parent = ReplicatedStorage;
 function createRule(selector: string, props: InstanceProperties<any>, styleSheet: StyleSheet) {
-    const rule = new Instance("StyleRule");
+    const rule: StyleRule = new Instance("StyleRule");
     rule.Parent = styleSheet;
     rule.Selector = selector;
     rule.SetProperties(props);
@@ -41,6 +44,7 @@ function createRule(selector: string, props: InstanceProperties<any>, styleSheet
 }
 createRule(".textOnDark", { TextColor3: "$AccentColour" }, lobbySheet);
 createRule(".textOnDemotivationCycle", { TextColor3: "$SecondaryAccentColour" }, lobbySheet);
+createRule(".textBody", { TextSize: "$TextSize", FontFace: "$FontMainRegular" }, lobbySheet);
 createRule(".textStandard", { TextSize: "$TextSize", FontFace: "$FontMainSemiBold" }, lobbySheet);
 createRule(".textTitleMain", { TextSize: "$TitleTextSize", FontFace: "$FontMainBold" }, lobbySheet);
 createRule(".textTitleSubheading", { TextSize: "$SubheadingTextSize", FontFace: "$FontMainBold" }, lobbySheet);
@@ -58,8 +62,30 @@ createRule(".tableOfQuest::UIPadding", {
     PaddingBottom: "$PaddingL",
     PaddingTop: "$PaddingL",
 }, lobbySheet)
+createRule(".tableOfQuest > UIListLayout", {
+    Padding: "$PaddingS"
+}, lobbySheet)
+createRule(".bodyContainer > .textGroup", {
+    Padding: "$PaddingS"
+}, lobbySheet)
 createRule(".QuestProgressBar > .QuestProgressBarContent", {
-    
+    BackgroundColor3: "$AccentColour"
+}, lobbySheet)
+createRule(".QuestProgressBar > .QuestProgressBarContent::UICorner", {
+    CornerRadius: new UDim(1, 0)
+}, lobbySheet)
+createRule(".QuestProgressBar", {
+    BackgroundTransparency: 0,
+    BackgroundColor3: "$progressQuestBarHighlight"
+}, lobbySheet)
+createRule(".QuestProgressBar::UICorner", {
+    CornerRadius: new UDim(1, 0)
+}, lobbySheet)
+createRule(".QuestProgressBar::UIPadding", {
+    PaddingLeft: "$PaddingXS",
+    PaddingRight: "$PaddingXS",
+    PaddingBottom: "$PaddingXS",
+    PaddingTop: "$PaddingXS",
 }, lobbySheet)
 createRule(".actionContainer > UIListLayout", {
     Padding: "$PaddingS"
@@ -132,7 +158,7 @@ export default function() {
             setSelectedPage: setSelectedPage
         },
         themes: {
-            "quests.progressBarWidth": 20
+            "quests.progressBarWidth": 10
         }
     }
     useEffect(()=>{

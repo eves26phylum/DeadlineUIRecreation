@@ -2,6 +2,8 @@ import React, { useMemo, useState } from "@rbxts/react";
 import { BasicScroll, Basic } from "./easyobjects";
 import { UiContextType } from "shared/types/deadlineClientTypes";
 import { useUiContext } from "./hooks/useAppContext";
+import { useAbsoluteAxis } from "./hooks/useAbsoluteAxis";
+
 export type ProgressObject = {
     now: number,
     finish: number
@@ -19,17 +21,20 @@ export function QuestProgressBar({progress, ...props}: {progress: ProgressObject
     const UiContext: UiContextType = useUiContext();
     const progressBarHeight: number = UiContext.themes["quests.progressBarWidth"];
 
-    return <Basic tags={["QuestProgressBar"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal}} {...props}>
-        <frame Tag={"QuestProgressBarContent"} Size={new UDim2(calculatedProgress, 0, 0, progressBarHeight)}/>
+    return <Basic BackgroundTransparency={0} tags={["QuestProgressBar"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal}} {...props}>
+        <frame BorderSizePixel={0} Tag={"QuestProgressBarContent"} Size={new UDim2(calculatedProgress, 0, 0, progressBarHeight)}/>
     </Basic>
 }
 export function Quest({tableQuest}: {tableQuest: TableOfQuestsType}) {
+    const [axis_content, refFunction] = useAbsoluteAxis("X");
     return <Basic tags={["tableOfQuest"]} Size={new UDim2(1, 0, 0, 0)} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>
-        <Basic tags={["actionContainer"]}>
+        <Basic tags={["bodyContainer", "actionContainer"]} dog={refFunction}>
             <uiflexitem FlexMode={"Fill"}/>
-            <textlabel AutomaticSize={Enum.AutomaticSize.XY} Text={tableQuest.name}/>
+            <Basic tags={["textGroup"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
+                <textlabel TextWrapped={true} Tag={"textBody textOnDark"} BackgroundTransparency={1} AutomaticSize={Enum.AutomaticSize.XY} Text={tableQuest.name}/>
+            </Basic>
             {/* <textlabel AutomaticSize={Enum.AutomaticSize.XY} Text="I AM A FUCKING PROGRESS BAR"/> */}
-            <QuestProgressBar Size={new UDim2(1, 0, 0, 0)} progress={tableQuest.progress}/>
+            <QuestProgressBar Size={new UDim2(0, axis_content, 0, 0)} AutomaticSize={Enum.AutomaticSize.Y} progress={tableQuest.progress}/>
         </Basic>
         <Basic tags={["actionContainer"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
             <Basic tags={["currencyBubbleCardObject"]} Size={new UDim2(0, 24, 0, 24)}>{tostring(tableQuest.newTaiwanDollarsAmount)}</Basic>
