@@ -75,9 +75,15 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
 		BackgroundColor3: "$AccentColour"
 	}, lobbySheet)
 	createRule(".spawnButton", {
-		BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(20, 20, 20)),
-		BackgroundTransparency: 0.5,
-
+		BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(60, 60, 60)),
+		BackgroundTransparency: 0.5
+	}, lobbySheet)
+	createRule(".MenuContent > Frame", {
+		BackgroundColor3: "$BackgroundColour",
+		BackgroundTransparency: 0.5
+	}, lobbySheet)
+	createRule(".spawnButton:Hover", {
+		BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(80, 80, 80))
 	}, lobbySheet)
 	createRule(".spawnButton::UIPadding", {
 		PaddingLeft: "$PaddingL",

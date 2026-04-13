@@ -124,8 +124,8 @@ export default function({children}: {children?: React.ReactNode}) {
         <motion.frame Size={new UDim2(1, 0, 1, 0)} BackgroundTransparency={1} Tag={"MenuContent"}>
             {/* <uiflexitem FlexMode={"Fill"}/> */}
             <uipagelayout ref={uiPageLayoutRef} EasingDirection={Enum.EasingDirection.Out} EasingStyle={Enum.EasingStyle.Quart} TweenTime={0.25}/>
-            <Basic BackgroundTransparency={1}>Hello I am the shop</Basic> {/* Negative one single page */}
-            <Basic Size={new UDim2(0, 0, 1, 0)} BackgroundTransparency={1} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
+            <Basic BackgroundTransparency={0.5}>Hello I am the shop</Basic> {/* Negative one single page */}
+            <Basic Size={new UDim2(0, 0, 1, 0)} BackgroundTransparency={0.5} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
                 <Basic Size={new UDim2(0.5, 0, 1, 0)} flexProps={{HorizontalAlignment: Enum.HorizontalAlignment.Center, VerticalAlignment: Enum.VerticalAlignment.Center}}>
                     <ProductionLobbySpawnConfig/>
                 </Basic>
@@ -133,10 +133,10 @@ export default function({children}: {children?: React.ReactNode}) {
                     <QuestsManager/>
                 </Basic>
             </Basic>
-            <Basic BackgroundTransparency={1}>Hello I am the servers</Basic>
-            <Basic BackgroundTransparency={1}>Hello I am the loadout</Basic>
-            <Basic BackgroundTransparency={1}>Hello I am the profile</Basic>
-            <Basic BackgroundTransparency={1}>Hello I am the settings</Basic>
+            <Basic Size={new UDim2(1, 0, 1, 0)} BackgroundTransparency={0.5}>Hello I am the servers</Basic>
+            <Basic BackgroundTransparency={0.5}>Hello I am the loadout</Basic>
+            <Basic BackgroundTransparency={0.5}>Hello I am the profile</Basic>
+            <Basic BackgroundTransparency={0.5}>Hello I am the settings</Basic>
         </motion.frame>
     </screengui></UiContextProvider></AppContextProvider>
 };
