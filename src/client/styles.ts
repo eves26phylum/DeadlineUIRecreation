@@ -9,12 +9,14 @@ export function createRule(selector: string, props: InstanceProperties<any>, sty
     rule.SetProperties(props);
     return rule
 }
-export function Styles({customSheet}: {customSheet?: StyleSheet} = {}) {
+export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?: StyleSheet, Parent?: Instance} = {}) {
 	let lobbySheet = customSheet;
 	if (!lobbySheet) {
 		lobbySheet = new Instance("StyleSheet");
 		lobbySheet.SetAttribute("PaddingXL", new UDim(0, 24));
 		lobbySheet.SetAttribute("PaddingXXL", new UDim(0, 32));
+		lobbySheet.SetAttribute("PaddingXXXL", new UDim(0, 64));
+		lobbySheet.SetAttribute("PaddingXXXXL", new UDim(0, 128));
 		lobbySheet.SetAttribute("PaddingL", new UDim(0, 16));
 		lobbySheet.SetAttribute("PaddingTL", new UDim(0, 12));
 		lobbySheet.SetAttribute("IconSize", new UDim2(0, 20, 0, 20));
@@ -41,7 +43,7 @@ export function Styles({customSheet}: {customSheet?: StyleSheet} = {}) {
 		lobbySheet.SetAttribute("TitleTextSize", 48);
 		lobbySheet.SetAttribute("LargerSubheadingTextSize", 32);
 		lobbySheet.SetAttribute("SubheadingTextSize", 24);
-		lobbySheet.Parent = ReplicatedStorage;
+		lobbySheet.Parent = Parent || ReplicatedStorage;
 	}
 	function safeGetAttribute<T extends keyof CheckableTypes>(sheet: StyleSheet, attr: string, theType: T): CheckableTypes[T] {
 		const attribute = sheet.GetAttribute(attr);
@@ -50,9 +52,11 @@ export function Styles({customSheet}: {customSheet?: StyleSheet} = {}) {
 		return attribute as CheckableTypes[T];
 	}
     createRule(".textOnDark", { TextColor3: "$AccentColour" }, lobbySheet);
+	createRule(".textOnLight", { TextColor3: "$BackgroundColour" }, lobbySheet);
     createRule(".textOnDemotivationCycle", { TextColor3: "$SecondaryAccentColour" }, lobbySheet);
     createRule(".textBody", { TextSize: "$TextSize", FontFace: "$FontMainRegular" }, lobbySheet);
     createRule(".textStandard", { TextSize: "$TextSize", FontFace: "$FontMainSemiBold" }, lobbySheet);
+	createRule(".accentText", { TextColor3: "$AccentColour" }, lobbySheet);
     createRule(".textMini", { TextSize: "$TextMiniSize", FontFace: "$FontMainSemiBold" }, lobbySheet);
     createRule(".textTitleMain", { TextSize: "$TitleTextSize", FontFace: "$FontMainBold" }, lobbySheet);
     createRule(".textTitleLargerSubheading", { TextSize: "$LargerSubheadingTextSize", FontFace: "$FontMainBold" }, lobbySheet);
@@ -67,6 +71,41 @@ export function Styles({customSheet}: {customSheet?: StyleSheet} = {}) {
     createRule(".defaultMenuButton > Frame > ImageLabel", { ImageColor3: "$AccentColour" }, lobbySheet);
     createRule(".defaultMenuButton.selected > Frame > TextLabel", { TextColor3: "$BackgroundColour" }, lobbySheet);
     createRule(".defaultMenuButton.selected > Frame > ImageLabel", { ImageColor3: "$BackgroundColour" }, lobbySheet);
+	createRule(".spawnButtonMain", {
+		BackgroundColor3: "$AccentColour"
+	}, lobbySheet)
+	createRule(".spawnButton", {
+		BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(20, 20, 20)),
+		BackgroundTransparency: 0.5,
+
+	}, lobbySheet)
+	createRule(".spawnButton::UIPadding", {
+		PaddingLeft: "$PaddingL",
+        PaddingRight: "$PaddingL",
+        PaddingBottom: "$PaddingL",
+        PaddingTop: "$PaddingL",
+	}, lobbySheet)
+	createRule(".spawnButton > Frame > UIListLayout", {
+		Padding: "$PaddingL"
+	}, lobbySheet)
+	createRule(".ZeroHourLogo", {
+		TextSize: 100
+	}, lobbySheet)
+	createRule(".zerohourspawnconfig > UIListLayout", {
+		Padding: "$PaddingL"
+	}, lobbySheet)
+	createRule(".spawnButtonMain:Hover", {
+		BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "AccentColour", "Color3"), Color3.fromRGB(-20, -20, -20))
+	}, lobbySheet)
+	createRule(".spawnButtonMain > Frame > UIListLayout", {
+		Padding: "$PaddingL"
+	}, lobbySheet)
+	createRule(".spawnButtonMain::UIPadding", {
+		PaddingLeft: "$PaddingXXL",
+        PaddingRight: "$PaddingXXXXL",
+        PaddingBottom: "$PaddingXXL",
+        PaddingTop: "$PaddingXXL",
+	}, lobbySheet)
     createRule(".tableOfQuest::UIPadding", {
         PaddingLeft: "$PaddingL",
         PaddingRight: "$PaddingL",

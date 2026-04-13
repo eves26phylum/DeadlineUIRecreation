@@ -17,6 +17,8 @@ export function Text({text, ...textProps}: {text: string} & Partial<React.Instan
                 Size={new UDim2(0, 0, 0, 0)}
                 BackgroundTransparency={1}
                 BorderSizePixel={0}
+                TextXAlignment={Enum.TextXAlignment.Left}
+                TextYAlignment={Enum.TextYAlignment.Top}
                 Text={text}
                 {...textProps}
             />

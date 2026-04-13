@@ -16,8 +16,7 @@ import QuestsManager from "./questsManager";
 import { TableOfQuestsType } from "./questTable";
 import { Styles, createRule } from "./styles";
 import { ProductionLobbySpawnConfig } from "./productionLobby";
-const lobbySheet = Styles();
-export default function() {
+export default function({children}: {children?: React.ReactNode}) {
     const uiPageLayoutRef = useRef<UIPageLayout>();
     const [money, setMoney] = useState<moneyFormat>({
         newTaiwanDollars: 0,
@@ -113,7 +112,7 @@ export default function() {
     useEffect(()=>{
         uiPageLayoutRef.current?.JumpToIndex(selectedPage + 1);
     }, [selectedPage])
-    return <AppContextProvider APPCONTEXT={APPCONTEXT}><UiContextProvider UICONTEXT={UICONTEXT}><screengui ResetOnSpawn={false} ScreenInsets={Enum.ScreenInsets.DeviceSafeInsets}>
+    return <AppContextProvider APPCONTEXT={APPCONTEXT}><UiContextProvider UICONTEXT={UICONTEXT}><screengui ResetOnSpawn={false} ScreenInsets={Enum.ScreenInsets.DeviceSafeInsets}>{children}
         <uilistlayout
             FillDirection={Enum.FillDirection.Vertical}
             Padding={new UDim(0, 0)}
@@ -127,7 +126,7 @@ export default function() {
             <uipagelayout ref={uiPageLayoutRef} EasingDirection={Enum.EasingDirection.Out} EasingStyle={Enum.EasingStyle.Quart} TweenTime={0.25}/>
             <Basic BackgroundTransparency={1}>Hello I am the shop</Basic> {/* Negative one single page */}
             <Basic Size={new UDim2(0, 0, 1, 0)} BackgroundTransparency={1} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
-                <Basic Size={new UDim2(0.5, 0, 1, 0)}>
+                <Basic Size={new UDim2(0.5, 0, 1, 0)} flexProps={{HorizontalAlignment: Enum.HorizontalAlignment.Center, VerticalAlignment: Enum.VerticalAlignment.Center}}>
                     <ProductionLobbySpawnConfig/>
                 </Basic>
                 <Basic Size={new UDim2(0.5, 0, 1, 0)} flexProps={{HorizontalAlignment: Enum.HorizontalAlignment.Center, VerticalAlignment: Enum.VerticalAlignment.Center}}>
@@ -139,6 +138,5 @@ export default function() {
             <Basic BackgroundTransparency={1}>Hello I am the profile</Basic>
             <Basic BackgroundTransparency={1}>Hello I am the settings</Basic>
         </motion.frame>
-        <stylelink StyleSheet={lobbySheet}/>
     </screengui></UiContextProvider></AppContextProvider>
 };
