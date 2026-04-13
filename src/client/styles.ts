@@ -82,6 +82,15 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
 		BackgroundColor3: "$BackgroundColour",
 		BackgroundTransparency: 0.5
 	}, lobbySheet)
+	createRule(".veryGenericBox", {
+		BackgroundColor3: "$BackgroundColour"
+	}, lobbySheet)
+	createRule(".veryGenericBox.alternate", {
+		BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(20, 20, 20))
+	}, lobbySheet)
+	createRule(".veryGenericBox.hasOutline::UIStroke", {
+		Color: "$BorderColour"
+	}, lobbySheet)
 	createRule(".spawnButton:Hover", {
 		BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(80, 80, 80))
 	}, lobbySheet)

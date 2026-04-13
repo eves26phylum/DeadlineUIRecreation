@@ -1,12 +1,9 @@
 import React, { StrictMode, useEffect, useState, useCallback } from "@rbxts/react";
 import ReactRoblox from "@rbxts/react-roblox";
 import { InferProps } from "@rbxts/react/src/prop-types";
-import { ProductionLobbySpawnConfig } from "client/productionLobby";
+import { SideBySideList } from "client/SidebySideList";
 import { Styles } from "client/styles";
-import { BaseButton } from "client/Button";
 import { Basic } from "client/easyobjects";
-import LobbyUI from "client/lobby";
-import { StoryProps } from "@rbxts/ui-labs/src/Typing/Typing";
 
 const controls = {
 };
@@ -26,6 +23,6 @@ export = {
             if (lobbySheet) return; // PREVENT INFINITE LOOPS
             setLobbySheet(Styles({Parent: props.target}));
         }, [theRef])
-        return <StrictMode><Basic dog={refFunction}><stylelink StyleSheet={lobbySheet}/><ProductionLobbySpawnConfig/></Basic></StrictMode>;
+        return <StrictMode><Basic dog={refFunction}><stylelink StyleSheet={lobbySheet}/><SideBySideList/></Basic></StrictMode>;
     }
 };
