@@ -6,6 +6,7 @@ import { useTimeStamp } from "./hooks/useTimeStamp";
 import { toHMS } from "shared/formatTime";
 import { useAppContext } from "./hooks/useAppContext";
 import { Object } from "@rbxts/luau-polyfill";
+import { BaseButton, IconBaseButton } from "./Button";
 
 function TimeStamp({endDate = 0}) {
     const [timeSet, timeSetState] = useState<number>(os.time());
@@ -18,6 +19,8 @@ export default function() {
     const appContext = useAppContext();
     const questTableState = appContext.states.questTableState;
     const setQuestTableState = appContext.states.setQuestTableState;
+    const money = appContext.states.money;
+    const setMoney = appContext.states.setMoney;
     return <Basic AutomaticSize={Enum.AutomaticSize.Y} Size={new UDim2(0, 700, 0, 0)}>
         <Basic BackgroundTransparency={0} Size={new UDim2(1, 0, 0, 0)} dog={refFunction} tags={["questsTitle"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum. ItemLineAlignment.Center}}>
             <uisizeconstraint MinSize={new Vector2(700, 0)}/>
@@ -25,17 +28,19 @@ export default function() {
             <Basic flexProps={{Tag: "paddingStandard", FillDirection: Enum.FillDirection.Horizontal, HorizontalAlignment: Enum.HorizontalAlignment.Right, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>
                 <uiflexitem FlexMode={"Fill"}/>
                 <TimeStamp endDate={appContext.states.questsFinishTimeSeconds}/>
-                <Button tags={["rerollButton", "rerollButtonMain"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>
-                    <imagelabel Tag={"icon"} BackgroundTransparency={1} Image={"rbxassetid://7072721134"}/>
-                    <textlabel AutomaticSize={Enum.AutomaticSize.XY} Tag={"textStandard textOnDark"} BackgroundTransparency={1} BorderSizePixel={0} Text={"REROLL"}/>
-                </Button>
+                <Basic textProps={{Tag: "textTitleSubheading textOnDark"}}>0 REROLLS</Basic>
+                {/* <IconBaseButton tags={["Ghost"]} textTags={["textOnDark"]} image={"rbxassetid://7072721134"}>REROLL</IconBaseButton> */}
             </Basic>
         </Basic>
         {/* Bob and Alice are inside a house. Bob is strong, and he can change the size of the house. Bob is really fat though, and Alice feels bad. It also is a bad look in photos, on why the couple are mismatched sizes in width. So, Alice decides to get fat herself. She can't change the size of the house, and if she gets too big, the walls of the house will crack again and the house explodes. Bob already cracked the house's walls once, so Alice wouldn't want to do it again. Alice uses useAbsoluteAxis, a service she found inside hooks. Alice uses this service as a guide on how big she can get. Alice tells Bob to measure himself, and Alice would size herself to this size that the experts at useAbsoluteAxis would tell her. */}
         <Basic Size={new UDim2(0, axis_content, 0, 0)} BackgroundColor3={Color3.fromRGB(255, 0, 0)} BackgroundTransparency={0}>
             <QuestTable tableOfQuests={questTableState} callback={(index: number) => {
+                if (questTableState[index].completed) return;
                 const cloneTableState = [...questTableState];
                 cloneTableState[index].completed = true;
+                const cloneMoney = {...money};
+                cloneMoney.newTaiwanDollars += cloneTableState[index].newTaiwanDollarsAmount
+                setMoney(cloneMoney);
                 setQuestTableState(cloneTableState);
             }}/>
         </Basic>

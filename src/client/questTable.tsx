@@ -1,9 +1,11 @@
 import React, { useMemo, useState } from "@rbxts/react";
-import { BasicScroll, Basic, Button } from "./easyobjects";
+import { BasicScroll, Basic, Button, Text } from "./easyobjects";
 import { UiContextType } from "client/types/deadlineClientTypes";
 import { useUiContext } from "./hooks/useAppContext";
 import { useAbsoluteAxis } from "./hooks/useAbsoluteAxis";
+import { IconBaseButton } from "./Button";
 
+export type styleIndicator = "NewTaiwanDollars" | "XP";
 export type ProgressObject = {
     now: number,
     finish: number
@@ -13,14 +15,16 @@ export interface TableOfQuestsType {
     name: string,
     progress: ProgressObject,
     experienceAmount: number,
-    newTaiwanDollarsAmount: number
+    newTaiwanDollarsAmount: number,
+    finished?: boolean
 }
-export function CurrencyBubbleCardObject({currency, amount, styleIndicator, completed}: {currency: string, amount: number, styleIndicator: string, completed?: boolean}) {
-    return <frame Tag={`currencyBubbleCardObject ${styleIndicator}`} Size={new UDim2(0, 48, 0, 48)} AutomaticSize={Enum.AutomaticSize.XY} BackgroundTransparency={0}>
+export function CurrencyBubbleCardObject({currency, amount, styleIndicator, completed}: {currency: string, amount: number, styleIndicator: styleIndicator, completed: string}) {
+    const combineString = `${styleIndicator} ${completed}`;
+    return <frame Tag={`currencyBubbleCardObject miniUICorner ${combineString}`} Size={new UDim2(0, 48, 0, 48)} AutomaticSize={Enum.AutomaticSize.XY} BackgroundTransparency={0}>
         <uigradient Rotation={90} Color={new ColorSequence([new ColorSequenceKeypoint(0, Color3.fromRGB(30, 30, 30)),new ColorSequenceKeypoint(1, Color3.fromRGB(15, 15, 15))])}/>
-        <uistroke Tag={`stroke ${styleIndicator}`}><uigradient Rotation={90} Color={new ColorSequence([new ColorSequenceKeypoint(0, Color3.fromRGB(128, 128, 128)),new ColorSequenceKeypoint(1, Color3.fromRGB(64, 64, 64))])}/></uistroke>
-        <frame Size={new UDim2(1, 0, 1, 0)} Tag={`paddingStandard ${styleIndicator}`} BackgroundTransparency={1} AutomaticSize={Enum.AutomaticSize.XY}><textlabel Tag={`textStandard ${styleIndicator} currencyBubbleLargeText`} AutomaticSize={Enum.AutomaticSize.XY} BackgroundTransparency={1} Position={new UDim2(0.5, 0, 0.5, 0)} AnchorPoint={new Vector2(0.5, 0.5)} Text={tostring(currency)}/></frame>
-        <textlabel Tag={`textMini ${styleIndicator} currencyBubbleMiniText paddingTiny`} BackgroundTransparency={1} AutomaticSize={Enum.AutomaticSize.XY} Position={new UDim2(0.5, 0, 1, 0)} AnchorPoint={new Vector2(0.5, 1)} Text={tostring(amount)}/>
+        <uistroke Tag={`stroke ${combineString}`}><uigradient Rotation={90} Color={new ColorSequence([new ColorSequenceKeypoint(0, Color3.fromRGB(128, 128, 128)),new ColorSequenceKeypoint(1, Color3.fromRGB(64, 64, 64))])}/></uistroke>
+        <frame Size={new UDim2(1, 0, 1, 0)} Tag={`paddingStandard ${combineString}`} BackgroundTransparency={1} AutomaticSize={Enum.AutomaticSize.XY}><textlabel Tag={`textStandard ${combineString} currencyBubbleLargeText`} AutomaticSize={Enum.AutomaticSize.XY} BackgroundTransparency={1} Position={new UDim2(0.5, 0, 0.5, 0)} AnchorPoint={new Vector2(0.5, 0.5)} Text={tostring(currency)}/></frame>
+        <textlabel Tag={`textMini ${combineString} currencyBubbleMiniText paddingTiny`} BackgroundTransparency={1} AutomaticSize={Enum.AutomaticSize.XY} Position={new UDim2(0.5, 0, 1, 0)} AnchorPoint={new Vector2(0.5, 1)} Text={tostring(amount)}/>
     </frame>;
 }
 export function QuestProgressBar({progress, completedTag, ...props}: {progress: ProgressObject, completedTag: string} & Partial<React.InstanceProps<Frame>>) {
@@ -34,11 +38,16 @@ export function QuestProgressBar({progress, completedTag, ...props}: {progress: 
     </Basic>
 }
 export function Quest({tableQuest, index, callback = () => {}}: {tableQuest: TableOfQuestsType, callback: (index: number) => void, index: number}) {
+    function getBtnTags(tableQuest: TableOfQuestsType) {
+        return tableQuest.completed ? "Ghost" : tableQuest.finished ? "Excited" : "Ghost"
+        
+    }
     const [axis_content, refFunction] = useAbsoluteAxis("X");
     const completedTag = tableQuest.completed ? "completed" : "";
+    const finishedTag = tableQuest.finished ? "finished" : "";
     const notCompletedTag = tableQuest.completed ? "" : "completed";
-    return <Basic BackgroundTransparency={0} tags={["tableOfQuest", completedTag]} Size={new UDim2(1, 0, 0, 0)} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>
-        <uigradient Color={new ColorSequence([new ColorSequenceKeypoint(0, tableQuest.completed ? Color3.fromRGB(70, 70, 70) : Color3.fromRGB(255, 255, 255)),new ColorSequenceKeypoint(1, Color3.fromRGB(0, 0, 0))])}/>
+    return <Basic BackgroundTransparency={0} tags={["tableOfQuest", completedTag]} Tag={`${finishedTag}`} Size={new UDim2(1, 0, 0, 0)} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>
+        <uigradient Color={new ColorSequence([new ColorSequenceKeypoint(0, tableQuest.finished ? Color3.fromRGB(70, 70, 70) : Color3.fromRGB(255, 255, 255)),new ColorSequenceKeypoint(1, Color3.fromRGB(0, 0, 0))])}/>
         <Basic tags={["bodyContainer", "actionContainer"]} dog={refFunction}>
             <uiflexitem FlexMode={"Fill"}/>
             <Basic tags={["textGroup"]} Size={new UDim2(1, 0, 0, 0)} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
@@ -55,10 +64,16 @@ export function Quest({tableQuest, index, callback = () => {}}: {tableQuest: Tab
             <QuestProgressBar completedTag={completedTag} Size={new UDim2(0, axis_content, 0, 0)} AutomaticSize={Enum.AutomaticSize.Y} progress={tableQuest.progress}/>
         </Basic>
         <Basic tags={["actionContainer"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
-            <CurrencyBubbleCardObject styleIndicator="XP" currency="XP" amount={tableQuest.experienceAmount}/>
-            <CurrencyBubbleCardObject styleIndicator="NewTaiwanDollars" currency="$" amount={tableQuest.newTaiwanDollarsAmount}/>
-            <Button tags={["rerollButton"]} textProps={{Tag: "textStandard textOnDemotivationCycle"}} Event={{MouseButton1Click: () => {callback(index)}}}>3 MORE</Button>
+            <CurrencyBubbleCardObject completed={completedTag} styleIndicator="XP" currency="XP" amount={tableQuest.experienceAmount}/>
+            <CurrencyBubbleCardObject completed={completedTag} styleIndicator="NewTaiwanDollars" currency="$" amount={tableQuest.newTaiwanDollarsAmount}/>
         </Basic>
+        <IconBaseButton tags={[getBtnTags(tableQuest)]} textTags={[getBtnTags(tableQuest)]} 
+            iconTags={[getBtnTags(tableQuest)]}
+            image={(tableQuest.finished && !tableQuest.completed) ? "rbxassetid://7072720870" : !tableQuest.completed ? "rbxasset://textures/ui/common/robux@2x.png" : ""} 
+            // normally you would hook up a reroll counter but you have no robux here 
+            clickCallback={() => {if (!tableQuest.finished) return; callback(index)}}>
+            {tableQuest.completed ? "CLAIMED" : tableQuest.finished ? "CLAIM" : `REROLL`}
+        </IconBaseButton>
         </Basic>;
 }
 export function QuestTable({tableOfQuests, callback}: {tableOfQuests?: TableOfQuestsType[], callback: (index: number) => void}) {
