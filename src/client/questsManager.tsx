@@ -28,7 +28,8 @@ export default function() {
             <Basic flexProps={{Tag: "paddingStandard", FillDirection: Enum.FillDirection.Horizontal, HorizontalAlignment: Enum.HorizontalAlignment.Right, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>
                 <uiflexitem FlexMode={"Fill"}/>
                 <TimeStamp endDate={appContext.states.questsFinishTimeSeconds}/>
-                <IconBaseButton tags={["Ghost"]} textTags={["textOnDark"]} image={"rbxassetid://7072721134"}>REROLL</IconBaseButton>
+                <Basic textProps={{Tag: "textTitleSubheading textOnDark"}}>0 REROLLS</Basic>
+                {/* <IconBaseButton tags={["Ghost"]} textTags={["textOnDark"]} image={"rbxassetid://7072721134"}>REROLL</IconBaseButton> */}
             </Basic>
         </Basic>
         {/* Bob and Alice are inside a house. Bob is strong, and he can change the size of the house. Bob is really fat though, and Alice feels bad. It also is a bad look in photos, on why the couple are mismatched sizes in width. So, Alice decides to get fat herself. She can't change the size of the house, and if she gets too big, the walls of the house will crack again and the house explodes. Bob already cracked the house's walls once, so Alice wouldn't want to do it again. Alice uses useAbsoluteAxis, a service she found inside hooks. Alice uses this service as a guide on how big she can get. Alice tells Bob to measure himself, and Alice would size herself to this size that the experts at useAbsoluteAxis would tell her. */}

@@ -69,9 +69,10 @@ export function Quest({tableQuest, index, callback = () => {}}: {tableQuest: Tab
         </Basic>
         <IconBaseButton tags={[getBtnTags(tableQuest)]} textTags={[getBtnTags(tableQuest)]} 
             iconTags={[getBtnTags(tableQuest)]}
-            image={(tableQuest.finished && !tableQuest.completed) ? "rbxassetid://7072720870" : ""} 
+            image={(tableQuest.finished && !tableQuest.completed) ? "rbxassetid://7072720870" : !tableQuest.completed ? "rbxasset://textures/ui/common/robux@2x.png" : ""} 
+            // normally you would hook up a reroll counter but you have no robux here 
             clickCallback={() => {if (!tableQuest.finished) return; callback(index)}}>
-            {tableQuest.completed ? "CLAIMED" : tableQuest.finished ? "CLAIM" : "3 MORE"}
+            {tableQuest.completed ? "CLAIMED" : tableQuest.finished ? "CLAIM" : `REROLL`}
         </IconBaseButton>
         </Basic>;
 }
