@@ -8,6 +8,9 @@ export interface DOMDefinition {
     flexProps?: Partial<React.InstanceProps<UIListLayout>>,
     textProps?: Partial<React.InstanceProps<TextLabel>>
 }
+export interface ButtonProps extends DOMDefinition, Partial<React.InstanceProps<TextButton>> {
+    frameProps?: Partial<React.InstanceProps<Frame>> 
+}
 export function Text({text, ...textProps}: {text: string} & Partial<React.InstanceProps<TextLabel>>) {
     return  <textlabel
                 AutomaticSize={Enum.AutomaticSize.XY}
@@ -72,7 +75,7 @@ export function BasicScroll({children, tags = [], scrollProps = {}, ...restProps
 	);
 }
 
-export function Button({children, tags = [], flexProps, frameProps, textProps, ...restProps}: DOMDefinition & {frameProps?: Partial<React.InstanceProps<Frame>>} & Partial<React.InstanceProps<TextButton>>) {
+export function Button({children, tags = [], flexProps, frameProps, textProps, ...restProps}: ButtonProps) {
     const ref = useRef<TextButton>();
     useTags(ref, tags);
     return <textbutton ref={ref} 

@@ -1,6 +1,6 @@
 import { ReplicatedStorage } from "@rbxts/services";
 import { Error } from "@rbxts/luau-polyfill";
-import { addColor3 } from "shared/addColor3";
+import { addColor3, mulColor3 } from "shared/Color3Util";
 
 export function createRule(selector: string, props: InstanceProperties<any>, styleSheet: StyleSheet) {
     const rule: StyleRule = new Instance("StyleRule");
@@ -19,11 +19,9 @@ export function Styles({customSheet}: {customSheet?: StyleSheet} = {}) {
 		lobbySheet.SetAttribute("PaddingTL", new UDim(0, 12));
 		lobbySheet.SetAttribute("IconSize", new UDim2(0, 20, 0, 20));
 		lobbySheet.SetAttribute("AccentColour", Color3.fromRGB(255, 255, 255));
-		lobbySheet.SetAttribute("AccentColourHover", Color3.fromRGB(235, 235, 235));
 		lobbySheet.SetAttribute("SecondaryAccentColour", Color3.fromHex("#808080"));
 		// yes i know the quest ui has a subtle gradient border thing but im not bothered to recreate it right now
 		// lobbySheet.SetAttribute("backgroundCompletedQuestColour", Color3.fromRGB(20, 70, 20))
-		lobbySheet.SetAttribute("DailyQuestsTitleComplementaryColourBackgroundColour3Darker", Color3.fromRGB(30, 30, 30));
 		lobbySheet.SetAttribute("progressBarBackgroundCompletedQuestColour", Color3.fromRGB(30, 30, 30));
 		lobbySheet.SetAttribute("BorderColour", Color3.fromHex("#2A2A2A"));
 		lobbySheet.SetAttribute("BackgroundColour", Color3.fromRGB(0, 0, 0));
@@ -128,7 +126,7 @@ export function Styles({customSheet}: {customSheet?: StyleSheet} = {}) {
         BackgroundColor3: "$progressQuestBarHighlight"
     }, lobbySheet)
     createRule(".QuestProgressBar.completed", {
-        BackgroundColor3: "$progressBarBackgroundCompletedQuestColour"
+        BackgroundColor3: mulColor3(safeGetAttribute(lobbySheet, "SecondaryAccentColour", "Color3"), new Color3(0.2, 0.2, 0.2))
     }, lobbySheet)
     createRule(".QuestProgressBar.completed > .QuestProgressBarContent", {
         BackgroundColor3: "$SecondaryAccentColour"
@@ -142,9 +140,33 @@ export function Styles({customSheet}: {customSheet?: StyleSheet} = {}) {
         PaddingBottom: "$PaddingXS",
         PaddingTop: "$PaddingXS",
     }, lobbySheet)
-    createRule(".GhostButton", {
-        BackgroundTransparency: 0.5
+    createRule(".Ghost.Button", {
+        BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(60, 60, 60))
     }, lobbySheet)
+	createRule(".Button > Frame > UIListLayout", {
+		Padding: "$PaddingS"
+	}, lobbySheet)
+	createRule(".Ghost.icon", {
+        BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(80, 80, 80))
+    }, lobbySheet)
+	createRule(".Ghost.text", {
+        TextColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(80, 80, 80))
+    }, lobbySheet)
+	createRule(".Ghost.Button:Hover", {
+        BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(80, 80, 80))
+    }, lobbySheet)
+	createRule(".Excited.Button", {
+		BackgroundColor3: "$AccentColour"
+	}, lobbySheet)
+	createRule(".Excited.icon", {
+		ImageColor3: "$BackgroundColour"
+	}, lobbySheet)
+	createRule(".Excited.text", {
+		TextColor3: "$BackgroundColour"
+	}, lobbySheet)
+	createRule(".Excited.Button:Hover", {
+		BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "AccentColour", "Color3"), Color3.fromRGB(-20, -20, -20))
+	}, lobbySheet)
     createRule(".Button::UIPadding", {
         PaddingLeft: "$PaddingXL",
         PaddingRight: "$PaddingXL",
