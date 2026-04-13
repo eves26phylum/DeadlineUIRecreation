@@ -38,6 +38,10 @@ export function QuestProgressBar({progress, completedTag, ...props}: {progress: 
     </Basic>
 }
 export function Quest({tableQuest, index, callback = () => {}}: {tableQuest: TableOfQuestsType, callback: (index: number) => void, index: number}) {
+    function getBtnTags(tableQuest: TableOfQuestsType) {
+        return tableQuest.completed ? "Ghost" : tableQuest.finished ? "Excited" : "Ghost"
+        
+    }
     const [axis_content, refFunction] = useAbsoluteAxis("X");
     const completedTag = tableQuest.completed ? "completed" : "";
     const finishedTag = tableQuest.finished ? "finished" : "";
@@ -63,29 +67,11 @@ export function Quest({tableQuest, index, callback = () => {}}: {tableQuest: Tab
             <CurrencyBubbleCardObject completed={completedTag} styleIndicator="XP" currency="XP" amount={tableQuest.experienceAmount}/>
             <CurrencyBubbleCardObject completed={completedTag} styleIndicator="NewTaiwanDollars" currency="$" amount={tableQuest.newTaiwanDollarsAmount}/>
         </Basic>
-        <IconBaseButton tags={[
-                tableQuest.completed ?
-                "Ghost"
-                :
-                tableQuest.finished ?
-                    "Excited"
-                : "Ghost"
-            ]} textTags={[
-                tableQuest.completed ?
-                "Ghost"
-                :
-                tableQuest.finished ?
-                    "Excited"
-                : "Ghost"
-            ]} image={(tableQuest.finished && !tableQuest.completed) ? "rbxassetid://7072720870" : ""} clickCallback={() => {if (!tableQuest.finished) return; callback(index)}}>
-            {
-                tableQuest.completed ?
-                "CLAIMED"
-                :
-                tableQuest.finished ?
-                    "CLAIM"
-                : "3 MORE"
-            }
+        <IconBaseButton tags={[getBtnTags(tableQuest)]} textTags={[getBtnTags(tableQuest)]} 
+            iconTags={[getBtnTags(tableQuest)]}
+            image={(tableQuest.finished && !tableQuest.completed) ? "rbxassetid://7072720870" : ""} 
+            clickCallback={() => {if (!tableQuest.finished) return; callback(index)}}>
+            {tableQuest.completed ? "CLAIMED" : tableQuest.finished ? "CLAIM" : "3 MORE"}
         </IconBaseButton>
         </Basic>;
 }

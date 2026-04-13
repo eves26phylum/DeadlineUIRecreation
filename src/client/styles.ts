@@ -147,10 +147,10 @@ export function Styles({customSheet}: {customSheet?: StyleSheet} = {}) {
 		Padding: "$PaddingS"
 	}, lobbySheet)
 	createRule(".Ghost.icon", {
-        BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(80, 80, 80))
+        BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(128, 128, 128))
     }, lobbySheet)
 	createRule(".Ghost.text", {
-        TextColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(80, 80, 80))
+        TextColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(128, 128, 128))
     }, lobbySheet)
 	createRule(".Ghost.Button:Hover", {
         BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(80, 80, 80))
