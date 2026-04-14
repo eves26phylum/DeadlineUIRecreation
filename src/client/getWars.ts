@@ -520,28 +520,28 @@ export const ongoingWars = [
     gamemode: {
       gamemode_code
 : 
-"terror_insurgency"
+"intimidation"
 ,
       gamemodeName
 : 
-"Terror Insurgency"
+"Intimidation"
 ,
       time_left
 : 
-147139200
+630720000
     },
     serverInfo: {
       playerCount
 : 
-10000
+175382
 ,
       maxPlayerCount
 : 
-42000000
+8347860862658
 ,
       location
 : 
-"Kabul & Nangarhar, Afghanistan"
+"Nothing important"
     }
   },
   // ─── 14. Haiti Gang War ───────────────────────────────────────────────────────
