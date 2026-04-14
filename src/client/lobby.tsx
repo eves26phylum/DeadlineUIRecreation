@@ -136,7 +136,7 @@ export default function({children}: {children?: React.ReactNode}) {
                     <QuestsManager/>
                 </Basic>
             </Basic>
-            <Basic Size={new UDim2(1, 0, 1, 0)} tags={["SERVERS"]} BackgroundTransparency={0.5}><SideBySideList/></Basic>
+            <Basic Size={new UDim2(1, 0, 1, 0)} tags={["SERVERS"]} BackgroundTransparency={0.5}></Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the loadout</Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the profile</Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the settings</Basic>
