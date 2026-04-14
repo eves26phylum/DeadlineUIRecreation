@@ -290,7 +290,8 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
         PaddingTop: "$PaddingXXS"
     }, lobbySheet)
     createRule(".menuBarButtonsContainer::UIStroke", {
-        Color: "$BorderColour"
+        Color: "$BorderColour",
+        BorderStrokePosition: Enum.BorderStrokePosition.Inner
     }, lobbySheet)
     createRule(".questsTitle::UIPadding", {
         PaddingLeft: "$PaddingL",
