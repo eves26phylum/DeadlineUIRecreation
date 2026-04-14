@@ -48,7 +48,7 @@ export = {
             [
                 {
                     map: {
-                        mapImage: "rbxassetid://127270861",
+                        mapImage: "rbxassetid://127270860",
                         mapName: "Afghanistan",
                         map_code: "afghanistan"
                     },
@@ -59,6 +59,7 @@ export = {
                     },
                     serverInfo: {
                         playerCount: 175382,
+                        maxPlayerCount: 8347860862658,
                         location: "Nothing important"
                     }
                 }

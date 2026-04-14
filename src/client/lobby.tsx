@@ -136,11 +136,11 @@ export default function({children}: {children?: React.ReactNode}) {
                     <QuestsManager/>
                 </Basic>
             </Basic>
-            <Basic Size={new UDim2(1, 0, 1, 0)} tags={["SERVERS"]} BackgroundTransparency={0.5}><SideBySideList serverData={
+            <Basic Size={new UDim2(1, 0, 1, 0)} tags={["SERVERS"]} flexProps={{VerticalAlignment: Enum.VerticalAlignment.Center, HorizontalAlignment: Enum.HorizontalAlignment.Center}} BackgroundTransparency={0.5}><SideBySideList serverData={
             [
                 {
                     map: {
-                        mapImage: "rbxassetid://127270861",
+                        mapImage: "rbxassetid://127270860",
                         mapName: "Afghanistan",
                         map_code: "afghanistan"
                     },
@@ -151,6 +151,7 @@ export default function({children}: {children?: React.ReactNode}) {
                     },
                     serverInfo: {
                         playerCount: 175382,
+                        maxPlayerCount: 8347860862658,
                         location: "Nothing important"
                     }
                 }

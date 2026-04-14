@@ -14,7 +14,7 @@ export interface BasicProps extends DOMDefinition, Partial<React.InstanceProps<F
 export interface ButtonProps extends DOMDefinition, Partial<React.InstanceProps<TextButton>> {
     frameProps?: BasicProps
 }
-export function Text({text, ...textProps}: {text: string} & Partial<React.InstanceProps<TextLabel>>) {
+export function Text({text, children, ...textProps}: {text: string, children?: React.ReactNode} & Partial<React.InstanceProps<TextLabel>>) {
     return  <textlabel
                 AutomaticSize={Enum.AutomaticSize.XY}
                 Size={new UDim2(0, 0, 0, 0)}
@@ -24,7 +24,7 @@ export function Text({text, ...textProps}: {text: string} & Partial<React.Instan
                 TextYAlignment={Enum.TextYAlignment.Top}
                 Text={text}
                 {...textProps}
-            />
+            >{children}</textlabel>
 }
 export function Basic({flexProps, textProps, children, dog, tags = [], ...restProps}: BasicProps) {
     const ref = useRef<Frame>();

@@ -88,6 +88,9 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
         PaddingBottom: "$PaddingL",
         PaddingTop: "$PaddingL",
 	}, lobbySheet)
+    createRule(".alternateListItem > UIListLayout", {
+		Padding: "$PaddingL"
+	}, lobbySheet)
     createRule(".SERVERS::UIPadding", {
 		PaddingLeft: "$PaddingL",
         PaddingRight: "$PaddingL",

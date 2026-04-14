@@ -12,6 +12,7 @@ export interface standardGamemodeData extends gamemodeData {
 }
 export interface robloxServerData {
     playerCount: number,
+    maxPlayerCount: number,
     // location: location,
     location: string // temp
 }
