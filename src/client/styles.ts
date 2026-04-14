@@ -82,15 +82,6 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
 		BackgroundColor3: "$BackgroundColour",
 		BackgroundTransparency: 0.5
 	}, lobbySheet)
-    createRule(".alternateListItem::UIPadding", {
-		PaddingLeft: "$PaddingL",
-        PaddingRight: "$PaddingL",
-        PaddingBottom: "$PaddingL",
-        PaddingTop: "$PaddingL",
-	}, lobbySheet)
-    createRule(".alternateListItem > UIListLayout", {
-		Padding: "$PaddingL"
-	}, lobbySheet)
     createRule(".SERVERS::UIPadding", {
 		PaddingLeft: "$PaddingL",
         PaddingRight: "$PaddingL",
@@ -265,6 +256,11 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
         PaddingRight: "$PaddingL",
         PaddingBottom: "$PaddingL",
         PaddingTop: "$PaddingL",
+    }, lobbySheet)
+    createRule(".debugRed", {
+        BackgroundColor3: Color3.fromRGB(255, 0, 0),
+        TextColor3: Color3.fromRGB(255, 0, 0),
+        ImageColor3: Color3.fromRGB(255, 0, 0),
     }, lobbySheet)
     createRule("UIListLayout.paddingStandard", {
         Padding: "$PaddingL"

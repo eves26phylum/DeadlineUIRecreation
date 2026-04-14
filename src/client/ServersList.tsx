@@ -55,8 +55,9 @@ export function ServersListTableKeys() {
                 //         location: "Nothing important"
                 //     }
                 // }
-export function ServersListCheckbox({}) {
-
+export function ServersListCheckbox({name, selectedBehaviourCallback}: {name: string, selectedBehaviourCallback?: () => {}}) {
+    // return <><Basic flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>FUCK ROBLOX FUCK ROBLOX FUCK ROBLOX </Basic><Basic flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>FUCK ROBLOX FUCK ROBLOX FUCK ROBLOX </Basic></>
+    return <Basic >Hi Why</Basic>
 }
 export function SideBySideList({serverData}: {serverData: productionServerData[]}) {
 
@@ -66,19 +67,19 @@ export function SideBySideList({serverData}: {serverData: productionServerData[]
     return <Basic Size={new UDim2(0, 0, 1, 0)}  AutomaticSize={Enum.AutomaticSize.X} flexProps={{FillDirection: Enum.FillDirection.Horizontal}} tags={["sideBySideList"]}>
         <Basic>
         <ListDrawer tags={["sideList"]}>
-            <AlternatingList flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}} Size={new UDim2(1, 0, 0, 0)} 
-            arrayOfChildren={[
+            <AlternatingList tags={["paddingSmall"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}} Size={new UDim2(1, 0, 0, 0)} 
+            arrayOfChildren={
                 serverData.map((value: productionServerData, index: number, array: readonly productionServerData[]) => {
-                    return <></>
+                    return <ServersListCheckbox name="Hi"/>
                 })
-            ]}/>
+            }/>
         </ListDrawer>
         </Basic>
         <ListDrawer Size={new UDim2(0, 980, 1, 0)} AutomaticSize={Enum.AutomaticSize.None}>
             {/* UITableLayout was malfunctioning so I just decided to use a classic UILayout row-table even if it means the lines aren't consistent */}
             <ServersListTableKeys/>
             <BasicScroll scrollProps={{Tag: "fuckROBLOX", Size: new UDim2(1, 0, 0, 0), AutomaticSize: Enum.AutomaticSize.None}} Size={new UDim2(1, 0, 1, 0)} BackgroundTransparency={1} AutomaticSize={Enum.AutomaticSize.XY}>
-                <AlternatingList flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}} Size={new UDim2(1, 0, 0, 0)} arrayOfChildren={mappedData}/>
+                <AlternatingList tags={["paddingStandard"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}} Size={new UDim2(1, 0, 0, 0)} arrayOfChildren={mappedData}/>
             </BasicScroll>
         </ListDrawer>
     </Basic>;
