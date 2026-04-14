@@ -3,9 +3,9 @@ import { Basic, BasicProps } from "./easyobjects";
 import { Error } from "@rbxts/luau-polyfill";
 import { array, arrayOf } from "@rbxts/react/src/prop-types";
 
-export function AlternatingList({arrayOfChildren, children, ...props}: {arrayOfChildren?: React.ReactNode[], children?: React.ReactNode} & BasicProps) {
+export function AlternatingList({arrayOfChildren, children, bigProps, ...props}: {arrayOfChildren?: React.ReactNode[], children?: React.ReactNode, bigProps?: BasicProps} & BasicProps) {
     if (!arrayOfChildren) throw new Error("Altenraitsch Liste eitch nè childre Haeg");
-    return <Basic Size={new UDim2(1, 0, 0, 0)}>
+    return <Basic Size={new UDim2(1, 0, 0, 0)} {...bigProps}>
         {children}
         {
             (arrayOfChildren as defined[]).map((children: React.ReactNode, index: number, array: readonly React.ReactNode[]) => {

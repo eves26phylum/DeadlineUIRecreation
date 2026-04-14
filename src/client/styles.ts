@@ -104,9 +104,13 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
 		BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(20, 20, 20))
 	}, lobbySheet)
 	createRule(".veryGenericBox.hasOutline::UIStroke", {
-		Color: "$BorderColour"
+		Color: "$BorderColour",
+        BorderStrokePosition: Enum.BorderStrokePosition.Inner
 	}, lobbySheet)
     createRule(".sideBySideList > UIListLayout", {
+        Padding: "$PaddingL"
+    }, lobbySheet)
+    createRule(".sideList > UIListLayout", {
         Padding: "$PaddingL"
     }, lobbySheet)
 	createRule(".spawnButton:Hover", {
@@ -206,6 +210,9 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
     createRule(".QuestProgressBar::UICorner", {
         CornerRadius: new UDim(1, 0)
     }, lobbySheet)
+    createRule(".fuckROBLOX::UIFlexItem", {
+        FlexMode: Enum.UIFlexMode.Fill
+    }, lobbySheet)
     createRule(".QuestProgressBar::UIPadding", {
         PaddingLeft: "$PaddingXS",
         PaddingRight: "$PaddingXS",
@@ -262,6 +269,9 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
     createRule("UIListLayout.paddingStandard", {
         Padding: "$PaddingL"
     }, lobbySheet)
+    createRule("UIListLayout.paddingSmall", {
+        Padding: "$PaddingS"
+    }, lobbySheet)
     createRule("UIListLayout.paddingMini", {
         Padding: "$PaddingXS"
     }, lobbySheet)
@@ -273,6 +283,12 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
         PaddingRight: "$PaddingL",
         PaddingBottom: "$PaddingL",
         PaddingTop: "$PaddingL"
+    }, lobbySheet)
+    createRule(".paddingSmall::UIPadding", {
+        PaddingLeft: "$PaddingS",
+        PaddingRight: "$PaddingS",
+        PaddingBottom: "$PaddingS",
+        PaddingTop: "$PaddingS"
     }, lobbySheet)
     createRule(".paddingGiant::UIPadding", {
         PaddingLeft: "$PaddingXXL",

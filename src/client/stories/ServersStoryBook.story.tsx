@@ -4,6 +4,7 @@ import { InferProps } from "@rbxts/react/src/prop-types";
 import { SideBySideList } from "client/ServersList";
 import { Styles } from "client/styles";
 import { Basic } from "client/easyobjects";
+import { ongoingWars } from "client/getWars";
 // export interface mapData {
 //     mapImage: string,
 //     mapName: string,
@@ -44,26 +45,6 @@ export = {
             if (lobbySheet) return; // PREVENT INFINITE LOOPS
             setLobbySheet(Styles({Parent: props.target}));
         }, [theRef])
-        return <StrictMode><Basic dog={refFunction}><stylelink StyleSheet={lobbySheet}/><SideBySideList serverData={
-            [
-                {
-                    map: {
-                        mapImage: "rbxassetid://127270860",
-                        mapName: "Afghanistan",
-                        map_code: "afghanistan"
-                    },
-                    gamemode: {
-                        gamemode_code: "intimidation",
-                        gamemodeName: "Intimidation",
-                        time_left: 630720000
-                    },
-                    serverInfo: {
-                        playerCount: 175382,
-                        maxPlayerCount: 8347860862658,
-                        location: "Nothing important"
-                    }
-                }
-            ]
-        }/></Basic></StrictMode>;
+        return <StrictMode><Basic dog={refFunction}><stylelink StyleSheet={lobbySheet}/><SideBySideList serverData={ongoingWars}/></Basic></StrictMode>;
     }
 };
