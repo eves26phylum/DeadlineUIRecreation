@@ -136,7 +136,26 @@ export default function({children}: {children?: React.ReactNode}) {
                     <QuestsManager/>
                 </Basic>
             </Basic>
-            <Basic Size={new UDim2(1, 0, 1, 0)} tags={["SERVERS"]} BackgroundTransparency={0.5}></Basic>
+            <Basic Size={new UDim2(1, 0, 1, 0)} tags={["SERVERS"]} BackgroundTransparency={0.5}><SideBySideList serverData={
+            [
+                {
+                    map: {
+                        mapImage: "rbxassetid://127270861",
+                        mapName: "Afghanistan",
+                        map_code: "afghanistan"
+                    },
+                    gamemode: {
+                        gamemode_code: "intimidation",
+                        gamemodeName: "Intimidation",
+                        time_left: 630720000
+                    },
+                    serverInfo: {
+                        playerCount: 175382,
+                        location: "Nothing important"
+                    }
+                }
+            ]
+        }/></Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the loadout</Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the profile</Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the settings</Basic>

@@ -48,14 +48,14 @@ export = {
             [
                 {
                     map: {
-                        mapImage: "",
+                        mapImage: "rbxassetid://127270861",
                         mapName: "Afghanistan",
                         map_code: "afghanistan"
                     },
                     gamemode: {
                         gamemode_code: "intimidation",
                         gamemodeName: "Intimidation",
-                        time_left: 1576800000
+                        time_left: 630720000
                     },
                     serverInfo: {
                         playerCount: 175382,
