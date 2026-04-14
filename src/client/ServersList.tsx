@@ -4,12 +4,12 @@ import { AlternatingList } from "./alternatingList";
 import { ListDrawer } from "./ListDrawer";
 
 export function SideBySideList() {
-    return <Basic flexProps={{FillDirection: Enum.FillDirection.Horizontal}} tags={["sideBySideList"]}>
+    return <Basic Size={new UDim2(0, 0, 1, 0)} flexProps={{FillDirection: Enum.FillDirection.Horizontal}} tags={["sideBySideList"]}>
         <ListDrawer>
             Apple Banana
         </ListDrawer>
-        <ListDrawer Size={new UDim2(0, 980, 0, 0)}>
-        <AlternatingList arrayOfChildren={[
+        <ListDrawer Size={new UDim2(0, 980, 1, 0)}>
+        <AlternatingList Size={new UDim2(1, 0, 0, 0)} arrayOfChildren={[
             <Basic>Hello!</Basic>,
             <Basic>Hello!</Basic>,
             <Basic>Hello!</Basic>,

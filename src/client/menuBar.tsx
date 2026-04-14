@@ -1,5 +1,5 @@
 import React, { StrictMode, useEffect, useState, useRef } from '@rbxts/react';
-import { Basic, Button } from "./easyobjects";
+import { Basic, BasicProps, Button } from "./easyobjects";
 import { MenuButton, IconMenuButton, MenuButtonProps, IconMenuButtonProps } from "./menuButton";
 import motion, { Transition } from "@rbxts/react-motion";
 import { useUiContext } from './hooks/useAppContext';
@@ -78,12 +78,12 @@ export function MenuBar({buttonsJSON = [], children = {}, slideTransition = {
             </motion.frame>
             </frame>
 }
-export function MenuBarHome({pageCallback = () => {}, getMoney = () => {return {newTaiwanDollars: 1, biitcoin: 67}}, ...props}: {getMoney?: () => {newTaiwanDollars: number, biitcoin: number}, pageCallback: (name: string, index: number) => void}) {
+export function MenuBarHome({pageCallback = () => {}, getMoney = () => {return {newTaiwanDollars: 1, biitcoin: 67}}, ...props}: {getMoney?: () => {newTaiwanDollars: number, biitcoin: number}, pageCallback: (name: string, index: number) => void} & BasicProps) {
     const money = getMoney();
     const UiContext: UiContextType = useUiContext();
     const selectedButton = UiContext.states.selectedPage;
     const setSelectedButton = UiContext.states.setSelectedPage;
-    return <Basic BackgroundTransparency={0} tags={["menuBarHome-full"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center, Wraps: true}}>
+    return <Basic BackgroundTransparency={0} tags={["menuBarHome-full"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center, Wraps: true}} {...props}>
         <Basic flexProps={{HorizontalAlignment: Enum.HorizontalAlignment.Center}}>
             <uiflexitem FlexMode={Enum.UIFlexMode.Fill}/>
         </Basic>

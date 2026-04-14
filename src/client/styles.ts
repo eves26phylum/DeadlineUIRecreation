@@ -88,6 +88,12 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
         PaddingBottom: "$PaddingL",
         PaddingTop: "$PaddingL",
 	}, lobbySheet)
+    createRule(".SERVERS::UIPadding", {
+		PaddingLeft: "$PaddingL",
+        PaddingRight: "$PaddingL",
+        PaddingBottom: "$PaddingL",
+        PaddingTop: "$PaddingL",
+	}, lobbySheet)
 	createRule(".veryGenericBox", {
 		BackgroundColor3: "$BackgroundColour"
 	}, lobbySheet)
