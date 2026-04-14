@@ -16,6 +16,8 @@ import QuestsManager from "./questsManager";
 import { TableOfQuestsType } from "./questTable";
 import { Styles, createRule } from "./styles";
 import { ProductionLobbySpawnConfig } from "./productionLobby";
+import { SideBySideList } from "./ServersList";
+
 export default function({children}: {children?: React.ReactNode}) {
     const uiPageLayoutRef = useRef<UIPageLayout>();
     const [money, setMoney] = useState<moneyFormat>({
@@ -133,7 +135,7 @@ export default function({children}: {children?: React.ReactNode}) {
                     <QuestsManager/>
                 </Basic>
             </Basic>
-            <Basic Size={new UDim2(1, 0, 1, 0)} BackgroundTransparency={0.5}>Hello I am the servers</Basic>
+            <Basic Size={new UDim2(1, 0, 1, 0)} BackgroundTransparency={0.5}><SideBySideList/></Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the loadout</Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the profile</Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the settings</Basic>

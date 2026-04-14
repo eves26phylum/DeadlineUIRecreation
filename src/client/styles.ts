@@ -82,6 +82,12 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
 		BackgroundColor3: "$BackgroundColour",
 		BackgroundTransparency: 0.5
 	}, lobbySheet)
+    createRule(".alternateListItem::UIPadding", {
+		PaddingLeft: "$PaddingL",
+        PaddingRight: "$PaddingL",
+        PaddingBottom: "$PaddingL",
+        PaddingTop: "$PaddingL",
+	}, lobbySheet)
 	createRule(".veryGenericBox", {
 		BackgroundColor3: "$BackgroundColour"
 	}, lobbySheet)
@@ -91,6 +97,9 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
 	createRule(".veryGenericBox.hasOutline::UIStroke", {
 		Color: "$BorderColour"
 	}, lobbySheet)
+    createRule(".sideBySideList > UIListLayout", {
+        Padding: "$PaddingL"
+    }, lobbySheet)
 	createRule(".spawnButton:Hover", {
 		BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(80, 80, 80))
 	}, lobbySheet)

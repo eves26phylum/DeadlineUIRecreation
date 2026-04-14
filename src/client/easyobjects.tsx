@@ -8,8 +8,11 @@ export interface DOMDefinition {
     flexProps?: Partial<React.InstanceProps<UIListLayout>>,
     textProps?: Partial<React.InstanceProps<TextLabel>>
 }
+export interface BasicProps extends DOMDefinition, Partial<React.InstanceProps<Frame>> {
+    dog?: (arg0: Frame | undefined) => void
+}
 export interface ButtonProps extends DOMDefinition, Partial<React.InstanceProps<TextButton>> {
-    frameProps?: Partial<React.InstanceProps<Frame>> 
+    frameProps?: BasicProps
 }
 export function Text({text, ...textProps}: {text: string} & Partial<React.InstanceProps<TextLabel>>) {
     return  <textlabel
@@ -23,7 +26,7 @@ export function Text({text, ...textProps}: {text: string} & Partial<React.Instan
                 {...textProps}
             />
 }
-export function Basic({flexProps, textProps, children, dog, tags = [], ...restProps}: DOMDefinition & {dog?: (arg0: Frame | undefined) => void} & Partial<React.InstanceProps<Frame>>) {
+export function Basic({flexProps, textProps, children, dog, tags = [], ...restProps}: BasicProps) {
     const ref = useRef<Frame>();
     useTags(ref, tags);
     const combinedRef = useCallback((instance: Frame | undefined) => {
@@ -55,7 +58,7 @@ export function Basic({flexProps, textProps, children, dog, tags = [], ...restPr
 	);
 }
 
-export function BasicScroll({children, tags = [], scrollProps = {}, ...restProps}: DOMDefinition & Partial<React.InstanceProps<Frame>> & {scrollProps?: Partial<React.InstanceProps<ScrollingFrame>>}) {
+export function BasicScroll({children, tags = [], scrollProps = {}, ...restProps}: BasicProps & {scrollProps?: Partial<React.InstanceProps<ScrollingFrame>>}) {
     const ref = useRef<ScrollingFrame>();
     useTags(ref, tags);
 	return (

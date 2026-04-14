@@ -1,7 +1,7 @@
 import React, { StrictMode, useEffect, useState, useCallback } from "@rbxts/react";
 import ReactRoblox from "@rbxts/react-roblox";
 import { InferProps } from "@rbxts/react/src/prop-types";
-import { SideBySideList } from "client/SidebySideList";
+import { SideBySideList } from "client/ServersList";
 import { Styles } from "client/styles";
 import { Basic } from "client/easyobjects";
 
