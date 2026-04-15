@@ -110,7 +110,7 @@ export default function({children}: {children?: React.ReactNode}) {
     //         setSelectedPage(currentPage);
     //     })
     // }, [uiPageLayoutRef]) infinite loop
-    // don't want to bother with trackpad support
+    // trackpad/scrolling page support incomplete
 
     useEffect(()=>{
         uiPageLayoutRef.current?.JumpToIndex(selectedPage + 1);

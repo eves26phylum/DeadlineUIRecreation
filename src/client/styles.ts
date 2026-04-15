@@ -96,7 +96,8 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
 	}, lobbySheet)
 	createRule(".veryGenericBox.hasOutline::UIStroke", {
 		Color: "$BorderColour",
-        BorderStrokePosition: Enum.BorderStrokePosition.Inner
+        BorderStrokePosition: Enum.BorderStrokePosition.Inner,
+        ApplyStrokeMode: Enum.ApplyStrokeMode.Border
 	}, lobbySheet)
     createRule(".sideBySideList > UIListLayout", {
         Padding: "$PaddingL"
@@ -271,7 +272,7 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
     createRule("UIListLayout.paddingMini", {
         Padding: "$PaddingXS"
     }, lobbySheet)
-     createRule("UIListLayout.paddingTiny", {
+    createRule("UIListLayout.paddingTiny", {
         Padding: "$PaddingXXS"
     }, lobbySheet)
     createRule(".paddingStandard::UIPadding", {

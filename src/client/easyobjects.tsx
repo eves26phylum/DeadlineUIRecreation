@@ -12,7 +12,8 @@ export interface BasicProps extends DOMDefinition, Partial<React.InstanceProps<F
     dog?: (arg0: Frame | undefined) => void
 }
 export interface ButtonProps extends DOMDefinition, Partial<React.InstanceProps<TextButton>> {
-    frameProps?: BasicProps
+    frameProps?: BasicProps,
+    btnChildren?: React.ReactNode
 }
 export function Text({text, children, ...textProps}: {text: string, children?: React.ReactNode} & Partial<React.InstanceProps<TextLabel>>) {
     return  <textlabel
@@ -80,7 +81,7 @@ export function BasicScroll({children, tags = [], scrollProps = {}, ...restProps
 	);
 }
 
-export function Button({children, tags = [], flexProps, frameProps, textProps, ...restProps}: ButtonProps) {
+export function Button({btnChildren, children, tags = [], flexProps, frameProps, textProps, ...restProps}: ButtonProps) {
     const ref = useRef<TextButton>();
     useTags(ref, tags);
     return <textbutton ref={ref} 
@@ -92,6 +93,7 @@ export function Button({children, tags = [], flexProps, frameProps, textProps, .
         {...restProps}
         Text={""}
         TextSize={1}>
+        {btnChildren}
         <Basic
             flexProps={{HorizontalAlignment: Enum.HorizontalAlignment.Center, ...flexProps}}
             textProps={

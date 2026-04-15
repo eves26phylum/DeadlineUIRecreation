@@ -1,14 +1,11 @@
 // note: Demo, then servers joining afghanistan and maybe real life war footage
-import React, { useState } from "@rbxts/react";
-import { Basic, BasicProps, BasicScroll, Text } from "./easyobjects";
+import React, { useMemo, useState } from "@rbxts/react";
+import { Basic, BasicProps, BasicScroll, Text, Button } from "./easyobjects";
 import { AlternatingList } from "./alternatingList";
 import { ListDrawer } from "./ListDrawer";
 import { productionServerData } from "./types/gameData";
-import { Players } from "@rbxts/services";
 import { toMS } from "shared/formatTime";
 import { BaseButton, IconBaseButton } from "./Button";
-
-const LocalPlayer = Players.LocalPlayer;
 
 export function ServersItem({data, ...props}: {data: productionServerData} & BasicProps) {
     return <>
@@ -55,22 +52,42 @@ export function ServersListTableKeys() {
                 //         location: "Nothing important"
                 //     }
                 // }
-export function ServersListCheckbox({name, selectedBehaviourCallback}: {name: string, selectedBehaviourCallback?: () => {}}) {
+export function ServersListCheckbox({name, selectedBehaviourCallback, ...props}: {name: string, selectedBehaviourCallback?: (isSelected?: boolean, setSelected?: React.Dispatch<React.SetStateAction<boolean>>) => void} & React.InstanceProps<TextLabel>) {
     // return <><Basic flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>FUCK ROBLOX FUCK ROBLOX FUCK ROBLOX </Basic><Basic flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>FUCK ROBLOX FUCK ROBLOX FUCK ROBLOX </Basic></>
-    return <Basic >Hi Why</Basic>
+    const [isSelected, setSelected] = useState(true);
+    return <>
+        <Button BackgroundTransparency={1} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}} Size={new UDim2(1, 0, 0, 0)} Event={{MouseButton1Click: () => {
+            setSelected(!isSelected);
+            selectedBehaviourCallback?.(isSelected, setSelected);
+        } }} btnChildren={<><uilistlayout
+            FillDirection={Enum.FillDirection.Horizontal}
+            Padding={new UDim(0, 0)}
+            HorizontalAlignment={Enum.HorizontalAlignment.Left}
+            VerticalAlignment={Enum.VerticalAlignment.Top}
+            ItemLineAlignment={Enum.ItemLineAlignment.Center}
+            SortOrder={Enum.SortOrder.Name}
+        /><uiflexitem FlexMode={"Fill"}/></>}>
+        <uiflexitem FlexMode={"Fill"}/>
+        <Text text={name} Tag={`textBody ${isSelected ? "textOnDark" : "textOnDemotivationCycle"}`} {...props}/>
+        <Basic>
+            <uiflexitem FlexMode={"Fill"}/>
+        </Basic>
+        <Button Size={new UDim2(0, 24, 0, 24)} BackgroundTransparency={1} tags={["workingCheckbox", "veryGenericBox", "hasOutline"]}/>
+        </Button>
+    </>
 }
 export function SideBySideList({serverData}: {serverData: productionServerData[]}) {
-
     const mappedData = serverData.map((value: productionServerData, index: number, array: readonly productionServerData[]) => {
-                        return <ServersItem data={value}/>
-                    });
+        return <ServersItem data={value}/>
+    });
+    const uniqueMapNames = [...new Set(serverData.map((value: productionServerData) => {return value.map.mapName}))];
     return <Basic Size={new UDim2(0, 0, 1, 0)}  AutomaticSize={Enum.AutomaticSize.X} flexProps={{FillDirection: Enum.FillDirection.Horizontal}} tags={["sideBySideList"]}>
         <Basic>
         <ListDrawer tags={["sideList"]}>
             <AlternatingList tags={["paddingSmall"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}} Size={new UDim2(1, 0, 0, 0)} 
             arrayOfChildren={
-                serverData.map((value: productionServerData, index: number, array: readonly productionServerData[]) => {
-                    return <ServersListCheckbox name="Hi"/>
+                uniqueMapNames.map((value: string, index: number, array: readonly string[]) => {
+                    return <ServersListCheckbox name={value}/>
                 })
             }/>
         </ListDrawer>
