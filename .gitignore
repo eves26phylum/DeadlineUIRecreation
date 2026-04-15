@@ -5,3 +5,4 @@
 .DS_Store
 *.rbxl.lock
 *.rbxlx.lock
+src/.DS_Store
