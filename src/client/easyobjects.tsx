@@ -94,6 +94,7 @@ export function Button({btnChildren, children, tags = [], flexProps, frameProps,
         Text={""}
         TextSize={1}>
         {btnChildren}
+        {/* Oh no */}
         <Basic
             flexProps={{HorizontalAlignment: Enum.HorizontalAlignment.Center, ...flexProps}}
             textProps={
