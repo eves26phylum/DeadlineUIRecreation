@@ -92,7 +92,7 @@ export function SideBySideList({serverData}: {serverData: productionServerData[]
     const [axis_content, refFunction] = useAbsoluteAxis("X");
     const mappedData = serverData.filter((value: productionServerData) => {
         const compiledString = HttpService.JSONEncode(value);
-        if (Object.keys(string.find(compiledString, searchQuery)).size() === 0) return false;
+        if (Object.keys(string.find(compiledString.lower(), searchQuery.lower())).size() === 0) return false;
         if (serverListCheckboxGamemodeState[value.gamemode.gamemodeName] === false) return false;
         if (serverListCheckboxNameState[value.map.mapName] === false) return false;
         return true;
