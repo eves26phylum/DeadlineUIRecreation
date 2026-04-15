@@ -1,6 +1,8 @@
 import React, {useState, useEffect, useCallback} from '@rbxts/react';
 
 // Solves the lack of align-self
+// new me: VerticalFlex and HorizontalFlex existed this whole time 🤦😭
+// SpaceBetween exists and I haven't noticed
 export function useAbsoluteAxis(whichAxis: 'X' | 'Y') {
     const [refBase, setRefBase] = useState<Frame | undefined>();
     const [axis, setAxis] = useState(0);
