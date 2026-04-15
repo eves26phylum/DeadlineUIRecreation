@@ -1,13 +1,32 @@
 import React, { StrictMode, useEffect, useState, useCallback } from "@rbxts/react";
 import ReactRoblox from "@rbxts/react-roblox";
 import { InferProps } from "@rbxts/react/src/prop-types";
-import { ProductionLobbySpawnConfig } from "client/productionLobby";
+import { SideBySideList } from "client/ServersList";
 import { Styles } from "client/styles";
-import { BaseButton } from "client/Button";
 import { Basic } from "client/easyobjects";
-import LobbyUI from "client/lobby";
-import { StoryProps } from "@rbxts/ui-labs/src/Typing/Typing";
-
+import { ongoingWars } from "client/getWars";
+// export interface mapData {
+//     mapImage: string,
+//     mapName: string,
+//     map_code: string
+// } // add more properties
+// export interface gamemodeData {
+//     gamemode_code: string,
+//     gamemodeName: string
+// }
+// export interface standardGamemodeData extends gamemodeData {
+//     time_left: number
+// }
+// export interface robloxServerData {
+//     playerCount: number,
+//     // location: location,
+//     location: string // temp
+// }
+// export interface productionServerData {
+//     map: mapData,
+//     gamemode: standardGamemodeData,
+//     serverInfo: robloxServerData
+// }
 const controls = {
 };
 export = {
@@ -26,6 +45,6 @@ export = {
             if (lobbySheet) return; // PREVENT INFINITE LOOPS
             setLobbySheet(Styles({Parent: props.target}));
         }, [theRef])
-        return <StrictMode><Basic dog={refFunction}><stylelink StyleSheet={lobbySheet}/><ProductionLobbySpawnConfig/></Basic></StrictMode>;
+        return <StrictMode><Basic dog={refFunction}><stylelink StyleSheet={lobbySheet}/><SideBySideList serverData={ongoingWars}/></Basic></StrictMode>;
     }
 };

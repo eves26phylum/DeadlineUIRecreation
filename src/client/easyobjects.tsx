@@ -8,10 +8,18 @@ export interface DOMDefinition {
     flexProps?: Partial<React.InstanceProps<UIListLayout>>,
     textProps?: Partial<React.InstanceProps<TextLabel>>
 }
-export interface ButtonProps extends DOMDefinition, Partial<React.InstanceProps<TextButton>> {
-    frameProps?: Partial<React.InstanceProps<Frame>> 
+export interface BasicProps extends DOMDefinition, Partial<React.InstanceProps<Frame>> {
+    dog?: (arg0: Frame | undefined) => void
 }
-export function Text({text, ...textProps}: {text: string} & Partial<React.InstanceProps<TextLabel>>) {
+export interface ButtonProps extends DOMDefinition, Partial<React.InstanceProps<TextButton>> {
+    frameProps?: BasicProps,
+    btnChildren?: React.ReactNode
+}
+export interface TextProps extends Partial<React.InstanceProps<TextLabel>> {
+    text: string,
+    children?: React.ReactNode
+}
+export function Text({text, children, ...textProps}: TextProps) {
     return  <textlabel
                 AutomaticSize={Enum.AutomaticSize.XY}
                 Size={new UDim2(0, 0, 0, 0)}
@@ -21,9 +29,9 @@ export function Text({text, ...textProps}: {text: string} & Partial<React.Instan
                 TextYAlignment={Enum.TextYAlignment.Top}
                 Text={text}
                 {...textProps}
-            />
+            >{children}</textlabel>
 }
-export function Basic({flexProps, textProps, children, dog, tags = [], ...restProps}: DOMDefinition & {dog?: (arg0: Frame | undefined) => void} & Partial<React.InstanceProps<Frame>>) {
+export function Basic({flexProps, textProps, children, dog, tags = [], ...restProps}: BasicProps) {
     const ref = useRef<Frame>();
     useTags(ref, tags);
     const combinedRef = useCallback((instance: Frame | undefined) => {
@@ -55,7 +63,7 @@ export function Basic({flexProps, textProps, children, dog, tags = [], ...restPr
 	);
 }
 
-export function BasicScroll({children, tags = [], scrollProps = {}, ...restProps}: DOMDefinition & Partial<React.InstanceProps<Frame>> & {scrollProps?: Partial<React.InstanceProps<ScrollingFrame>>}) {
+export function BasicScroll({children, tags = [], scrollProps = {}, ...restProps}: BasicProps & {scrollProps?: Partial<React.InstanceProps<ScrollingFrame>>}) {
     const ref = useRef<ScrollingFrame>();
     useTags(ref, tags);
 	return (
@@ -77,7 +85,7 @@ export function BasicScroll({children, tags = [], scrollProps = {}, ...restProps
 	);
 }
 
-export function Button({children, tags = [], flexProps, frameProps, textProps, ...restProps}: ButtonProps) {
+export function Button({btnChildren, children, tags = [], flexProps, frameProps, textProps, ...restProps}: ButtonProps) {
     const ref = useRef<TextButton>();
     useTags(ref, tags);
     return <textbutton ref={ref} 
@@ -89,6 +97,8 @@ export function Button({children, tags = [], flexProps, frameProps, textProps, .
         {...restProps}
         Text={""}
         TextSize={1}>
+        {btnChildren}
+        {/* Oh no */}
         <Basic
             flexProps={{HorizontalAlignment: Enum.HorizontalAlignment.Center, ...flexProps}}
             textProps={

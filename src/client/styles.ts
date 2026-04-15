@@ -9,54 +9,54 @@ export function createRule(selector: string, props: InstanceProperties<any>, sty
     rule.SetProperties(props);
     return rule
 }
-export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?: StyleSheet, Parent?: Instance} = {}) {
-	let lobbySheet = customSheet;
-	if (!lobbySheet) {
-		lobbySheet = new Instance("StyleSheet");
-		lobbySheet.SetAttribute("PaddingXL", new UDim(0, 24));
-		lobbySheet.SetAttribute("PaddingXXL", new UDim(0, 32));
-		lobbySheet.SetAttribute("PaddingXXXL", new UDim(0, 64));
-		lobbySheet.SetAttribute("PaddingXXXXL", new UDim(0, 128));
-		lobbySheet.SetAttribute("PaddingL", new UDim(0, 16));
-		lobbySheet.SetAttribute("PaddingTL", new UDim(0, 12));
-		lobbySheet.SetAttribute("IconSize", new UDim2(0, 20, 0, 20));
-		lobbySheet.SetAttribute("AccentColour", Color3.fromRGB(255, 255, 255));
-		lobbySheet.SetAttribute("SecondaryAccentColour", Color3.fromHex("#808080"));
-		// yes i know the quest ui has a subtle gradient border thing but im not bothered to recreate it right now
-		// lobbySheet.SetAttribute("backgroundCompletedQuestColour", Color3.fromRGB(20, 70, 20))
-		lobbySheet.SetAttribute("progressBarBackgroundCompletedQuestColour", Color3.fromRGB(30, 30, 30));
-		lobbySheet.SetAttribute("BorderColour", Color3.fromHex("#2A2A2A"));
-		lobbySheet.SetAttribute("BackgroundColour", Color3.fromRGB(0, 0, 0));
-		lobbySheet.SetAttribute("PositiveColour", Color3.fromRGB(0, 255, 0));
-		lobbySheet.SetAttribute("SavouryColour", Color3.fromRGB(255, 200, 0));
-		lobbySheet.SetAttribute("backgroundQuestColour", Color3.fromRGB(15, 15, 15));
-		lobbySheet.SetAttribute("progressQuestBarHighlight", Color3.fromRGB(37, 37, 37));
-		lobbySheet.SetAttribute("PaddingS", new UDim(0, 8));
-		lobbySheet.SetAttribute("PaddingXS", new UDim(0, 4));
-		lobbySheet.SetAttribute("PaddingXXS", new UDim(0, 2));
-		lobbySheet.SetAttribute("PaddingOne", new UDim(0, 1));
-		lobbySheet.SetAttribute("FontMainBold", new Font("rbxassetid://12187365977", Enum.FontWeight.Bold));
-		lobbySheet.SetAttribute("FontMainSemiBold", new Font("rbxassetid://12187365977", Enum.FontWeight.SemiBold));
-		lobbySheet.SetAttribute("FontMainRegular", new Font("rbxassetid://12187365977", Enum.FontWeight.Regular));
-		lobbySheet.SetAttribute("TextSize", 16);
-		lobbySheet.SetAttribute("TextMiniSize", 10);
-		lobbySheet.SetAttribute("TitleTextSize", 48);
-		lobbySheet.SetAttribute("LargerSubheadingTextSize", 32);
-		lobbySheet.SetAttribute("SubheadingTextSize", 24);
-		lobbySheet.Parent = Parent || ReplicatedStorage;
-	}
-	function safeGetAttribute<T extends keyof CheckableTypes>(sheet: StyleSheet, attr: string, theType: T): CheckableTypes[T] {
-		const attribute = sheet.GetAttribute(attr);
-		if (!attribute) throw new Error("attribute is not defined");
-		if (!typeIs(attribute, theType)) throw new Error("attribute is the wrong type");
-		return attribute as CheckableTypes[T];
-	}
+export function Styles({ customSheet, Parent = ReplicatedStorage }: { customSheet?: StyleSheet, Parent?: Instance } = {}) {
+    let lobbySheet = customSheet;
+    if (!lobbySheet) {
+        lobbySheet = new Instance("StyleSheet");
+        lobbySheet.SetAttribute("PaddingXL", new UDim(0, 24));
+        lobbySheet.SetAttribute("PaddingXXL", new UDim(0, 32));
+        lobbySheet.SetAttribute("PaddingXXXL", new UDim(0, 64));
+        lobbySheet.SetAttribute("PaddingXXXXL", new UDim(0, 128));
+        lobbySheet.SetAttribute("PaddingL", new UDim(0, 16));
+        lobbySheet.SetAttribute("PaddingTL", new UDim(0, 12));
+        lobbySheet.SetAttribute("IconSize", new UDim2(0, 20, 0, 20));
+        lobbySheet.SetAttribute("AccentColour", Color3.fromRGB(255, 255, 255));
+        lobbySheet.SetAttribute("SecondaryAccentColour", Color3.fromHex("#808080"));
+        // yes i know the quest ui has a subtle gradient border thing but im not bothered to recreate it right now
+        // lobbySheet.SetAttribute("backgroundCompletedQuestColour", Color3.fromRGB(20, 70, 20))
+        lobbySheet.SetAttribute("progressBarBackgroundCompletedQuestColour", Color3.fromRGB(30, 30, 30));
+        lobbySheet.SetAttribute("BorderColour", Color3.fromHex("#2A2A2A"));
+        lobbySheet.SetAttribute("BackgroundColour", Color3.fromRGB(0, 0, 0));
+        lobbySheet.SetAttribute("PositiveColour", Color3.fromRGB(0, 255, 0));
+        lobbySheet.SetAttribute("SavouryColour", Color3.fromRGB(255, 200, 0));
+        lobbySheet.SetAttribute("backgroundQuestColour", Color3.fromRGB(15, 15, 15));
+        lobbySheet.SetAttribute("progressQuestBarHighlight", Color3.fromRGB(37, 37, 37));
+        lobbySheet.SetAttribute("PaddingS", new UDim(0, 8));
+        lobbySheet.SetAttribute("PaddingXS", new UDim(0, 4));
+        lobbySheet.SetAttribute("PaddingXXS", new UDim(0, 2));
+        lobbySheet.SetAttribute("PaddingOne", new UDim(0, 1));
+        lobbySheet.SetAttribute("FontMainBold", new Font("rbxassetid://12187365977", Enum.FontWeight.Bold));
+        lobbySheet.SetAttribute("FontMainSemiBold", new Font("rbxassetid://12187365977", Enum.FontWeight.SemiBold));
+        lobbySheet.SetAttribute("FontMainRegular", new Font("rbxassetid://12187365977", Enum.FontWeight.Regular));
+        lobbySheet.SetAttribute("TextSize", 16);
+        lobbySheet.SetAttribute("TextMiniSize", 10);
+        lobbySheet.SetAttribute("TitleTextSize", 48);
+        lobbySheet.SetAttribute("LargerSubheadingTextSize", 32);
+        lobbySheet.SetAttribute("SubheadingTextSize", 24);
+        lobbySheet.Parent = Parent || ReplicatedStorage;
+    }
+    function safeGetAttribute<T extends keyof CheckableTypes>(sheet: StyleSheet, attr: string, theType: T): CheckableTypes[T] {
+        const attribute = sheet.GetAttribute(attr);
+        if (!attribute) throw new Error("attribute is not defined");
+        if (!typeIs(attribute, theType)) throw new Error("attribute is the wrong type");
+        return attribute as CheckableTypes[T];
+    }
     createRule(".textOnDark", { TextColor3: "$AccentColour" }, lobbySheet);
-	createRule(".textOnLight", { TextColor3: "$BackgroundColour" }, lobbySheet);
+    createRule(".textOnLight", { TextColor3: "$BackgroundColour" }, lobbySheet);
     createRule(".textOnDemotivationCycle", { TextColor3: "$SecondaryAccentColour" }, lobbySheet);
     createRule(".textBody", { TextSize: "$TextSize", FontFace: "$FontMainRegular" }, lobbySheet);
     createRule(".textStandard", { TextSize: "$TextSize", FontFace: "$FontMainSemiBold" }, lobbySheet);
-	createRule(".accentText", { TextColor3: "$AccentColour" }, lobbySheet);
+    createRule(".accentText", { TextColor3: "$AccentColour" }, lobbySheet);
     createRule(".textMini", { TextSize: "$TextMiniSize", FontFace: "$FontMainSemiBold" }, lobbySheet);
     createRule(".textTitleMain", { TextSize: "$TitleTextSize", FontFace: "$FontMainBold" }, lobbySheet);
     createRule(".textTitleLargerSubheading", { TextSize: "$LargerSubheadingTextSize", FontFace: "$FontMainBold" }, lobbySheet);
@@ -71,47 +71,70 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
     createRule(".defaultMenuButton > Frame > ImageLabel", { ImageColor3: "$AccentColour" }, lobbySheet);
     createRule(".defaultMenuButton.selected > Frame > TextLabel", { TextColor3: "$BackgroundColour" }, lobbySheet);
     createRule(".defaultMenuButton.selected > Frame > ImageLabel", { ImageColor3: "$BackgroundColour" }, lobbySheet);
-	createRule(".spawnButtonMain", {
-		BackgroundColor3: "$AccentColour"
-	}, lobbySheet)
-	createRule(".spawnButton", {
-		BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(60, 60, 60)),
-		BackgroundTransparency: 0.5
-	}, lobbySheet)
-	createRule(".MenuContent > Frame", {
-		BackgroundColor3: "$BackgroundColour",
-		BackgroundTransparency: 0.5
-	}, lobbySheet)
-	createRule(".spawnButton:Hover", {
-		BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(80, 80, 80))
-	}, lobbySheet)
-	createRule(".spawnButton::UIPadding", {
-		PaddingLeft: "$PaddingL",
+    createRule(".spawnButtonMain", {
+        BackgroundColor3: "$AccentColour"
+    }, lobbySheet)
+    createRule(".spawnButton", {
+        BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(60, 60, 60)),
+        BackgroundTransparency: 0.5
+    }, lobbySheet)
+    createRule(".MenuContent > Frame", {
+        BackgroundColor3: "$BackgroundColour",
+        BackgroundTransparency: 0.5
+    }, lobbySheet)
+    createRule(".SERVERS::UIPadding", {
+        PaddingLeft: "$PaddingL",
         PaddingRight: "$PaddingL",
         PaddingBottom: "$PaddingL",
         PaddingTop: "$PaddingL",
-	}, lobbySheet)
-	createRule(".spawnButton > Frame > UIListLayout", {
-		Padding: "$PaddingL"
-	}, lobbySheet)
-	createRule(".ZeroHourLogo", {
-		TextSize: 100
-	}, lobbySheet)
-	createRule(".zerohourspawnconfig > UIListLayout", {
-		Padding: "$PaddingL"
-	}, lobbySheet)
-	createRule(".spawnButtonMain:Hover", {
-		BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "AccentColour", "Color3"), Color3.fromRGB(-20, -20, -20))
-	}, lobbySheet)
-	createRule(".spawnButtonMain > Frame > UIListLayout", {
-		Padding: "$PaddingL"
-	}, lobbySheet)
-	createRule(".spawnButtonMain::UIPadding", {
-		PaddingLeft: "$PaddingXXL",
+    }, lobbySheet)
+    createRule(".veryGenericBox", {
+        BackgroundColor3: "$BackgroundColour"
+    }, lobbySheet)
+    createRule(".veryGenericBox.alternate", {
+        BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(20, 20, 20))
+    }, lobbySheet)
+    createRule(".veryGenericBox.hasOutline::UIStroke", {
+        Color: "$BorderColour",
+        BorderStrokePosition: Enum.BorderStrokePosition.Inner,
+        ApplyStrokeMode: Enum.ApplyStrokeMode.Border
+    }, lobbySheet)
+    createRule(".sideBySideList > UIListLayout", {
+        Padding: "$PaddingS"
+    }, lobbySheet)
+    // createRule(".sideList > UIListLayout", {
+    //     Padding: "$PaddingL"
+    // }, lobbySheet)
+    createRule(".spawnButton:Hover", {
+        BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(80, 80, 80))
+    }, lobbySheet)
+    createRule(".spawnButton::UIPadding", {
+        PaddingLeft: "$PaddingL",
+        PaddingRight: "$PaddingL",
+        PaddingBottom: "$PaddingL",
+        PaddingTop: "$PaddingL",
+    }, lobbySheet)
+    createRule(".spawnButton > Frame > UIListLayout", {
+        Padding: "$PaddingL"
+    }, lobbySheet)
+    createRule(".ZeroHourLogo", {
+        TextSize: 100
+    }, lobbySheet)
+    createRule(".zerohourspawnconfig > UIListLayout", {
+        Padding: "$PaddingL"
+    }, lobbySheet)
+    createRule(".spawnButtonMain:Hover", {
+        BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "AccentColour", "Color3"), Color3.fromRGB(-20, -20, -20))
+    }, lobbySheet)
+    createRule(".spawnButtonMain > Frame > UIListLayout", {
+        Padding: "$PaddingL"
+    }, lobbySheet)
+    createRule(".spawnButtonMain::UIPadding", {
+        PaddingLeft: "$PaddingXXL",
         PaddingRight: "$PaddingXXXXL",
         PaddingBottom: "$PaddingXXL",
         PaddingTop: "$PaddingXXL",
-	}, lobbySheet)
+    }, lobbySheet)
     createRule(".tableOfQuest::UIPadding", {
         PaddingLeft: "$PaddingL",
         PaddingRight: "$PaddingL",
@@ -179,6 +202,9 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
     createRule(".QuestProgressBar::UICorner", {
         CornerRadius: new UDim(1, 0)
     }, lobbySheet)
+    createRule(".fuckROBLOX::UIFlexItem", {
+        FlexMode: Enum.UIFlexMode.Fill
+    }, lobbySheet)
     createRule(".QuestProgressBar::UIPadding", {
         PaddingLeft: "$PaddingXS",
         PaddingRight: "$PaddingXS",
@@ -188,30 +214,30 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
     createRule(".Ghost.Button", {
         BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(60, 60, 60))
     }, lobbySheet)
-	createRule(".Button > Frame > UIListLayout", {
-		Padding: "$PaddingS"
-	}, lobbySheet)
-	createRule(".Ghost.icon", {
+    createRule(".Button > Frame > UIListLayout", {
+        Padding: "$PaddingS"
+    }, lobbySheet)
+    createRule(".Ghost.icon", {
         BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(128, 128, 128))
     }, lobbySheet)
-	createRule(".Ghost.text", {
+    createRule(".Ghost.text", {
         TextColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(128, 128, 128))
     }, lobbySheet)
-	createRule(".Ghost.Button:Hover", {
+    createRule(".Ghost.Button:Hover", {
         BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(80, 80, 80))
     }, lobbySheet)
-	createRule(".Excited.Button", {
-		BackgroundColor3: "$AccentColour"
-	}, lobbySheet)
-	createRule(".Excited.icon", {
-		ImageColor3: "$BackgroundColour"
-	}, lobbySheet)
-	createRule(".Excited.text", {
-		TextColor3: "$BackgroundColour"
-	}, lobbySheet)
-	createRule(".Excited.Button:Hover", {
-		BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "AccentColour", "Color3"), Color3.fromRGB(-20, -20, -20))
-	}, lobbySheet)
+    createRule(".Excited.Button", {
+        BackgroundColor3: "$AccentColour"
+    }, lobbySheet)
+    createRule(".Excited.icon", {
+        ImageColor3: "$BackgroundColour"
+    }, lobbySheet)
+    createRule(".Excited.text", {
+        TextColor3: "$BackgroundColour"
+    }, lobbySheet)
+    createRule(".Excited.Button:Hover", {
+        BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "AccentColour", "Color3"), Color3.fromRGB(-20, -20, -20))
+    }, lobbySheet)
     createRule(".Button::UIPadding", {
         PaddingLeft: "$PaddingXL",
         PaddingRight: "$PaddingXL",
@@ -232,13 +258,21 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
         PaddingBottom: "$PaddingL",
         PaddingTop: "$PaddingL",
     }, lobbySheet)
+    createRule(".debugRed", {
+        BackgroundColor3: Color3.fromRGB(255, 0, 0),
+        TextColor3: Color3.fromRGB(255, 0, 0),
+        ImageColor3: Color3.fromRGB(255, 0, 0),
+    }, lobbySheet)
     createRule("UIListLayout.paddingStandard", {
         Padding: "$PaddingL"
+    }, lobbySheet)
+    createRule("UIListLayout.paddingSmall", {
+        Padding: "$PaddingS"
     }, lobbySheet)
     createRule("UIListLayout.paddingMini", {
         Padding: "$PaddingXS"
     }, lobbySheet)
-     createRule("UIListLayout.paddingTiny", {
+    createRule("UIListLayout.paddingTiny", {
         Padding: "$PaddingXXS"
     }, lobbySheet)
     createRule(".paddingStandard::UIPadding", {
@@ -246,6 +280,12 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
         PaddingRight: "$PaddingL",
         PaddingBottom: "$PaddingL",
         PaddingTop: "$PaddingL"
+    }, lobbySheet)
+    createRule(".paddingSmall::UIPadding", {
+        PaddingLeft: "$PaddingS",
+        PaddingRight: "$PaddingS",
+        PaddingBottom: "$PaddingS",
+        PaddingTop: "$PaddingS"
     }, lobbySheet)
     createRule(".paddingGiant::UIPadding", {
         PaddingLeft: "$PaddingXXL",
@@ -266,7 +306,8 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
         PaddingTop: "$PaddingXXS"
     }, lobbySheet)
     createRule(".menuBarButtonsContainer::UIStroke", {
-        Color: "$BorderColour"
+        Color: "$BorderColour",
+        BorderStrokePosition: Enum.BorderStrokePosition.Inner
     }, lobbySheet)
     createRule(".questsTitle::UIPadding", {
         PaddingLeft: "$PaddingL",
@@ -289,15 +330,15 @@ export function Styles({customSheet, Parent = ReplicatedStorage}: {customSheet?:
 
     createRule(".menuButton", { BackgroundTransparency: 1, BackgroundColor3: "$AccentColour" }, lobbySheet);
     createRule(".menuButton.defaultMenuButton:Hover", { BackgroundTransparency: 0.9 }, lobbySheet);
-    createRule(".menuButton.defaultMenuButton:Press", {  BackgroundTransparency: 0.9 }, lobbySheet);
+    createRule(".menuButton.defaultMenuButton:Press", { BackgroundTransparency: 0.9 }, lobbySheet);
     createRule(".menuButton.defaultMenuButton.selected", { BackgroundTransparency: 0, BackgroundColor3: "$AccentColour" }, lobbySheet);
     createRule(".menuButton.shopMenuButton.selected", { BackgroundColor3: "$PositiveColour" }, lobbySheet);
     createRule(".menuButton.shopMenuButton:Hover, .menuButton.shopMenuButton:Press", { BackgroundTransparency: 0, BackgroundColor3: "$PositiveColour" }, lobbySheet);
-    createRule(".icon", { 
+    createRule(".icon", {
         Size: "$IconSize"
-     }, lobbySheet);
+    }, lobbySheet);
     createRule(".menuButton > Frame > UIListLayout", {
-        FillDirection: Enum.FillDirection.Horizontal, 
+        FillDirection: Enum.FillDirection.Horizontal,
         Padding: "$PaddingS",
         ItemLineAlignment: Enum.ItemLineAlignment.Center,
         VerticalAlignment: Enum.VerticalAlignment.Center

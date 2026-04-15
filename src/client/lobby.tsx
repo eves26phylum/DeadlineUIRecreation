@@ -16,6 +16,9 @@ import QuestsManager from "./questsManager";
 import { TableOfQuestsType } from "./questTable";
 import { Styles, createRule } from "./styles";
 import { ProductionLobbySpawnConfig } from "./productionLobby";
+import { SideBySideList } from "./ServersList";
+import { ongoingWars } from "./getWars";
+
 export default function({children}: {children?: React.ReactNode}) {
     const uiPageLayoutRef = useRef<UIPageLayout>();
     const [money, setMoney] = useState<moneyFormat>({
@@ -25,12 +28,12 @@ export default function({children}: {children?: React.ReactNode}) {
     const [questsFinishTimeSeconds, setQuestsFinishTimeSeconds] = useState<number>(12000);
     const [questTableState, setQuestTableState] = useState<TableOfQuestsType[]>([
                 {
-                    name: "Feed 673382381 people for 20 years (solve world hunger)",
+                    name: "Help 2 SYNO allies",
                     progress: {
-                        now: 4,
-                        finish: 673382381
+                        now: 0,
+                        finish: 2
                     },
-                    newTaiwanDollarsAmount: math.huge,
+                    newTaiwanDollarsAmount: 500,
                     experienceAmount: math.huge
                 },
                 {
@@ -44,21 +47,21 @@ export default function({children}: {children?: React.ReactNode}) {
                     finished: true
                 },
                 {
-                    name: "Help 2 SYNO allies",
+                    name: "Headshot 30 players",
                     progress: {
-                        now: 0,
-                        finish: 2
+                        now: 4,
+                        finish: 30
                     },
-                    newTaiwanDollarsAmount: 10000,
-                    experienceAmount: 7000
+                    newTaiwanDollarsAmount: 5000,
+                    experienceAmount: 30000
                 },
                 {
-                    name: "Headshot 3000 players with the Arid Eagle Mk RIZZ .50AE Conversion for Arid Eagle Mk RIZZ Eagle",
+                    name: "Headshot 30 players with the Arid Eagle Mk XIX .50AE Conversion",
                     progress: {
-                        now: 538,
-                        finish: 3000
+                        now: 1,
+                        finish: 30
                     },
-                    newTaiwanDollarsAmount: 676767,
+                    newTaiwanDollarsAmount: 5000,
                     experienceAmount: 30000
                 },
                 {
@@ -107,7 +110,7 @@ export default function({children}: {children?: React.ReactNode}) {
     //         setSelectedPage(currentPage);
     //     })
     // }, [uiPageLayoutRef]) infinite loop
-    // don't want to bother with trackpad support
+    // trackpad/scrolling page support incomplete
 
     useEffect(()=>{
         uiPageLayoutRef.current?.JumpToIndex(selectedPage + 1);
@@ -120,9 +123,10 @@ export default function({children}: {children?: React.ReactNode}) {
             VerticalAlignment={Enum.VerticalAlignment.Top}
             SortOrder={Enum.SortOrder.Name}
         />
-        <MenuBarHome getMoney={()=>{return money;}} pageCallback={(name: string, index: number) => {}}/>
+        <MenuBarHome getMoney={()=>{return money;}} pageCallback={(name: string, index: number) => {}} AutomaticSize={Enum.AutomaticSize.Y}/>
         <motion.frame Size={new UDim2(1, 0, 1, 0)} BackgroundTransparency={1} Tag={"MenuContent"}>
             {/* <uiflexitem FlexMode={"Fill"}/> */}
+            <uiflexitem FlexMode={"Fill"}/>
             <uipagelayout ref={uiPageLayoutRef} EasingDirection={Enum.EasingDirection.Out} EasingStyle={Enum.EasingStyle.Quart} TweenTime={0.25}/>
             <Basic BackgroundTransparency={0.5}>Hello I am the shop</Basic> {/* Negative one single page */}
             <Basic Size={new UDim2(0, 0, 1, 0)} BackgroundTransparency={0.5} flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
@@ -133,7 +137,28 @@ export default function({children}: {children?: React.ReactNode}) {
                     <QuestsManager/>
                 </Basic>
             </Basic>
-            <Basic Size={new UDim2(1, 0, 1, 0)} BackgroundTransparency={0.5}>Hello I am the servers</Basic>
+            <Basic Size={new UDim2(1, 0, 1, 0)} tags={["SERVERS"]} flexProps={{VerticalAlignment: Enum.VerticalAlignment.Center, HorizontalAlignment: Enum.HorizontalAlignment.Center}} BackgroundTransparency={0.5}><SideBySideList serverData={
+            // [
+            //     {
+            //         map: {
+            //             mapImage: "rbxassetid://127270860",
+            //             mapName: "Afghanistan",
+            //             map_code: "afghanistan"
+            //         },
+            //         gamemode: {
+            //             gamemode_code: "intimidation",
+            //             gamemodeName: "Intimidation",
+            //             time_left: 630720000
+            //         },
+            //         serverInfo: {
+            //             playerCount: 175382,
+            //             maxPlayerCount: 8347860862658,
+            //             location: "Nothing important"
+            //         }
+            //     }
+            // ]
+            ongoingWars
+        }/></Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the loadout</Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the profile</Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the settings</Basic>
