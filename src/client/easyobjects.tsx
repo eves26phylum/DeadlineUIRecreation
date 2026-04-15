@@ -15,7 +15,11 @@ export interface ButtonProps extends DOMDefinition, Partial<React.InstanceProps<
     frameProps?: BasicProps,
     btnChildren?: React.ReactNode
 }
-export function Text({text, children, ...textProps}: {text: string, children?: React.ReactNode} & Partial<React.InstanceProps<TextLabel>>) {
+export interface TextProps extends Partial<React.InstanceProps<TextLabel>> {
+    text: string,
+    children?: React.ReactNode
+}
+export function Text({text, children, ...textProps}: TextProps) {
     return  <textlabel
                 AutomaticSize={Enum.AutomaticSize.XY}
                 Size={new UDim2(0, 0, 0, 0)}
