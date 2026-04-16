@@ -18,6 +18,7 @@ import { Styles, createRule } from "./styles";
 import { ProductionLobbySpawnConfig } from "./productionLobby";
 import { SideBySideList } from "./ServersList";
 import { ongoingWars } from "./getWars";
+import { LoadoutEditor } from "./loadout";
 
 export default function({children}: {children?: React.ReactNode}) {
     const uiPageLayoutRef = useRef<UIPageLayout>();
@@ -159,7 +160,7 @@ export default function({children}: {children?: React.ReactNode}) {
             // ]
             ongoingWars
         }/></Basic>
-            <Basic BackgroundTransparency={0.5}>Hello I am the loadout</Basic>
+            <Basic BackgroundTransparency={0.5}><LoadoutEditor/></Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the profile</Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the settings</Basic>
         </motion.frame>

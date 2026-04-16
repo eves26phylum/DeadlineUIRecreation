@@ -5,3 +5,8 @@ export function ListDrawer({children, tags = [], ...props}: {children?: React.Re
         {children}
     </Basic>;
 }
+export function ListDrawerFeatureless({children, tags = [], ...props}: {children?: React.ReactNode, tags?: string[]} & BasicProps) {
+    return <Basic tags={["veryGenericBox", ...tags]} BackgroundTransparency={0} Size={new UDim2(0, 240, 0, 0)} {...props}>
+        {children}
+    </Basic>;
+}

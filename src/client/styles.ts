@@ -51,8 +51,8 @@ export function Styles({ customSheet, Parent = ReplicatedStorage }: { customShee
         if (!typeIs(attribute, theType)) throw new Error("attribute is the wrong type");
         return attribute as CheckableTypes[T];
     }
-    createRule(".textOnDark", { TextColor3: "$AccentColour" }, lobbySheet);
-    createRule(".textOnLight", { TextColor3: "$BackgroundColour" }, lobbySheet);
+    createRule(".textOnDark", { ImageColor3: "$AccentColour", TextColor3: "$AccentColour" }, lobbySheet);
+    createRule(".textOnLight", { ImageColor3: "$BackgroundColour", TextColor3: "$BackgroundColour" }, lobbySheet);
     createRule(".textOnDemotivationCycle", { TextColor3: "$SecondaryAccentColour" }, lobbySheet);
     createRule(".textBody", { TextSize: "$TextSize", FontFace: "$FontMainRegular" }, lobbySheet);
     createRule(".textStandard", { TextSize: "$TextSize", FontFace: "$FontMainSemiBold" }, lobbySheet);
@@ -262,6 +262,9 @@ export function Styles({ customSheet, Parent = ReplicatedStorage }: { customShee
         BackgroundColor3: Color3.fromRGB(255, 0, 0),
         TextColor3: Color3.fromRGB(255, 0, 0),
         ImageColor3: Color3.fromRGB(255, 0, 0),
+    }, lobbySheet)
+    createRule(".loadoutCard", {
+        BackgroundColor3: "$AccentColour"
     }, lobbySheet)
     createRule("UIListLayout.paddingStandard", {
         Padding: "$PaddingL"
