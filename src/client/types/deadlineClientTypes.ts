@@ -2,6 +2,15 @@ import React from '@rbxts/react';
 import { clientThemeTypes } from './clientThemeTypes';
 import { TableOfQuestsType } from 'client/questTable';
 
+export interface LoadoutBullshit {
+    name: string,
+    loadoutInterfaceData: gameLoadoutData, // to be implemented
+    guiState: LoadoutGuiState
+}
+export interface LoadoutGuiState {
+    isSelected: boolean
+}
+
 export type moneyFormat = {
     newTaiwanDollars: number,
     biitcoin: number

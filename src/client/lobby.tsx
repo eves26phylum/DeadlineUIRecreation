@@ -11,7 +11,7 @@ import { MenuBarHome } from "./menuBar";
 import { PlayerFighterState } from "./vars/playerFighterState";
 import motion from "@rbxts/react-motion";
 import { UiContextProvider, AppContextProvider } from "./hooks/useAppContext";
-import { moneyFormat } from "client/types/deadlineClientTypes";
+import { LoadoutBullshit, moneyFormat } from "client/types/deadlineClientTypes";
 import QuestsManager from "./questsManager";
 import { TableOfQuestsType } from "./questTable";
 import { Styles, createRule } from "./styles";
@@ -96,7 +96,19 @@ export default function({children}: {children?: React.ReactNode}) {
             "quests.progressBarWidth": 10
         }
     }
-    const listChildren = [{name: "HI", loadoutInterfaceData: {}, guiState: {isSelected: true, onRename: (name: string) => {print(name);}, onMove: () => {}, onDelete: () => {}, onSelect: () => {}, onClone: () => {}}}];
+    const [listChildren, setListChildren] = useState<LoadoutBullshit[]>([
+        {name: "HI", loadoutInterfaceData: {}, guiState: {isSelected: true}}
+    ]);
+    const [selectedListChildren, setSelectedListChildren] = useState<number>(0);
+    listChildren.forEach((value: LoadoutBullshit, index: number, aray: readonly LoadoutBullshit[]) => {
+        const guiState = listChildren[index].guiState
+        if (!guiState) return;
+        guiState.isSelected = false;
+        if (index === selectedListChildren) { 
+            guiState.isSelected = true;
+        };
+    })
+
     // get from datastore here
     // useEffect(()=>{
     //     task.delay(1, () => {
@@ -162,7 +174,33 @@ export default function({children}: {children?: React.ReactNode}) {
             // ]
             ongoingWars
         }/></Basic>
-            <Basic BackgroundTransparency={0.5} Size={new UDim2(1, 0, 1, 0)} AutomaticSize={Enum.AutomaticSize.None}><LoadoutEditor listChildren={listChildren} selectedIndex={0}/></Basic>
+            <Basic BackgroundTransparency={0.5} Size={new UDim2(1, 0, 1, 0)} AutomaticSize={Enum.AutomaticSize.None}>
+                <LoadoutEditor callbacks={{
+                    onRename: (index: number, name: string) => {
+                        const clonedListChildren = [...listChildren];
+                        clonedListChildren[index].name = name;
+                        setListChildren(clonedListChildren);
+                    },
+                    onMove: (index: number, pos: number) => {
+                        
+                    },
+                    onSelect: (index: number) => {
+                        setSelectedListChildren(index);
+                    },
+                    onClone: (index: number) => {
+                        const clonedListChildren = [...listChildren];
+                        const thisCloned = {...clonedListChildren[index]};
+                        thisCloned.guiState.isSelected = false;
+                        clonedListChildren.insert(index + 1, thisCloned)
+                        setListChildren(clonedListChildren);
+                    },
+                    onDelete: (index: number) => {
+                        const clonedListChildren = [...listChildren].filter((value, indexOfThis) => indexOfThis !== index);;
+                        // clonedListChildren.pop(index);
+                        setListChildren(clonedListChildren);
+                    }
+                }} listChildren={listChildren} setListChildren={setListChildren} selectedIndex={0}/>
+            </Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the profile</Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the settings</Basic>
         </motion.frame>

@@ -226,6 +226,18 @@ export function Styles({ customSheet, Parent = ReplicatedStorage }: { customShee
     createRule(".Ghost.Button:Hover", {
         BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(80, 80, 80))
     }, lobbySheet)
+    createRule(".Generic.Button", {
+        BackgroundColor3: "$BackgroundColour"
+    }, lobbySheet)
+    createRule(".Generic.icon", {
+        BackgroundColor3: "$AccentColour"
+    }, lobbySheet)
+    createRule(".Generic.text", {
+        TextColor3: "$AccentColour"
+    }, lobbySheet)
+    createRule(".Generic.Button:Hover", {
+        BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(20, 20, 20))
+    }, lobbySheet)
     createRule(".Excited.Button", {
         BackgroundColor3: "$AccentColour"
     }, lobbySheet)

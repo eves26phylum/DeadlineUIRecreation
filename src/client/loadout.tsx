@@ -1,41 +1,45 @@
 import React, { useState } from "@rbxts/react";
-import { Basic, BasicScroll, Button, Text } from "./easyobjects";
+import { Basic, BasicScroll, Button, ButtonProps, Text } from "./easyobjects";
 import { ListDrawer, ListDrawerFeatureless } from "./ListDrawer";
-import { gameLoadoutData } from "./types/deadlineClientTypes";
+import { gameLoadoutData, LoadoutBullshit, LoadoutGuiState } from "./types/deadlineClientTypes";
 import { NotImplemented } from "./notImplementedInfo";
 import { HttpService } from "@rbxts/services";
 import { BaseButton, IconBaseButton } from "./Button";
+import { defaultLoadout } from "./vars/mainClientConfig";
+import { Object } from "@rbxts/luau-polyfill";
 
-export interface LoadoutBullshit {
-    name: string,
-    loadoutInterfaceData: gameLoadoutData, // to be implemented
-    guiState: LoadoutGuiState
-}
-export interface LoadoutGuiState {
-    isSelected: boolean,
+export interface loadoutUIItemCallbacksBase {
     onRename: (name: string) => void,
     onMove: (pos: -1 | 1) => void,
     onDelete: () => void,
     onSelect: () => void,
     onClone: () => void
 }
+export interface loadoutUIItemCallbacks {
+    onRename: (index: number, name: string) => void,
+    onMove: (index: number, pos: -1 | 1) => void,
+    onDelete: (index: number) => void,
+    onSelect: (index: number) => void,
+    onClone: (index: number) => void
+}
 export function LoadoutControlsButton({callback, textTag, iconGoesHere}: {callback: () => void, textTag: string, iconGoesHere: string}) {
     return <Button BackgroundTransparency={1} flexProps={{HorizontalAlignment: Enum.HorizontalAlignment.Center}} frameProps={{Size: new UDim2(1, 0, 1, 0)}} Event={{MouseButton1Click: callback}}><imagelabel Size={new UDim2(0, 16, 0, 16)} BackgroundTransparency={1} Tag={`icon ${textTag} paddingMini`} Image={iconGoesHere}/></Button>
 }
-export function LoadoutControls({LoadoutGuiState, onEdit}: {LoadoutGuiState: LoadoutGuiState, onEdit: () => void}) {
+export function LoadoutControls({callbacks, onEdit}: {callbacks: loadoutUIItemCallbacksBase, onEdit: () => void}) {
     return <Basic flexProps={{FillDirection: Enum.FillDirection.Horizontal, HorizontalAlignment: Enum.HorizontalAlignment.Center, HorizontalFlex: Enum.UIFlexAlignment.Fill}}>
-                <LoadoutControlsButton callback={() => {LoadoutGuiState.onMove(-1)}} textTag={"textOnLight"} iconGoesHere="rbxassetid://7072983757"/>
-                <LoadoutControlsButton callback={() => {LoadoutGuiState.onMove(1)}} textTag={"textOnLight"} iconGoesHere="rbxassetid://7072982593"/>
+                <LoadoutControlsButton callback={() => {callbacks.onMove(-1)}} textTag={"textOnLight"} iconGoesHere="rbxassetid://7072983757"/>
+                <LoadoutControlsButton callback={() => {callbacks.onMove(1)}} textTag={"textOnLight"} iconGoesHere="rbxassetid://7072982593"/>
                 <LoadoutControlsButton callback={onEdit} textTag={"textOnLight"} iconGoesHere="rbxassetid://7072715962"/>   
-                <LoadoutControlsButton callback={LoadoutGuiState.onClone} textTag={"textOnLight"} iconGoesHere="rbxassetid://7072707790"/>   
-                <LoadoutControlsButton callback={LoadoutGuiState.onDelete} textTag={"textOnLight"} iconGoesHere="rbxassetid://7072725342"/>                     
+                <LoadoutControlsButton callback={callbacks.onClone} textTag={"textOnLight"} iconGoesHere="rbxassetid://7072707790"/>   
+                <LoadoutControlsButton callback={callbacks.onDelete} textTag={"textOnLight"} iconGoesHere="rbxassetid://7072725342"/>                     
             </Basic>
 }
-export function Loadout({myValue}: {myValue: LoadoutBullshit}) {
+export function Loadout({myValue, callbacks, ...props}: {myValue: LoadoutBullshit, callbacks: loadoutUIItemCallbacksBase} & ButtonProps) {
     const loadoutState = myValue.guiState;
+    if (!loadoutState) return <Basic>COMPONENT NOT RENDERED: guiState does not exist!</Basic>;
     const [isEditing, setIsEditing] = useState(false);
     const [textBoxName, setTextBoxName] = useState(myValue.name);
-    return <Button BackgroundTransparency={loadoutState?.isSelected? 0 : 1} tags={["paddingSmall", "loadoutCard", "hasOutline", "veryGenericBox"]} flexProps={{HorizontalFlex: Enum.UIFlexAlignment.Fill, Tag: "paddingSmall"}} frameProps={{Size: new UDim2(1, 0, 0, 0)}} Event={{MouseButton1Click: () => loadoutState.onSelect}}>
+    return <Button BackgroundTransparency={loadoutState?.isSelected? 0 : 1} tags={["paddingSmall", "loadoutCard", "hasOutline", "veryGenericBox"]} flexProps={{HorizontalFlex: Enum.UIFlexAlignment.Fill, Tag: "paddingSmall"}} frameProps={{Size: new UDim2(1, 0, 0, 0)}} Event={{MouseButton1Click: () => {callbacks.onSelect()}}} {...props}>
         <Basic flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
             {isEditing ? 
             <textbox Change={{Text: (textBox) => {
@@ -43,25 +47,39 @@ export function Loadout({myValue}: {myValue: LoadoutBullshit}) {
             }}} BackgroundTransparency={1} AutomaticSize={Enum.AutomaticSize.XY} Tag={`textBody textOnLight`} ClearTextOnFocus={false} Text={myValue.name} PlaceholderText={"Loadout name"} TextWrapped={true} TextXAlignment={Enum.TextXAlignment.Left} TextYAlignment={Enum.TextYAlignment.Top}/>
             : <Text Tag={`textBody ${loadoutState.isSelected ? "textOnLight" : "textOnDemotivationCycle"}`} text={myValue.name} TextWrapped={true}/>}
         </Basic>
-        { !isEditing ? (loadoutState.isSelected ? <LoadoutControls LoadoutGuiState={loadoutState} onEdit={() => {setIsEditing(true)}}/> : <></>) : 
+        { !isEditing ? (loadoutState.isSelected ? <LoadoutControls callbacks={callbacks} onEdit={() => {setIsEditing(true)}}/> : <></>) : 
         <Basic flexProps={{FillDirection: Enum.FillDirection.Horizontal, HorizontalAlignment: Enum.HorizontalAlignment.Center, HorizontalFlex: Enum.UIFlexAlignment.Fill}}>
             <LoadoutControlsButton callback={() => {setIsEditing(false); setTextBoxName(myValue.name)}} textTag={"textOnLight"} iconGoesHere="rbxassetid://7072725342"/>                
-                <LoadoutControlsButton callback={() => {if (textBoxName === "") return; setIsEditing(false); loadoutState.onRename(textBoxName)}} textTag={`${textBoxName === "" ? "textOnDemotivationCycle" : "textOnLight"}`} iconGoesHere="rbxassetid://7072706620"/>                
+                <LoadoutControlsButton callback={() => {if (textBoxName === "") return; setIsEditing(false); callbacks.onRename(textBoxName)}} textTag={`${textBoxName === "" ? "textOnDemotivationCycle" : "textOnLight"}`} iconGoesHere="rbxassetid://7072706620"/>                
             </Basic> }        
     </Button>
 }
-export function LoadoutEditor({listChildren, selectedIndex}: {listChildren: LoadoutBullshit[], selectedIndex: number}) {
+export function LoadoutEditor({listChildren, setListChildren, selectedIndex, callbacks}: {listChildren: LoadoutBullshit[], setListChildren: React.Dispatch<React.SetStateAction<LoadoutBullshit[]>>, selectedIndex: number, callbacks: loadoutUIItemCallbacks}) {
     return <Basic Size={new UDim2(1, 0, 1, 0)} tags={["paddingStandard"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal, Tag: "paddingStandard", HorizontalAlignment: Enum.HorizontalAlignment.Center, VerticalAlignment: Enum.VerticalAlignment.Center}}>
         <ListDrawer flexProps={{HorizontalFlex: Enum.UIFlexAlignment.Fill}} AutomaticSize={Enum.AutomaticSize.None} Size={new UDim2(0, 240, 1, 0)}>
-        <BasicScroll flexProps={{HorizontalFlex: Enum.UIFlexAlignment.Fill}} Size={new UDim2(1, 0, 0, 0)} scrollProps={{Size: new UDim2(1, 0, 1, 0), AutomaticSize: Enum.AutomaticSize.None}}>
+        <BasicScroll flexProps={{HorizontalFlex: Enum.UIFlexAlignment.Fill, SortOrder: Enum.SortOrder.LayoutOrder}} Size={new UDim2(1, 0, 0, 0)} scrollProps={{Size: new UDim2(1, 0, 1, 0), AutomaticSize: Enum.AutomaticSize.None}}>
         {[...listChildren.map(
             (value: LoadoutBullshit, index: number, array: readonly LoadoutBullshit[]) => {
-                value.guiState.onMove = (pos: number) => {
-
-                }
-                return <Loadout myValue={value}/>
-            }
-        ), <IconBaseButton image={"rbxassetid://7072720870"}>NEW LOADOUT</IconBaseButton>]}
+                return <Loadout myValue={value} callbacks={{
+                    onRename: (name: string) => callbacks.onRename(index, name),
+                    onMove: (pos: 1 | -1) => callbacks.onMove(index, pos),
+                    onDelete: () => callbacks.onDelete(index),
+                    onSelect: () => callbacks.onSelect(index),
+                    onClone: () => callbacks.onClone(index),
+                }}/>
+            }),
+        <IconBaseButton LayoutOrder={23853287953287593289053290532905290} image={"rbxassetid://7072720870"} tags={["veryGenericBox", "hasOutline", "Generic"]} iconTags={["Generic"]} textTags={["Generic"]} 
+            clickCallback={() => {
+                const listChildrenClone = [...listChildren];
+                const customDefaultLoadout = {...defaultLoadout};
+                customDefaultLoadout.guiState = {
+                    isSelected: false
+                };
+                listChildrenClone.push(customDefaultLoadout);
+                setListChildren(listChildrenClone)
+            }}
+        >NEW LOADOUT</IconBaseButton> // dogshit roblox
+        ]}
         </BasicScroll>
     </ListDrawer>
         <NotImplemented>{HttpService.JSONEncode(listChildren[selectedIndex])}</NotImplemented>

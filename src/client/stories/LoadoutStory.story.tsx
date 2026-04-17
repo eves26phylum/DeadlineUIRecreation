@@ -4,6 +4,7 @@ import { InferProps } from "@rbxts/react/src/prop-types";
 import { LoadoutEditor } from "client/loadout";
 import { Styles } from "client/styles";
 import { Basic } from "client/easyobjects";
+import { LoadoutBullshit } from "client/types/deadlineClientTypes";
 
 const controls = {
 };
@@ -23,7 +24,27 @@ export = {
             if (lobbySheet) return; // PREVENT INFINITE LOOPS
             setLobbySheet(Styles({Parent: props.target}));
         }, [theRef])
-    const listChildren = [{name: "HI", loadoutInterfaceData: {}, guiState: {isSelected: true, onRename: (name: string) => {print(name);}, onMove: () => {}, onDelete: () => {}, onSelect: () => {}, onClone: () => {}}}];
-        return <StrictMode><Basic dog={refFunction}><stylelink StyleSheet={lobbySheet}/><LoadoutEditor listChildren={listChildren} selectedIndex={0}/></Basic></StrictMode>;
+        const [listChildren, setListChildren] = useState<LoadoutBullshit[]>([
+            {name: "HI", loadoutInterfaceData: {}, guiState: {isSelected: true}}
+        ]);
+        return <StrictMode><Basic dog={refFunction}><stylelink StyleSheet={lobbySheet}/><LoadoutEditor listChildren={listChildren} setListChildren={setListChildren} selectedIndex={0} callbacks={{
+                    onRename: (index: number, name: string) => {
+
+                    },
+                    onMove: (index: number, pos: number) => {
+                        
+                    },
+                    onSelect: (index: number) => {
+                        print("SRNHISRDFIOJHBRDJOIHJOIHSJPIOEDHJPOISJHIPOBSEDJHOPGBI")
+                    },
+                    onClone: (index: number) => {
+
+                    },
+                    onDelete: (index: number) => {
+                        const clonedListChildren = [...listChildren];
+                        // clonedListChildren.pop(index);
+                        setListChildren(clonedListChildren);
+                    }
+                }}/></Basic></StrictMode>;
     }
 };
