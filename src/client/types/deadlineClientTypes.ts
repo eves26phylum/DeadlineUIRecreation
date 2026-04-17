@@ -24,3 +24,7 @@ export interface UiContextType {
     },
     themes: clientThemeTypes
 }
+
+export interface gameLoadoutData {
+
+}
