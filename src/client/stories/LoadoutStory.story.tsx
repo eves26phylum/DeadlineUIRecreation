@@ -23,6 +23,7 @@ export = {
             if (lobbySheet) return; // PREVENT INFINITE LOOPS
             setLobbySheet(Styles({Parent: props.target}));
         }, [theRef])
-        return <StrictMode><Basic dog={refFunction}><stylelink StyleSheet={lobbySheet}/><LoadoutEditor/></Basic></StrictMode>;
+    const listChildren = [{name: "HI", loadoutInterfaceData: {}, guiState: {isSelected: true, onRename: (name: string) => {print(name);}, onMove: () => {}, onDelete: () => {}, onSelect: () => {}, onClone: () => {}}}];
+        return <StrictMode><Basic dog={refFunction}><stylelink StyleSheet={lobbySheet}/><LoadoutEditor listChildren={listChildren} selectedIndex={0}/></Basic></StrictMode>;
     }
 };

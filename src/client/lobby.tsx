@@ -96,6 +96,8 @@ export default function({children}: {children?: React.ReactNode}) {
             "quests.progressBarWidth": 10
         }
     }
+    const listChildren = [{name: "HI", loadoutInterfaceData: {}, guiState: {isSelected: true, onRename: (name: string) => {print(name);}, onMove: () => {}, onDelete: () => {}, onSelect: () => {}, onClone: () => {}}}];
+    // get from datastore here
     // useEffect(()=>{
     //     task.delay(1, () => {
     //         setMoney({newTaiwanDollars: money.newTaiwanDollars + 10000, biitcoin: money.biitcoin + 10});
@@ -160,7 +162,7 @@ export default function({children}: {children?: React.ReactNode}) {
             // ]
             ongoingWars
         }/></Basic>
-            <Basic BackgroundTransparency={0.5}><LoadoutEditor/></Basic>
+            <Basic BackgroundTransparency={0.5} Size={new UDim2(1, 0, 1, 0)} AutomaticSize={Enum.AutomaticSize.None}><LoadoutEditor listChildren={listChildren} selectedIndex={0}/></Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the profile</Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the settings</Basic>
         </motion.frame>
