@@ -189,7 +189,7 @@ export default function({children}: {children?: React.ReactNode}) {
                     onClone: (index: number) => {
                         const clonedListChildren = [...listChildren];
                         const thisCloned = {...clonedListChildren[index]};
-                        thisCloned.name = `${thisCloned.name} (Clone)`;
+                        thisCloned.name = `${thisCloned.name} (Copy)`;
                         clonedListChildren.insert(index + 1, thisCloned);
                         setSelectedListChildren(index + 1);
                         setListChildren(clonedListChildren);
