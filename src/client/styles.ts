@@ -53,7 +53,7 @@ export function Styles({ customSheet, Parent = ReplicatedStorage }: { customShee
     }
     createRule(".textOnDark", { ImageColor3: "$AccentColour", TextColor3: "$AccentColour" }, lobbySheet);
     createRule(".textOnLight", { ImageColor3: "$BackgroundColour", TextColor3: "$BackgroundColour" }, lobbySheet);
-    createRule(".textOnDemotivationCycle", { TextColor3: "$SecondaryAccentColour" }, lobbySheet);
+    createRule(".textOnDemotivationCycle", { TextColor3: "$SecondaryAccentColour", ImageColor3: "$SecondaryAccentColour" }, lobbySheet);
     createRule(".textBody", { TextSize: "$TextSize", FontFace: "$FontMainRegular" }, lobbySheet);
     createRule(".textStandard", { TextSize: "$TextSize", FontFace: "$FontMainSemiBold" }, lobbySheet);
     createRule(".accentText", { TextColor3: "$AccentColour" }, lobbySheet);
