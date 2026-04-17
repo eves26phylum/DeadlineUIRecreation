@@ -100,8 +100,8 @@ export function SideBySideList({serverData}: {serverData: productionServerData[]
         return <ServersItem data={value}/>
     }); // flatMap doesn't exist :(
     return <Basic Size={new UDim2(0, 0, 1, 0)}  AutomaticSize={Enum.AutomaticSize.X} flexProps={{FillDirection: Enum.FillDirection.Horizontal}} tags={["sideBySideList"]}>
-        <Basic dog={refFunction} flexProps={{Tag: "paddingSmall"}}>
-        <ListDrawer Size={new UDim2(0, math.max(240, axis_content), 0, 0)} tags={["sideList"]}>
+        <Basic flexProps={{Tag: "paddingSmall", HorizontalFlex: Enum.UIFlexAlignment.Fill}}>
+        <ListDrawer tags={["sideList"]} flexProps={{HorizontalFlex: Enum.UIFlexAlignment.Fill}}>
             <Text Tag={"textTitleSubheading textOnDark paddingStandard"} TextXAlignment={Enum.TextXAlignment.Center} text="GAMEMODES"/>
             <AlternatingList tags={["paddingSmall"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}} Size={new UDim2(1, 0, 0, 0)} 
             arrayOfChildren={
@@ -114,7 +114,7 @@ export function SideBySideList({serverData}: {serverData: productionServerData[]
                 })
             }/>
         </ListDrawer>
-        <ListDrawer Size={new UDim2(0, math.max(240, axis_content), 0, 0)} tags={["sideList"]}>
+        <ListDrawer tags={["sideList"]} flexProps={{HorizontalFlex: Enum.UIFlexAlignment.Fill}}>
             <Text Tag={"textTitleSubheading textOnDark paddingStandard"} TextXAlignment={Enum.TextXAlignment.Center} text="MAPS"/>
             <AlternatingList tags={["paddingSmall"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}} Size={new UDim2(1, 0, 0, 0)} 
             arrayOfChildren={
