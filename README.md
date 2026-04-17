@@ -6,6 +6,6 @@ From someone's request, I have decided to recreate [Deadline](https://www.roblox
 I have finished the menu bar, the quests page, the play menu, the servers section, and the loadout section
 # DEPENDENCIES
 I included the package.json
-(I think it was @rbxts/luau-polyfill, @rbxts/react, @rbxts/react-motion?? idk just check it yourself)
+(I think it was @rbxts/luau-polyfill, @rbxts/react, @rbxts/react-motion, @rbxts/react-roblox, @rbxts/services, @rbxts/ui-labs?? idk just check it yourself)
 
 Slowly constructed by @greatfuton on Discord
