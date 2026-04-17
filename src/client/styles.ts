@@ -51,9 +51,9 @@ export function Styles({ customSheet, Parent = ReplicatedStorage }: { customShee
         if (!typeIs(attribute, theType)) throw new Error("attribute is the wrong type");
         return attribute as CheckableTypes[T];
     }
-    createRule(".textOnDark", { TextColor3: "$AccentColour" }, lobbySheet);
-    createRule(".textOnLight", { TextColor3: "$BackgroundColour" }, lobbySheet);
-    createRule(".textOnDemotivationCycle", { TextColor3: "$SecondaryAccentColour" }, lobbySheet);
+    createRule(".textOnDark", { ImageColor3: "$AccentColour", TextColor3: "$AccentColour" }, lobbySheet);
+    createRule(".textOnLight", { ImageColor3: "$BackgroundColour", TextColor3: "$BackgroundColour" }, lobbySheet);
+    createRule(".textOnDemotivationCycle", { TextColor3: "$SecondaryAccentColour", ImageColor3: "$SecondaryAccentColour" }, lobbySheet);
     createRule(".textBody", { TextSize: "$TextSize", FontFace: "$FontMainRegular" }, lobbySheet);
     createRule(".textStandard", { TextSize: "$TextSize", FontFace: "$FontMainSemiBold" }, lobbySheet);
     createRule(".accentText", { TextColor3: "$AccentColour" }, lobbySheet);
@@ -226,6 +226,18 @@ export function Styles({ customSheet, Parent = ReplicatedStorage }: { customShee
     createRule(".Ghost.Button:Hover", {
         BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(80, 80, 80))
     }, lobbySheet)
+    createRule(".Generic.Button", {
+        BackgroundColor3: "$BackgroundColour"
+    }, lobbySheet)
+    createRule(".Generic.icon", {
+        BackgroundColor3: "$AccentColour"
+    }, lobbySheet)
+    createRule(".Generic.text", {
+        TextColor3: "$AccentColour"
+    }, lobbySheet)
+    createRule(".Generic.Button:Hover", {
+        BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(20, 20, 20))
+    }, lobbySheet)
     createRule(".Excited.Button", {
         BackgroundColor3: "$AccentColour"
     }, lobbySheet)
@@ -262,6 +274,9 @@ export function Styles({ customSheet, Parent = ReplicatedStorage }: { customShee
         BackgroundColor3: Color3.fromRGB(255, 0, 0),
         TextColor3: Color3.fromRGB(255, 0, 0),
         ImageColor3: Color3.fromRGB(255, 0, 0),
+    }, lobbySheet)
+    createRule(".loadoutCard", {
+        BackgroundColor3: "$AccentColour"
     }, lobbySheet)
     createRule("UIListLayout.paddingStandard", {
         Padding: "$PaddingL"

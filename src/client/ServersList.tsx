@@ -88,9 +88,11 @@ export function SideBySideList({serverData}: {serverData: productionServerData[]
     const uniqueGamemodeNames = [...new Set(serverData.map((value: productionServerData) => {return value.gamemode.gamemodeName}))];
     const [serverListCheckboxNameState, setServerListCheckboxNameState] = useState<Record<string, boolean>>({});
     const [serverListCheckboxGamemodeState, setServerListCheckboxGamemodeState] = useState<Record<string, boolean>>({});
+    const [searchQuery, setSearchQuery] = useState<string>("");
     const [axis_content, refFunction] = useAbsoluteAxis("X");
     const mappedData = serverData.filter((value: productionServerData) => {
         const compiledString = HttpService.JSONEncode(value);
+        if (Object.keys(string.find(compiledString.lower(), searchQuery.lower())).size() === 0) return false;
         if (serverListCheckboxGamemodeState[value.gamemode.gamemodeName] === false) return false;
         if (serverListCheckboxNameState[value.map.mapName] === false) return false;
         return true;
@@ -98,8 +100,8 @@ export function SideBySideList({serverData}: {serverData: productionServerData[]
         return <ServersItem data={value}/>
     }); // flatMap doesn't exist :(
     return <Basic Size={new UDim2(0, 0, 1, 0)}  AutomaticSize={Enum.AutomaticSize.X} flexProps={{FillDirection: Enum.FillDirection.Horizontal}} tags={["sideBySideList"]}>
-        <Basic dog={refFunction} flexProps={{Tag: "paddingSmall"}}>
-        <ListDrawer Size={new UDim2(0, math.max(240, axis_content), 0, 0)} tags={["sideList"]}>
+        <Basic flexProps={{Tag: "paddingSmall", HorizontalFlex: Enum.UIFlexAlignment.Fill}}>
+        <ListDrawer tags={["sideList"]} flexProps={{HorizontalFlex: Enum.UIFlexAlignment.Fill}}>
             <Text Tag={"textTitleSubheading textOnDark paddingStandard"} TextXAlignment={Enum.TextXAlignment.Center} text="GAMEMODES"/>
             <AlternatingList tags={["paddingSmall"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}} Size={new UDim2(1, 0, 0, 0)} 
             arrayOfChildren={
@@ -112,7 +114,7 @@ export function SideBySideList({serverData}: {serverData: productionServerData[]
                 })
             }/>
         </ListDrawer>
-        <ListDrawer Size={new UDim2(0, math.max(240, axis_content), 0, 0)} tags={["sideList"]}>
+        <ListDrawer tags={["sideList"]} flexProps={{HorizontalFlex: Enum.UIFlexAlignment.Fill}}>
             <Text Tag={"textTitleSubheading textOnDark paddingStandard"} TextXAlignment={Enum.TextXAlignment.Center} text="MAPS"/>
             <AlternatingList tags={["paddingSmall"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}} Size={new UDim2(1, 0, 0, 0)} 
             arrayOfChildren={
@@ -129,8 +131,8 @@ export function SideBySideList({serverData}: {serverData: productionServerData[]
         </Basic>
         <ListDrawer Size={new UDim2(0, 980, 1, 0)} AutomaticSize={Enum.AutomaticSize.None}>
             {/* UITableLayout was malfunctioning so I just decided to use a classic UILayout row-table even if it means the lines aren't consistent */}
-            <Basic flexProps={{FillDirection: Enum.FillDirection.Horizontal}}><Text text="SERVERS" Tag="paddingStandard textOnDark textTitleMain"/>
-            <ListDrawerSearchBar onChangeCallback={(query: string) => {print(query)}}/>
+            <Basic Size={new UDim2(1, 0, 0, 0)} AutomaticSize={Enum.AutomaticSize.Y} flexProps={{HorizontalFlex: Enum.UIFlexAlignment.SpaceBetween, FillDirection: Enum.FillDirection.Horizontal, VerticalFlex: Enum.UIFlexAlignment.Fill}}><Text text="SERVERS" Tag="paddingStandard textOnDark textTitleLargerSubheading"/>
+            <ListDrawerSearchBar onChangeCallback={(query: string) => {setSearchQuery(query)}}/>
             </Basic>
             <ServersListTableKeys/>
             <BasicScroll scrollProps={{Tag: "fuckROBLOX", Size: new UDim2(1, 0, 0, 0), AutomaticSize: Enum.AutomaticSize.None}} Size={new UDim2(1, 0, 1, 0)} BackgroundTransparency={1} AutomaticSize={Enum.AutomaticSize.XY}>

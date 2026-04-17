@@ -11,13 +11,14 @@ import { MenuBarHome } from "./menuBar";
 import { PlayerFighterState } from "./vars/playerFighterState";
 import motion from "@rbxts/react-motion";
 import { UiContextProvider, AppContextProvider } from "./hooks/useAppContext";
-import { moneyFormat } from "client/types/deadlineClientTypes";
+import { LoadoutBullshit, moneyFormat } from "client/types/deadlineClientTypes";
 import QuestsManager from "./questsManager";
 import { TableOfQuestsType } from "./questTable";
 import { Styles, createRule } from "./styles";
 import { ProductionLobbySpawnConfig } from "./productionLobby";
 import { SideBySideList } from "./ServersList";
 import { ongoingWars } from "./getWars";
+import { LoadoutEditor } from "./loadout";
 
 export default function({children}: {children?: React.ReactNode}) {
     const uiPageLayoutRef = useRef<UIPageLayout>();
@@ -95,6 +96,12 @@ export default function({children}: {children?: React.ReactNode}) {
             "quests.progressBarWidth": 10
         }
     }
+    const [listChildren, setListChildren] = useState<LoadoutBullshit[]>([
+        {name: "HI", loadoutInterfaceData: {}}
+    ]);
+    const [selectedListChildren, setSelectedListChildren] = useState<number>(0);
+
+    // get from datastore here
     // useEffect(()=>{
     //     task.delay(1, () => {
     //         setMoney({newTaiwanDollars: money.newTaiwanDollars + 10000, biitcoin: money.biitcoin + 10});
@@ -159,7 +166,41 @@ export default function({children}: {children?: React.ReactNode}) {
             // ]
             ongoingWars
         }/></Basic>
-            <Basic BackgroundTransparency={0.5}>Hello I am the loadout</Basic>
+            <Basic BackgroundTransparency={0.5} Size={new UDim2(1, 0, 1, 0)} AutomaticSize={Enum.AutomaticSize.None}>
+                <LoadoutEditor callbacks={{
+                    onRename: (index: number, name: string) => {
+                        const clonedListChildren = [...listChildren];
+                        clonedListChildren[index].name = name;
+                        setListChildren(clonedListChildren);
+                    },
+                    onMove: (index: number, pos: number) => {
+                        const target = index + pos;
+                        if (target < 0 || target >= listChildren.size()) return;
+                        const cloned = [...listChildren];
+                        const item = cloned[index];
+                        cloned.remove(index);
+                        cloned.insert(target, item);
+                        setListChildren(cloned);
+                        setSelectedListChildren(target);
+                    },
+                    onSelect: (index: number) => {
+                        setSelectedListChildren(index);
+                    },
+                    onClone: (index: number) => {
+                        const clonedListChildren = [...listChildren];
+                        const thisCloned = {...clonedListChildren[index]};
+                        thisCloned.name = `${thisCloned.name} (Clone)`;
+                        clonedListChildren.insert(index + 1, thisCloned);
+                        setSelectedListChildren(index + 1);
+                        setListChildren(clonedListChildren);
+                    },
+                    onDelete: (index: number) => {
+                        const clonedListChildren = [...listChildren].filter((value, indexOfThis) => indexOfThis !== index);;
+                        // clonedListChildren.pop(index);
+                        setListChildren(clonedListChildren);
+                    }
+                }} listChildren={listChildren} setListChildren={setListChildren} selectedIndex={selectedListChildren}/>
+            </Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the profile</Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the settings</Basic>
         </motion.frame>

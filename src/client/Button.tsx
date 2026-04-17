@@ -11,7 +11,7 @@ export interface iconBaseButtonProps extends baseButtonProps {
 }
 export function BaseButton({children, clickCallback = () => {}, tags = []}: baseButtonProps) {
 
-    return  <Button tags={["Button", "miniUICorner", ...tags]} Event={{MouseButton1Click: clickCallback}} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}}>
+    return  <Button tags={["Button", "miniUICorner", ...tags]} Event={{MouseButton1Click: clickCallback}} flexProps={{FillDirection: Enum.FillDirection.Horizontal, ItemLineAlignment: Enum.ItemLineAlignment.Center}} frameProps={{Size: new UDim2(1, 0, 1, 0)}}>
                 {children}
             </Button>
 }
