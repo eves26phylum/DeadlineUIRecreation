@@ -22,7 +22,7 @@
     "eslint-plugin-roblox-ts": "^1.4.0",
     "prettier": "^3.8.1",
     "roblox-ts": "^3.0.0-dev-9165cde",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.4"
   },
   "dependencies": {
     "@rbxts/luau-polyfill": "^1.1.3",
