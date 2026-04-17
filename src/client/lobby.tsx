@@ -97,17 +97,9 @@ export default function({children}: {children?: React.ReactNode}) {
         }
     }
     const [listChildren, setListChildren] = useState<LoadoutBullshit[]>([
-        {name: "HI", loadoutInterfaceData: {}, guiState: {isSelected: true}}
+        {name: "HI", loadoutInterfaceData: {}}
     ]);
     const [selectedListChildren, setSelectedListChildren] = useState<number>(0);
-    listChildren.forEach((value: LoadoutBullshit, index: number, aray: readonly LoadoutBullshit[]) => {
-        const guiState = listChildren[index].guiState
-        if (!guiState) return;
-        guiState.isSelected = false;
-        if (index === selectedListChildren) { 
-            guiState.isSelected = true;
-        };
-    })
 
     // get from datastore here
     // useEffect(()=>{
@@ -182,7 +174,14 @@ export default function({children}: {children?: React.ReactNode}) {
                         setListChildren(clonedListChildren);
                     },
                     onMove: (index: number, pos: number) => {
-                        
+                        const target = index + pos;
+                        if (target < 0 || target >= listChildren.size()) return;
+                        const cloned = [...listChildren];
+                        const item = cloned[index];
+                        cloned.remove(index);
+                        cloned.insert(target, item);
+                        setListChildren(cloned);
+                        setSelectedListChildren(target);
                     },
                     onSelect: (index: number) => {
                         setSelectedListChildren(index);
@@ -190,8 +189,9 @@ export default function({children}: {children?: React.ReactNode}) {
                     onClone: (index: number) => {
                         const clonedListChildren = [...listChildren];
                         const thisCloned = {...clonedListChildren[index]};
-                        thisCloned.guiState.isSelected = false;
-                        clonedListChildren.insert(index + 1, thisCloned)
+                        thisCloned.name = `${thisCloned.name} (Clone)`;
+                        clonedListChildren.insert(index + 1, thisCloned);
+                        setSelectedListChildren(index + 1);
                         setListChildren(clonedListChildren);
                     },
                     onDelete: (index: number) => {
@@ -199,7 +199,7 @@ export default function({children}: {children?: React.ReactNode}) {
                         // clonedListChildren.pop(index);
                         setListChildren(clonedListChildren);
                     }
-                }} listChildren={listChildren} setListChildren={setListChildren} selectedIndex={0}/>
+                }} listChildren={listChildren} setListChildren={setListChildren} selectedIndex={selectedListChildren}/>
             </Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the profile</Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the settings</Basic>

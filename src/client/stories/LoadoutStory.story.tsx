@@ -25,7 +25,7 @@ export = {
             setLobbySheet(Styles({Parent: props.target}));
         }, [theRef])
         const [listChildren, setListChildren] = useState<LoadoutBullshit[]>([
-            {name: "HI", loadoutInterfaceData: {}, guiState: {isSelected: true}}
+            {name: "HI", loadoutInterfaceData: {}}
         ]);
         return <StrictMode><Basic dog={refFunction}><stylelink StyleSheet={lobbySheet}/><LoadoutEditor listChildren={listChildren} setListChildren={setListChildren} selectedIndex={0} callbacks={{
                     onRename: (index: number, name: string) => {
