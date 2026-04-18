@@ -1,6 +1,7 @@
 import React from "@rbxts/react";
 import { Basic, Text } from "./easyobjects";
 import { ListDrawer } from "./ListDrawer";
+import { NotImplemented } from "./notImplementedInfo";
 
 export function ProfileLevelProgressBar({progress = 1}: {progress?: number}) {
     return  <Basic Size={new UDim2(0, 600, 0, 20)} AutomaticSize={Enum.AutomaticSize.None} BackgroundTransparency={1} tags={["hasOutline"]}>
@@ -23,8 +24,9 @@ export function PlayerUIProfile() {
     return <Basic flexProps={{FillDirection: Enum.FillDirection.Horizontal, Tag: "paddingSmall"}} Size={new UDim2(0, 0, 1, 0)} AutomaticSize={Enum.AutomaticSize.X}>
         <Basic flexProps={{Tag: "paddingSmall", HorizontalFlex: Enum.UIFlexAlignment.Fill}} Size={new UDim2(0, 0, 1, 0)}>
             <ProfileCard/>
-            <ListDrawer>
+            <ListDrawer flexProps={{VerticalAlignment: Enum.VerticalAlignment.Center, HorizontalAlignment: Enum.HorizontalAlignment.Center}}>
                 <uiflexitem FlexMode={"Fill"}/>
+                <NotImplemented/>
             </ListDrawer>
         </Basic>
         <Basic>
