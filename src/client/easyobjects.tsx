@@ -63,7 +63,7 @@ export function Basic({flexProps, textProps, children, dog, tags = [], ...restPr
 	);
 }
 
-export function BasicScroll({children, tags = [], scrollProps = {}, ...restProps}: BasicProps & {scrollProps?: Partial<React.InstanceProps<ScrollingFrame>>}) {
+export function BasicScroll({children, scrollChildren, tags = [], scrollProps = {}, ...restProps}: BasicProps & {scrollChildren?: React.ReactNode, scrollProps?: Partial<React.InstanceProps<ScrollingFrame>>}) {
     const ref = useRef<ScrollingFrame>();
     useTags(ref, tags);
 	return (
@@ -78,6 +78,7 @@ export function BasicScroll({children, tags = [], scrollProps = {}, ...restProps
 			AutomaticCanvasSize={Enum.AutomaticSize.XY}
 			{...scrollProps}
 		>
+            {scrollChildren}
             <Basic {...restProps}>
                 {children}
             </Basic>

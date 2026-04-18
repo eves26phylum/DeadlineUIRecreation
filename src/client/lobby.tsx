@@ -19,6 +19,7 @@ import { ProductionLobbySpawnConfig } from "./productionLobby";
 import { SideBySideList } from "./ServersList";
 import { ongoingWars } from "./getWars";
 import { LoadoutEditor } from "./loadout";
+import { defaultLoadout } from "./vars/mainClientConfig";
 
 export default function({children}: {children?: React.ReactNode}) {
     const uiPageLayoutRef = useRef<UIPageLayout>();
@@ -97,7 +98,7 @@ export default function({children}: {children?: React.ReactNode}) {
         }
     }
     const [listChildren, setListChildren] = useState<LoadoutBullshit[]>([
-        {name: "HI", loadoutInterfaceData: {}}
+        {...defaultLoadout}
     ]);
     const [selectedListChildren, setSelectedListChildren] = useState<number>(0);
 

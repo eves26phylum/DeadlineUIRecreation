@@ -71,6 +71,9 @@ export function Styles({ customSheet, Parent = ReplicatedStorage }: { customShee
     createRule(".defaultMenuButton > Frame > ImageLabel", { ImageColor3: "$AccentColour" }, lobbySheet);
     createRule(".defaultMenuButton.selected > Frame > TextLabel", { TextColor3: "$BackgroundColour" }, lobbySheet);
     createRule(".defaultMenuButton.selected > Frame > ImageLabel", { ImageColor3: "$BackgroundColour" }, lobbySheet);
+    createRule(".progressFilling", {
+        BackgroundColor3: "$AccentColour"
+    }, lobbySheet)
     createRule(".spawnButtonMain", {
         BackgroundColor3: "$AccentColour"
     }, lobbySheet)
@@ -94,7 +97,7 @@ export function Styles({ customSheet, Parent = ReplicatedStorage }: { customShee
     createRule(".veryGenericBox.alternate", {
         BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(20, 20, 20))
     }, lobbySheet)
-    createRule(".veryGenericBox.hasOutline::UIStroke", {
+    createRule(".hasOutline::UIStroke", {
         Color: "$BorderColour",
         BorderStrokePosition: Enum.BorderStrokePosition.Inner,
         ApplyStrokeMode: Enum.ApplyStrokeMode.Border

@@ -56,7 +56,15 @@ export function Loadout({myValue, callbacks, isSelected, ...props}: {myValue: Lo
 export function LoadoutEditor({listChildren, setListChildren, selectedIndex, callbacks}: {listChildren: LoadoutBullshit[], setListChildren: React.Dispatch<React.SetStateAction<LoadoutBullshit[]>>, selectedIndex: number, callbacks: loadoutUIItemCallbacks}) {
     return <Basic Size={new UDim2(1, 0, 1, 0)} tags={["paddingStandard"]} flexProps={{FillDirection: Enum.FillDirection.Horizontal, Tag: "paddingStandard", HorizontalAlignment: Enum.HorizontalAlignment.Center, VerticalAlignment: Enum.VerticalAlignment.Center}}>
         <ListDrawer flexProps={{HorizontalFlex: Enum.UIFlexAlignment.Fill}} AutomaticSize={Enum.AutomaticSize.None} Size={new UDim2(0, 240, 1, 0)}>
-        <BasicScroll flexProps={{HorizontalFlex: Enum.UIFlexAlignment.Fill, SortOrder: Enum.SortOrder.LayoutOrder}} Size={new UDim2(1, 0, 0, 0)} scrollProps={{Size: new UDim2(1, 0, 1, 0), AutomaticSize: Enum.AutomaticSize.None}}>
+        <Basic flexProps={{FillDirection: Enum.FillDirection.Horizontal, HorizontalFlex: Enum.UIFlexAlignment.SpaceBetween, ItemLineAlignment: Enum.ItemLineAlignment.Center}} tags={["paddingSmall"]}>
+            <Text Tag={"textTitleSubheading textOnDark"} text="SLOTS"/>
+            <Basic flexProps={{FillDirection: Enum.FillDirection.Horizontal}}>
+                <Text Tag={"textBody textOnDark"} text={tostring(listChildren.size())}/>
+                <Text Tag={`textBody textOnDemotivationCycle`} text={` / `}/>
+                <Text Tag={"textBody textOnDark"} text={"10"}/>
+            </Basic>
+        </Basic>
+        <BasicScroll flexProps={{HorizontalFlex: Enum.UIFlexAlignment.Fill, SortOrder: Enum.SortOrder.LayoutOrder}} Size={new UDim2(1, 0, 0, 0)} scrollProps={{Size: new UDim2(1, 0, 1, 0), AutomaticSize: Enum.AutomaticSize.None}} scrollChildren={<uiflexitem FlexMode={"Fill"}/>}>
         {[...listChildren.map(
             (value: LoadoutBullshit, index: number, array: readonly LoadoutBullshit[]) => {
                 return <Loadout myValue={value} isSelected={index === selectedIndex} callbacks={{
