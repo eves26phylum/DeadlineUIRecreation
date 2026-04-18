@@ -85,7 +85,7 @@ export function Styles({ customSheet, Parent = ReplicatedStorage }: { customShee
         BackgroundColor3: "$BackgroundColour",
         BackgroundTransparency: 0.5
     }, lobbySheet)
-    createRule(".SERVERS::UIPadding", {
+    createRule(".PAGE::UIPadding", {
         PaddingLeft: "$PaddingL",
         PaddingRight: "$PaddingL",
         PaddingBottom: "$PaddingL",

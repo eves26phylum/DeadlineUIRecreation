@@ -8,7 +8,7 @@ export function ProfileLevelProgressBar({progress = 1}: {progress?: number}) {
             </Basic>
 }
 export function ProfileCard() {
-    return  <ListDrawer flexProps={{HorizontalFlex: Enum.UIFlexAlignment.Fill}}>
+    return  <ListDrawer>
                 <Basic tags={["paddingStandard"]}>
                     <Text Tag={"textTitleLargerSubheading textOnDark"} text="FLANKER2000Y2K'S PROFILE"/>
                 </Basic>
@@ -20,15 +20,15 @@ export function ProfileCard() {
             </ListDrawer>
 }
 export function PlayerUIProfile() {
-    return <Basic flexProps={{FillDirection: Enum.FillDirection.Horizontal, VerticalFlex: Enum.UIFlexAlignment.Fill}} Size={new UDim2(1, 0, 1, 0)}>
-        <Basic flexProps={{Tag: "paddingSmall"}}>
+    return <Basic flexProps={{FillDirection: Enum.FillDirection.Horizontal, Tag: "paddingSmall"}} Size={new UDim2(0, 0, 1, 0)} AutomaticSize={Enum.AutomaticSize.X}>
+        <Basic flexProps={{Tag: "paddingSmall", HorizontalFlex: Enum.UIFlexAlignment.Fill}} Size={new UDim2(0, 0, 1, 0)}>
             <ProfileCard/>
             <ListDrawer>
                 <uiflexitem FlexMode={"Fill"}/>
             </ListDrawer>
         </Basic>
         <Basic>
-
+            HELLO
         </Basic>
     </Basic>
 }
