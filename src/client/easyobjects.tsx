@@ -16,10 +16,11 @@ export interface ButtonProps extends DOMDefinition, Partial<React.InstanceProps<
     btnChildren?: React.ReactNode
 }
 export interface TextProps extends Partial<React.InstanceProps<TextLabel>> {
-    text: string,
+    text: unknown,
     children?: React.ReactNode
 }
 export function Text({text, children, ...textProps}: TextProps) {
+    const sanitisedText: string = tostring(text);
     return  <textlabel
                 AutomaticSize={Enum.AutomaticSize.XY}
                 Size={new UDim2(0, 0, 0, 0)}
@@ -27,7 +28,7 @@ export function Text({text, children, ...textProps}: TextProps) {
                 BorderSizePixel={0}
                 TextXAlignment={Enum.TextXAlignment.Left}
                 TextYAlignment={Enum.TextYAlignment.Top}
-                Text={text}
+                Text={sanitisedText}
                 {...textProps}
             >{children}</textlabel>
 }
@@ -63,7 +64,7 @@ export function Basic({flexProps, textProps, children, dog, tags = [], ...restPr
 	);
 }
 
-export function BasicScroll({children, tags = [], scrollProps = {}, ...restProps}: BasicProps & {scrollProps?: Partial<React.InstanceProps<ScrollingFrame>>}) {
+export function BasicScroll({children, scrollChildren, tags = [], scrollProps = {}, ...restProps}: BasicProps & {scrollChildren?: React.ReactNode, scrollProps?: Partial<React.InstanceProps<ScrollingFrame>>}) {
     const ref = useRef<ScrollingFrame>();
     useTags(ref, tags);
 	return (
@@ -78,6 +79,7 @@ export function BasicScroll({children, tags = [], scrollProps = {}, ...restProps
 			AutomaticCanvasSize={Enum.AutomaticSize.XY}
 			{...scrollProps}
 		>
+            {scrollChildren}
             <Basic {...restProps}>
                 {children}
             </Basic>

@@ -19,6 +19,8 @@ import { ProductionLobbySpawnConfig } from "./productionLobby";
 import { SideBySideList } from "./ServersList";
 import { ongoingWars } from "./getWars";
 import { LoadoutEditor } from "./loadout";
+import { defaultLoadout } from "./vars/mainClientConfig";
+import { PlayerUIProfile } from "./profile";    
 
 export default function({children}: {children?: React.ReactNode}) {
     const uiPageLayoutRef = useRef<UIPageLayout>();
@@ -97,7 +99,7 @@ export default function({children}: {children?: React.ReactNode}) {
         }
     }
     const [listChildren, setListChildren] = useState<LoadoutBullshit[]>([
-        {name: "HI", loadoutInterfaceData: {}}
+        {...defaultLoadout}
     ]);
     const [selectedListChildren, setSelectedListChildren] = useState<number>(0);
 
@@ -144,7 +146,7 @@ export default function({children}: {children?: React.ReactNode}) {
                     <QuestsManager/>
                 </Basic>
             </Basic>
-            <Basic Size={new UDim2(1, 0, 1, 0)} tags={["SERVERS"]} flexProps={{VerticalAlignment: Enum.VerticalAlignment.Center, HorizontalAlignment: Enum.HorizontalAlignment.Center}} BackgroundTransparency={0.5}><SideBySideList serverData={
+            <Basic Size={new UDim2(1, 0, 1, 0)} tags={["PAGE"]} flexProps={{VerticalAlignment: Enum.VerticalAlignment.Center, HorizontalAlignment: Enum.HorizontalAlignment.Center}} BackgroundTransparency={0.5}><SideBySideList serverData={
             // [
             //     {
             //         map: {
@@ -201,7 +203,36 @@ export default function({children}: {children?: React.ReactNode}) {
                     }
                 }} listChildren={listChildren} setListChildren={setListChildren} selectedIndex={selectedListChildren}/>
             </Basic>
-            <Basic BackgroundTransparency={0.5}>Hello I am the profile</Basic>
+            <Basic BackgroundTransparency={0.5} Size={new UDim2(1, 0, 1, 0)} AutomaticSize={Enum.AutomaticSize.None} flexProps={{VerticalAlignment: Enum.VerticalAlignment.Center, HorizontalAlignment: Enum.HorizontalAlignment.Center}} tags={["PAGE"]}>
+                <PlayerUIProfile
+                        playerInfo={{totalInfo:{
+                            rounds_played: 5, ballisticsInfo: {head: 15, left_arm_vis: 250, left_leg_vis: 3513, right_arm_vis: 4885, right_leg_vis: 1465, torso: 100},
+                            leaderboardInfo: {
+                                kills: 20,
+                                deaths: 6767,
+                                capture_finish: 5000,
+                                points: 1
+                            }
+                        }, weaponSpecificInfo:{
+                            M4A1: {
+                                rounds_played: 5, ballisticsInfo: {head: 15, left_arm_vis: 250, left_leg_vis: 3513, right_arm_vis: 4885, right_leg_vis: 1465, torso: 100},
+                                leaderboardInfo: {
+                                    kills: 20,
+                                    deaths: 6767,
+                                    capture_finish: 5000,
+                                    points: 1
+                                }
+                        }
+                        }, levelsInfo:{
+                            level: 259,
+                            progress: {
+                                now: 28888,
+                                finish: 77777
+                            }
+                        }, playerDescriptior:{
+                            name: "flanker2000Y2K"
+                        }}}/>
+            </Basic>
             <Basic BackgroundTransparency={0.5}>Hello I am the settings</Basic>
         </motion.frame>
     </screengui></UiContextProvider></AppContextProvider>

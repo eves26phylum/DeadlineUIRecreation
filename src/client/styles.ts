@@ -71,6 +71,9 @@ export function Styles({ customSheet, Parent = ReplicatedStorage }: { customShee
     createRule(".defaultMenuButton > Frame > ImageLabel", { ImageColor3: "$AccentColour" }, lobbySheet);
     createRule(".defaultMenuButton.selected > Frame > TextLabel", { TextColor3: "$BackgroundColour" }, lobbySheet);
     createRule(".defaultMenuButton.selected > Frame > ImageLabel", { ImageColor3: "$BackgroundColour" }, lobbySheet);
+    createRule(".progressFilling", {
+        BackgroundColor3: "$AccentColour"
+    }, lobbySheet)
     createRule(".spawnButtonMain", {
         BackgroundColor3: "$AccentColour"
     }, lobbySheet)
@@ -82,7 +85,7 @@ export function Styles({ customSheet, Parent = ReplicatedStorage }: { customShee
         BackgroundColor3: "$BackgroundColour",
         BackgroundTransparency: 0.5
     }, lobbySheet)
-    createRule(".SERVERS::UIPadding", {
+    createRule(".PAGE::UIPadding", {
         PaddingLeft: "$PaddingL",
         PaddingRight: "$PaddingL",
         PaddingBottom: "$PaddingL",
@@ -94,7 +97,7 @@ export function Styles({ customSheet, Parent = ReplicatedStorage }: { customShee
     createRule(".veryGenericBox.alternate", {
         BackgroundColor3: addColor3(safeGetAttribute(lobbySheet, "BackgroundColour", "Color3"), Color3.fromRGB(20, 20, 20))
     }, lobbySheet)
-    createRule(".veryGenericBox.hasOutline::UIStroke", {
+    createRule(".hasOutline::UIStroke", {
         Color: "$BorderColour",
         BorderStrokePosition: Enum.BorderStrokePosition.Inner,
         ApplyStrokeMode: Enum.ApplyStrokeMode.Border
@@ -278,16 +281,16 @@ export function Styles({ customSheet, Parent = ReplicatedStorage }: { customShee
     createRule(".loadoutCard", {
         BackgroundColor3: "$AccentColour"
     }, lobbySheet)
-    createRule("UIListLayout.paddingStandard", {
+    createRule("UIGridStyleLayout.paddingStandard", {
         Padding: "$PaddingL"
     }, lobbySheet)
-    createRule("UIListLayout.paddingSmall", {
+    createRule("UIGridStyleLayout.paddingSmall", {
         Padding: "$PaddingS"
     }, lobbySheet)
-    createRule("UIListLayout.paddingMini", {
+    createRule("UIGridStyleLayout.paddingMini", {
         Padding: "$PaddingXS"
     }, lobbySheet)
-    createRule("UIListLayout.paddingTiny", {
+    createRule("UIGridStyleLayout.paddingTiny", {
         Padding: "$PaddingXXS"
     }, lobbySheet)
     createRule(".paddingStandard::UIPadding", {

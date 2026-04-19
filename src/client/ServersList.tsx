@@ -3,7 +3,7 @@ import React, { useMemo, useState } from "@rbxts/react";
 import { Basic, BasicProps, BasicScroll, Text, Button } from "./easyobjects";
 import { AlternatingList } from "./alternatingList";
 import { ListDrawer } from "./ListDrawer";
-import { productionServerData } from "./types/gameData";
+import { productionServerData } from "shared/types/gameData";
 import { toMS } from "shared/formatTime";
 import { BaseButton, IconBaseButton } from "./Button";
 import { Object, Boolean } from "@rbxts/luau-polyfill";
