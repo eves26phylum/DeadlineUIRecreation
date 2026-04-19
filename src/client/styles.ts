@@ -281,16 +281,16 @@ export function Styles({ customSheet, Parent = ReplicatedStorage }: { customShee
     createRule(".loadoutCard", {
         BackgroundColor3: "$AccentColour"
     }, lobbySheet)
-    createRule("UIListLayout.paddingStandard", {
+    createRule("UIGridStyleLayout.paddingStandard", {
         Padding: "$PaddingL"
     }, lobbySheet)
-    createRule("UIListLayout.paddingSmall", {
+    createRule("UIGridStyleLayout.paddingSmall", {
         Padding: "$PaddingS"
     }, lobbySheet)
-    createRule("UIListLayout.paddingMini", {
+    createRule("UIGridStyleLayout.paddingMini", {
         Padding: "$PaddingXS"
     }, lobbySheet)
-    createRule("UIListLayout.paddingTiny", {
+    createRule("UIGridStyleLayout.paddingTiny", {
         Padding: "$PaddingXXS"
     }, lobbySheet)
     createRule(".paddingStandard::UIPadding", {

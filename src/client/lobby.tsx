@@ -208,23 +208,23 @@ export default function({children}: {children?: React.ReactNode}) {
                         playerInfo={{totalInfo:{
                             rounds_played: 5, ballisticsInfo: {head: 15, left_arm_vis: 250, left_leg_vis: 3513, right_arm_vis: 4885, right_leg_vis: 1465, torso: 100},
                             leaderboardInfo: {
-                                kills: 67,
+                                kills: 20,
                                 deaths: 6767,
-                                capture_finish: 5,
+                                capture_finish: 5000,
                                 points: 1
                             }
                         }, weaponSpecificInfo:{
                             M4A1: {
                                 rounds_played: 5, ballisticsInfo: {head: 15, left_arm_vis: 250, left_leg_vis: 3513, right_arm_vis: 4885, right_leg_vis: 1465, torso: 100},
                                 leaderboardInfo: {
-                                    kills: 67,
+                                    kills: 20,
                                     deaths: 6767,
-                                    capture_finish: 5,
+                                    capture_finish: 5000,
                                     points: 1
                                 }
                         }
                         }, levelsInfo:{
-                            level: 67,
+                            level: 259,
                             progress: {
                                 now: 28888,
                                 finish: 77777

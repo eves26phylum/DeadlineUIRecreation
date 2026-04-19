@@ -48,11 +48,18 @@ export function PlayerUIProfile({playerInfo}: {playerInfo: playerStatisticsInfo}
                 <NotImplemented/>
             </ListDrawer>
         </Basic>
-        <Basic Size={new UDim2(0, 450, 0, 0)} AutomaticSize={Enum.AutomaticSize.Y} flexProps={{Tag: "paddingSmall", Wraps: true, FillDirection: Enum.FillDirection.Horizontal}}>
-            <ProfileStatCard icon="rbxassetid://7072715827" name="KILLS" amount={playerInfo.totalInfo.leaderboardInfo.kills}/>
-            <ProfileStatCard icon="rbxassetid://7072725342" name="DEATHS" amount={playerInfo.totalInfo.leaderboardInfo.deaths}/>
-            <ProfileStatCard icon="rbxassetid://7072715646" name="MATCHES" amount={playerInfo.totalInfo.rounds_played}/>
-            <ProfileStatCard icon="rbxassetid://7072716549" name="POINTS TAKEN" amount={playerInfo.totalInfo.leaderboardInfo.capture_finish}/>
+        <Basic flexProps={{Tag: "paddingSmall", HorizontalFlex: Enum.UIFlexAlignment.Fill}} Size={new UDim2(0, 0, 1, 0)}>
+            <frame BackgroundTransparency={1} Size={new UDim2(0, 0, 0, 0)} AutomaticSize={Enum.AutomaticSize.XY}>
+                <uigridlayout FillDirectionMaxCells={2} SortOrder={"Name"} Tag="paddingSmall" CellSize={new UDim2(0, 200, 0, 200)}/>
+                <ProfileStatCard icon="rbxassetid://7072715827" name="KILLS" amount={playerInfo.totalInfo.leaderboardInfo.kills}/>
+                <ProfileStatCard icon="rbxassetid://7072725342" name="DEATHS" amount={playerInfo.totalInfo.leaderboardInfo.deaths}/>
+                <ProfileStatCard icon="rbxassetid://7072715646" name="MATCHES" amount={playerInfo.totalInfo.rounds_played}/>
+                <ProfileStatCard icon="rbxassetid://7072716549" name="POINTS TAKEN" amount={playerInfo.totalInfo.leaderboardInfo.capture_finish}/>
+            </frame>
+            <ListDrawer flexProps={{VerticalAlignment: Enum.VerticalAlignment.Center, HorizontalAlignment: Enum.HorizontalAlignment.Center}}>
+                <uiflexitem FlexMode={"Fill"}/>
+                <NotImplemented/>
+            </ListDrawer>
         </Basic>
     </Basic>
 }
