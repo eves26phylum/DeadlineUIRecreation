@@ -16,10 +16,11 @@ export interface ButtonProps extends DOMDefinition, Partial<React.InstanceProps<
     btnChildren?: React.ReactNode
 }
 export interface TextProps extends Partial<React.InstanceProps<TextLabel>> {
-    text: string,
+    text: unknown,
     children?: React.ReactNode
 }
 export function Text({text, children, ...textProps}: TextProps) {
+    const sanitisedText: string = tostring(text);
     return  <textlabel
                 AutomaticSize={Enum.AutomaticSize.XY}
                 Size={new UDim2(0, 0, 0, 0)}
@@ -27,7 +28,7 @@ export function Text({text, children, ...textProps}: TextProps) {
                 BorderSizePixel={0}
                 TextXAlignment={Enum.TextXAlignment.Left}
                 TextYAlignment={Enum.TextYAlignment.Top}
-                Text={text}
+                Text={sanitisedText}
                 {...textProps}
             >{children}</textlabel>
 }

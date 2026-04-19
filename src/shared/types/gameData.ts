@@ -45,6 +45,10 @@ export interface leaderboardPlayerInfo {
     points: number
 }
 export type weaponName = "M4A1"
+export interface playerProfilePlayerDescriptor {
+    name: string
+    // to be extended for other functionalities ingame
+}
 export interface weaponLifetimeInfo {
     rounds_played: number,
     ballisticsInfo: weaponsInfoBallisticsInfo
@@ -53,5 +57,10 @@ export interface weaponLifetimeInfo {
 export interface playerStatisticsInfo {
     totalInfo: weaponLifetimeInfo,
     weaponSpecificInfo: Record<weaponName, weaponLifetimeInfo>
-    levelsInfo: playerLevelsInfo
+    levelsInfo: playerLevelsInfo,
+    playerDescriptior: playerProfilePlayerDescriptor
+}
+export function calculateProgressOnProgressData(progress: progress): number {
+    const progressTotal: number = progress.finish - (progress.start || 0); // the new finish
+    return progress.now / progressTotal
 }
